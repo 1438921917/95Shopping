@@ -51,7 +51,7 @@
 #pragma mark --创建背景的滚动试图
 -(void)CreatBgScrollView{
     _bgScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-49)];
-    _bgScrollView.backgroundColor=[UIColor colorWithRed:221/255.0 green:222/255.0 blue:227/255.0 alpha:1];
+    _bgScrollView.backgroundColor=COLOR;
     _bgScrollView.delegate=self;
     [self.view addSubview:_bgScrollView];
 }
@@ -174,7 +174,6 @@
 
    cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 20, ScreenWidth, 540*ScreenWidth/1080) delegate:self placeholderImage:[UIImage imageNamed:@"banner"]];
     cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-   // NSLog(@">>>%f",ScreenWidth);
     cycleScrollView2.currentPageDotColor = [UIColor whiteColor];
     [_bgScrollView addSubview:cycleScrollView2];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -298,7 +297,7 @@
     [label setSingleLineAutoResizeWithMaxWidth:200];
     //线条
     UIView * linview =[UIView new];
-    linview.backgroundColor=[UIColor colorWithRed:221/255.0 green:222/255.0 blue:227/255.0 alpha:1];
+    linview.backgroundColor=COLOR;
     [_view3 sd_addSubviews:@[linview]];
     linview.sd_layout
     .leftSpaceToView(_view3,0)
@@ -350,7 +349,7 @@
     [label setSingleLineAutoResizeWithMaxWidth:200];
     //线条
     UIView * linview =[UIView new];
-    linview.backgroundColor=[UIColor colorWithRed:221/255.0 green:222/255.0 blue:227/255.0 alpha:1];
+    linview.backgroundColor=COLOR;
     [_view4 sd_addSubviews:@[linview]];
     linview.sd_layout
     .leftSpaceToView(_view4,0)
@@ -414,7 +413,7 @@
     [label setSingleLineAutoResizeWithMaxWidth:200];
     //线条
     UIView * linview =[UIView new];
-    linview.backgroundColor=[UIColor colorWithRed:221/255.0 green:222/255.0 blue:227/255.0 alpha:1];
+    linview.backgroundColor=COLOR;
     [_view5 sd_addSubviews:@[linview]];
     linview.sd_layout
     .leftSpaceToView(_view5,0)

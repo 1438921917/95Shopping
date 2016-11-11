@@ -11,4 +11,6 @@
 @interface ToolClass : NSObject
 #pragma mark --适配高度
 +(CGFloat)cellContentViewWith;
+#pragma mark --根据图片url获取图片尺寸
++(CGSize)getImageSizeWithURL:(id)imageURL;
 @end

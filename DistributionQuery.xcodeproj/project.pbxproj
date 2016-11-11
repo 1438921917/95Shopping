@@ -995,7 +995,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 232982DK86;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = /Users/Macx/Desktop/95Shopping/DistributionQuery/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Volumes/DISK0S3/95Shopping/DistributionQuery/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DistributionQuery/PrefixHeader.pch\"";
 				INFOPLIST_FILE = DistributionQuery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -1014,7 +1014,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 232982DK86;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = /Users/Macx/Desktop/95Shopping/DistributionQuery/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Volumes/DISK0S3/95Shopping/DistributionQuery/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DistributionQuery/PrefixHeader.pch\"";
 				INFOPLIST_FILE = DistributionQuery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
