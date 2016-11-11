@@ -9,6 +9,8 @@
 #import "HomeVC.h"
 #import "YouZhiXianHuoVC.h"
 #import "LrdOutputView.h"
+#import "YouZhiShangHuVC.h"
+#import "QiYeKuaiSuMaiVC.h"
 @interface HomeVC ()<UIScrollViewDelegate,SDCycleScrollViewDelegate,LrdOutputViewDelegate>
 {
     SDCycleScrollView *cycleScrollView2;
@@ -79,7 +81,7 @@
     _textfield.layer.borderWidth=1;
     _textfield.layer.borderColor=[[UIColor colorWithRed:210/255.0 green:210/255.0 blue:210/255.0 alpha:1]CGColor];
     _textfield.center=CGPointMake(self.view.center.x, 27);
-    _textfield.bounds=CGRectMake(0, 0, ScreenWidth-170, 30);
+    _textfield.bounds=CGRectMake(0, 0, ScreenWidth-150, 30);
     _textfield.placeholder=@"   请输入类别或者关键字";
     _textfield.font=[UIFont systemFontOfSize:14];
     UIBarButtonItem * leftBtn3 =[[UIBarButtonItem alloc]initWithCustomView:_textfield];
@@ -89,7 +91,7 @@
     _rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [_rightBtn setTitle:@"搜索" forState:0];
     _rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
-    _rightBtn.frame=CGRectMake(0, 0, 45, 15);
+    _rightBtn.frame=CGRectMake(0, 0, 50, 15);
     UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:_rightBtn];
      self.navigationItem.rightBarButtonItems=@[rightBtn];
     
@@ -224,10 +226,16 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag==1){
         //优质商户
+        YouZhiShangHuVC * vc =[YouZhiShangHuVC new];
+        vc.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag==2){
         //最新采购
     }else if (btn.tag==3){
         //企业快色买货
+        QiYeKuaiSuMaiVC* vc =[QiYeKuaiSuMaiVC new];
+        vc.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

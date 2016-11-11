@@ -7,7 +7,8 @@
 //
 
 #import "MyVC.h"
-
+#import "SetViewController.h"
+#import "LoginVC.h"
 @interface MyVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * dataArray;
@@ -67,6 +68,20 @@
     .bottomSpaceToView(headImageView,0)
     .widthIs(33/2)
     .heightIs(33/2);
+   
+   
+    //登录按钮
+    UIButton * loginBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+    [loginBtn setImage:[UIImage imageNamed:@"weidenglu"] forState:0];
+    [loginBtn addTarget:self action:@selector(loginBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [headView sd_addSubviews:@[loginBtn]];
+    loginBtn.sd_layout
+    .leftSpaceToView(headImageView,15)
+    .centerYEqualToView(headImageView)
+    .widthIs(164/2)
+    .heightIs(67/2);
+    
+    
     //标题
     UILabel * titleLabel=[UILabel new];
     titleLabel.text=@"江苏物业公司经理";
@@ -88,9 +103,19 @@
     .topSpaceToView(titleLabel,10)
     .heightIs(20);
     [deTitleLable setSingleLineAutoResizeWithMaxWidth:ScreenWidth];
+    if ([ToolClass isLogin]) {
+        deTitleLable.hidden=NO;
+        titleLabel.hidden=NO;
+        loginBtn.hidden=YES;
+    }else{
+        deTitleLable.hidden=YES;
+        titleLabel.hidden=YES;
+        loginBtn.hidden=NO;
+    }
     //右上角设置
     UIButton * sheZhiBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     [sheZhiBtn setImage:[UIImage imageNamed:@"my_set"] forState:0];
+    [sheZhiBtn addTarget:self action:@selector(shezhiBtn:) forControlEvents:UIControlEventTouchUpInside];
     [headView sd_addSubviews:@[sheZhiBtn]];
     sheZhiBtn.sd_layout
     .rightSpaceToView(headView,20)
@@ -99,6 +124,20 @@
     .heightIs(30);
     return headView;
 }
+#pragma mark --设置按钮
+-(void)shezhiBtn:(UIButton*)btn{
+    SetViewController * vc =[SetViewController new];
+    vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+#pragma mark --登录按钮
+-(void)loginBtn:(UIButton*)btn{
+    LoginVC * vc =[LoginVC new];
+     vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 #pragma mark --创建表
 -(void)CreatTableView
 {

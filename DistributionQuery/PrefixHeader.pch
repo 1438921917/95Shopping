@@ -20,6 +20,7 @@
 #define SERVICE  @"http://101.200.133.10:9089/"
 #define COLOR [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]
 #define TITLE_FOUNT 18
+#define NSUSE_DEFO [NSUserDefaults standardUserDefaults]
 /*
  *   头文件
  */

@@ -1,32 +1,34 @@
 //
-//  YouZhiXianHuoCell.m
+//  YouZhiShangHuCell.m
 //  DistributionQuery
 //
-//  Created by Macx on 16/11/10.
+//  Created by Macx on 16/11/11.
 //  Copyright © 2016年 Macx. All rights reserved.
 //
 
-#import "YouZhiXianHuoCell.h"
-@interface YouZhiXianHuoCell ()
+#import "YouZhiShangHuCell.h"
+@interface YouZhiShangHuCell()
 @property(nonatomic,strong)UIImageView * leftImage;//左边图片
 @property(nonatomic,strong)UILabel * titleLabel;//标题
 @property(nonatomic,strong)UIImageView * imagedan;//标题图标
+@property(nonatomic,strong)UIImageView * woshouImage;//握手图标
+@property(nonatomic,strong)UILabel * woshouLabel;//握手次数
+@property(nonatomic,strong)UILabel * cishuLable;//次数
+@property(nonatomic,strong)UIImageView * xingImage;//五角星
 @property(nonatomic,strong)UIImageView * imagedw;//定位图标
 @property(nonatomic,strong)UILabel * cityLabel;//定位城市
-@property(nonatomic,strong)UILabel * taishuLabel;//台数
-@property(nonatomic,strong)UILabel * priceLabel;//价格
 
 @end
-@implementation YouZhiXianHuoCell
+@implementation YouZhiShangHuCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID{
-    YouZhiXianHuoCell * cell =[tableView dequeueReusableCellWithIdentifier:cellID];
+    YouZhiShangHuCell * cell =[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell=[[YouZhiXianHuoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell=[[YouZhiShangHuCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -36,7 +38,7 @@
     
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-      //  self.backgroundColor=[UIColor colorWithRed:254/255.0 green:251/255.0 blue:224/255.0 alpha:1];
+        //  self.backgroundColor=[UIColor colorWithRed:254/255.0 green:251/255.0 blue:224/255.0 alpha:1];
         [self CreatStar];
     }
     return self;
@@ -46,41 +48,48 @@
      leftImage;//左边图片
      titleLabel;//标题
      imagedan;//标题图标
+     woshouImage;//握手图标
+     woshouLabel;//握手次数
+     cishuLable;//次数
+     xingImage;//五角星
      imagedw;//定位图标
      cityLabel;//定位城市
-     taishuLabel;//台数
-     priceLabel;//价格
-     chaKanBtn;//立即查看
      */
     _leftImage=[UIImageView new];
     _titleLabel=[UILabel new];
     _imagedan=[UIImageView new];
     _imagedw=[UIImageView new];
     _cityLabel=[UILabel new];
-    _taishuLabel=[UILabel new];
-    _priceLabel=[UILabel new];
-    _chaKanBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    _cishuLable=[UILabel new];
+    _xingImage=[UIImageView new];
+    _woshouImage=[UIImageView new];
+    _woshouLabel=[UILabel new];
+    
     //属性
     _titleLabel.font=[UIFont systemFontOfSize:16];
     _titleLabel.numberOfLines=0;
     _cityLabel.font=[UIFont systemFontOfSize:13];
     _cityLabel.alpha=.6;
-    _taishuLabel.font=[UIFont systemFontOfSize:13];
-    _taishuLabel.alpha=.6;
-    _priceLabel.font=[UIFont systemFontOfSize:15];
-    _priceLabel.textColor=[UIColor redColor];
+    _cishuLable.font=[UIFont systemFontOfSize:13];
+    _cishuLable.alpha=.6;
+    _woshouLabel.font=[UIFont systemFontOfSize:13];
+    _woshouLabel.alpha=.6;
+    
+    
     //赋值(固定值)
     _titleLabel.text=@"出售海泰500T注塑机";
     _leftImage.image=[UIImage imageNamed:@"xianhuo_pic1"];
     _imagedan.image=[UIImage imageNamed:@"xianhuo_dan"];
     _imagedw.image=[UIImage imageNamed:@"xianhuo_address"];
-    _cityLabel.text=@"河北-石家庄";
-    _taishuLabel.text=@"10台";
-    _priceLabel.text=@"8000元";
-    [_chaKanBtn setBackgroundImage:[UIImage imageNamed:@"xianhuo_chakan"] forState:0];
+    _xingImage.image=[UIImage imageNamed:@"shanghu_shoucang"];
+    _woshouImage.image=[UIImage imageNamed:@"shanghu_chengjiao"];
     
-    [self.contentView sd_addSubviews:@[_leftImage,_titleLabel,_imagedan,_imagedw]];
-    [self.contentView sd_addSubviews:@[_cityLabel,_taishuLabel,_priceLabel,_chaKanBtn]];
+    _cityLabel.text=@"河北-石家庄";
+    _cishuLable.text=@"1000次";
+    _woshouLabel.text=@"100次";
+    
+    [self.contentView sd_addSubviews:@[_leftImage,_titleLabel,_imagedan,_imagedw,_woshouLabel,_woshouImage]];
+    [self.contentView sd_addSubviews:@[_cityLabel,_cishuLable,_xingImage]];
     
     [self CreatFrame];
 }
@@ -103,9 +112,37 @@
     .topSpaceToView(self.contentView,10)
     .widthIs(37/2)
     .heightIs(37/2);
+    //握手
+    _woshouImage.sd_layout
+    .leftEqualToView(_titleLabel)
+    .topSpaceToView(_titleLabel,15)
+    .widthIs(28/2)
+    .heightIs(21/2);
+    //握手的次数
+    _woshouLabel.sd_layout
+    .leftSpaceToView(_woshouImage,5)
+    .centerYEqualToView(_woshouImage)
+    .heightIs(10);
+    [_woshouLabel setSingleLineAutoResizeWithMaxWidth:130];
+    //五角星
+    _xingImage.sd_layout
+    .leftSpaceToView(_woshouLabel,20)
+    .centerYEqualToView(_woshouLabel)
+    .widthIs(27/2)
+    .heightIs(27/2);
+    //五角星次数
+    _cishuLable.sd_layout
+    .leftSpaceToView(_xingImage,5)
+    .heightIs(10)
+    .centerYEqualToView(_xingImage);
+    [_cishuLable setSingleLineAutoResizeWithMaxWidth:120];
+    
+    
+    
+    
     //定位的小图标
     _imagedw.sd_layout
-    .topSpaceToView(_titleLabel,10)
+    .topSpaceToView(_woshouImage,15)
     .leftEqualToView(_titleLabel)
     .widthIs(24/2)
     .heightIs(24/2);
@@ -115,30 +152,12 @@
     .centerYEqualToView(_imagedw)
     .heightIs(15);
     [_cityLabel setSingleLineAutoResizeWithMaxWidth:150];
-    //几台
-    _taishuLabel.sd_layout
-    .leftSpaceToView(_cityLabel,10)
-    .centerYEqualToView(_cityLabel)
-    .heightRatioToView(_cityLabel,1);
-    [_taishuLabel setSingleLineAutoResizeWithMaxWidth:150];
-    //价格
-    _priceLabel.sd_layout
-    .leftEqualToView(_imagedw)
-    .heightIs(20)
-    .topSpaceToView(_imagedw,10);
-    [_priceLabel setSingleLineAutoResizeWithMaxWidth:150];
-    //立即查看
-    _chaKanBtn.sd_layout
-    .rightSpaceToView(self.contentView,20)
-    .centerYEqualToView(_priceLabel)
-    .widthIs(117/2)
-    .heightIs(43/2);
    
     
-    [self.contentView setupAutoHeightWithBottomView:_chaKanBtn bottomMargin:10];
+    
+    [self.contentView setupAutoHeightWithBottomView:_imagedw bottomMargin:10];
     
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

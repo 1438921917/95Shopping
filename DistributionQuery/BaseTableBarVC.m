@@ -8,6 +8,7 @@
 
 #import "BaseTableBarVC.h"
 #import "BaseNavigationController.h"
+#import "FaBuViewController.h"
 #define kClassKey   @"rootVCClassString"
 #define kTitleKey   @"title"
 #define kImgKey     @"imageName"
@@ -28,8 +29,8 @@
                                    kImgKey    : @"home_noclick",
                                    kSelImgKey : @"home"},
                                  
-                                 @{kClassKey  : @"ScanCodeVC",
-                                   kTitleKey  : @"发布",
+                                 @{kClassKey  : @"FaBuViewController",
+                                   kTitleKey  : @"入驻发布",
                                    kImgKey    : @"fabu",
                                    kSelImgKey : @"fabu_click"},
                                  

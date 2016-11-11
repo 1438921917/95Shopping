@@ -83,6 +83,22 @@
 		8FCD4FA91DA8B4D300CB113C /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD4F7A1DA8B4D300CB113C /* SDCollectionViewCell.m */; };
 		8FCD4FAA1DA8B4D300CB113C /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD4F7C1DA8B4D300CB113C /* SDCycleScrollView.m */; };
 		8FCD4FAB1DA8B4D300CB113C /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD4F7E1DA8B4D300CB113C /* UIView+SDExtension.m */; };
+		8FDC2E2E1DD562620009E639 /* YouZhiShangHuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E2D1DD562620009E639 /* YouZhiShangHuVC.m */; };
+		8FDC2E351DD564320009E639 /* YouZhiShangHuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E341DD564320009E639 /* YouZhiShangHuCell.m */; };
+		8FDC2E381DD56B0A0009E639 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E371DD56B0A0009E639 /* SetViewController.m */; };
+		8FDC2E3B1DD57A0F0009E639 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E3A1DD57A0F0009E639 /* MessageVC.m */; };
+		8FDC2E411DD581CF0009E639 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E401DD581CF0009E639 /* MessageCell.m */; };
+		8FDC2E441DD5A20B0009E639 /* MyRenZhengVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E431DD5A20B0009E639 /* MyRenZhengVC.m */; };
+		8FDC2E471DD5AE3E0009E639 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E461DD5AE3E0009E639 /* LoginVC.m */; };
+		8FDC2E4A1DD5CB600009E639 /* RegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E491DD5CB600009E639 /* RegistVC.m */; };
+		8FDC2E501DD5D2850009E639 /* SGTopTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E4D1DD5D2850009E639 /* SGTopTitleView.m */; };
+		8FDC2E511DD5D2850009E639 /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E4F1DD5D2850009E639 /* UIView+SGExtension.m */; };
+		8FDC2E541DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E531DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m */; };
+		8FDC2E581DD5D4D00009E639 /* MyselfPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E571DD5D4D00009E639 /* MyselfPublicVC.m */; };
+		8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */; };
+		8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */; };
+		8FDC2E611DD603160009E639 /* YuYinPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E601DD603160009E639 /* YuYinPublicVC.m */; };
+		8FDC2E641DD610430009E639 /* FaBuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E631DD610430009E639 /* FaBuViewController.m */; };
 		8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */; };
 		8FEE743D1DD40DB700470D75 /* YouZhiXianHuoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */; };
 /* End PBXBuildFile section */
@@ -262,6 +278,38 @@
 		8FCD4F7C1DA8B4D300CB113C /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		8FCD4F7D1DA8B4D300CB113C /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		8FCD4F7E1DA8B4D300CB113C /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		8FDC2E2C1DD562620009E639 /* YouZhiShangHuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiShangHuVC.h; sourceTree = "<group>"; };
+		8FDC2E2D1DD562620009E639 /* YouZhiShangHuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiShangHuVC.m; sourceTree = "<group>"; };
+		8FDC2E331DD564320009E639 /* YouZhiShangHuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiShangHuCell.h; sourceTree = "<group>"; };
+		8FDC2E341DD564320009E639 /* YouZhiShangHuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiShangHuCell.m; sourceTree = "<group>"; };
+		8FDC2E361DD56B0A0009E639 /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		8FDC2E371DD56B0A0009E639 /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
+		8FDC2E391DD57A0F0009E639 /* MessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageVC.h; sourceTree = "<group>"; };
+		8FDC2E3A1DD57A0F0009E639 /* MessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageVC.m; sourceTree = "<group>"; };
+		8FDC2E3F1DD581CF0009E639 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		8FDC2E401DD581CF0009E639 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		8FDC2E421DD5A20B0009E639 /* MyRenZhengVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRenZhengVC.h; sourceTree = "<group>"; };
+		8FDC2E431DD5A20B0009E639 /* MyRenZhengVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRenZhengVC.m; sourceTree = "<group>"; };
+		8FDC2E451DD5AE3E0009E639 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		8FDC2E461DD5AE3E0009E639 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		8FDC2E481DD5CB600009E639 /* RegistVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistVC.h; sourceTree = "<group>"; };
+		8FDC2E491DD5CB600009E639 /* RegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistVC.m; sourceTree = "<group>"; };
+		8FDC2E4C1DD5D2850009E639 /* SGTopTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTopTitleView.h; sourceTree = "<group>"; };
+		8FDC2E4D1DD5D2850009E639 /* SGTopTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTopTitleView.m; sourceTree = "<group>"; };
+		8FDC2E4E1DD5D2850009E639 /* UIView+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGExtension.h"; sourceTree = "<group>"; };
+		8FDC2E4F1DD5D2850009E639 /* UIView+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGExtension.m"; sourceTree = "<group>"; };
+		8FDC2E521DD5D3490009E639 /* QiYeKuaiSuMaiVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiYeKuaiSuMaiVC.h; sourceTree = "<group>"; };
+		8FDC2E531DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiYeKuaiSuMaiVC.m; sourceTree = "<group>"; };
+		8FDC2E561DD5D4D00009E639 /* MyselfPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyselfPublicVC.h; sourceTree = "<group>"; };
+		8FDC2E571DD5D4D00009E639 /* MyselfPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfPublicVC.m; sourceTree = "<group>"; };
+		8FDC2E591DD5D4EB0009E639 /* WeiTuoPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiTuoPublicVC.h; sourceTree = "<group>"; };
+		8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiTuoPublicVC.m; sourceTree = "<group>"; };
+		8FDC2E5C1DD5E2160009E639 /* MyselfPublicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyselfPublicCell.h; sourceTree = "<group>"; };
+		8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfPublicCell.m; sourceTree = "<group>"; };
+		8FDC2E5F1DD603160009E639 /* YuYinPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuYinPublicVC.h; sourceTree = "<group>"; };
+		8FDC2E601DD603160009E639 /* YuYinPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuYinPublicVC.m; sourceTree = "<group>"; };
+		8FDC2E621DD610430009E639 /* FaBuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaBuViewController.h; sourceTree = "<group>"; };
+		8FDC2E631DD610430009E639 /* FaBuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaBuViewController.m; sourceTree = "<group>"; };
 		8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoVC.h; sourceTree = "<group>"; };
 		8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiXianHuoVC.m; sourceTree = "<group>"; };
 		8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoCell.h; sourceTree = "<group>"; };
@@ -323,6 +371,7 @@
 			children = (
 				8F02FE691DA89AFE0051EDFC /* LIb */,
 				8F02FE481DA886D00051EDFC /* Other */,
+				8FDC2E2B1DD5622A0009E639 /* Engine */,
 				8F02FE591DA887E30051EDFC /* BaseViewController */,
 				8F02FE5A1DA887F20051EDFC /* HomeViewController */,
 				8F02FE5B1DA888050051EDFC /* SaoMaViewController */,
@@ -366,10 +415,6 @@
 				8F02FE191DA883FE0051EDFC /* AppDelegate.m */,
 				8F02FE1B1DA883FE0051EDFC /* ViewController.h */,
 				8F02FE1C1DA883FE0051EDFC /* ViewController.m */,
-				8F02FE6A1DA89B850051EDFC /* Engine.h */,
-				8F02FE6B1DA89B850051EDFC /* Engine.m */,
-				8F6208341DD41ABE00E9A306 /* ToolClass.h */,
-				8F6208351DD41ABE00E9A306 /* ToolClass.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -403,16 +448,9 @@
 		8F02FE5A1DA887F20051EDFC /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8F02FE501DA887740051EDFC /* HomeVC.h */,
-				8F02FE511DA887740051EDFC /* HomeVC.m */,
-				8F6208371DD44E0300E9A306 /* LrdOutputView.h */,
-				8F6208381DD44E0300E9A306 /* LrdOutputView.m */,
-				8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */,
-				8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */,
-				8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */,
-				8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */,
-				8F62083A1DD45B7B00E9A306 /* XiangQingVC.h */,
-				8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */,
+				8FDC2E271DD561C30009E639 /* Controller */,
+				8FDC2E251DD561A60009E639 /* View */,
+				8FDC2E261DD561B60009E639 /* Cell */,
 			);
 			name = HomeViewController;
 			sourceTree = "<group>";
@@ -422,6 +460,8 @@
 			children = (
 				8F02FE531DA887B40051EDFC /* ScanCodeVC.h */,
 				8F02FE541DA887B40051EDFC /* ScanCodeVC.m */,
+				8FDC2E621DD610430009E639 /* FaBuViewController.h */,
+				8FDC2E631DD610430009E639 /* FaBuViewController.m */,
 			);
 			name = SaoMaViewController;
 			sourceTree = "<group>";
@@ -431,6 +471,18 @@
 			children = (
 				8F02FE561DA887CC0051EDFC /* MyVC.h */,
 				8F02FE571DA887CC0051EDFC /* MyVC.m */,
+				8FDC2E361DD56B0A0009E639 /* SetViewController.h */,
+				8FDC2E371DD56B0A0009E639 /* SetViewController.m */,
+				8FDC2E391DD57A0F0009E639 /* MessageVC.h */,
+				8FDC2E3A1DD57A0F0009E639 /* MessageVC.m */,
+				8FDC2E3F1DD581CF0009E639 /* MessageCell.h */,
+				8FDC2E401DD581CF0009E639 /* MessageCell.m */,
+				8FDC2E421DD5A20B0009E639 /* MyRenZhengVC.h */,
+				8FDC2E431DD5A20B0009E639 /* MyRenZhengVC.m */,
+				8FDC2E451DD5AE3E0009E639 /* LoginVC.h */,
+				8FDC2E461DD5AE3E0009E639 /* LoginVC.m */,
+				8FDC2E481DD5CB600009E639 /* RegistVC.h */,
+				8FDC2E491DD5CB600009E639 /* RegistVC.m */,
 			);
 			name = MyViewController;
 			sourceTree = "<group>";
@@ -438,6 +490,7 @@
 		8F02FE691DA89AFE0051EDFC /* LIb */ = {
 			isa = PBXGroup;
 			children = (
+				8FDC2E4B1DD5D2850009E639 /* SGTopTitleView */,
 				8FCD4F191DA8B4D300CB113C /* AF5.0 */,
 				8FCD4F631DA8B4D300CB113C /* MBProgressHUD */,
 				8FCD4F691DA8B4D300CB113C /* SDAutoLayout */,
@@ -648,6 +701,113 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		8FDC2E251DD561A60009E639 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8F6208371DD44E0300E9A306 /* LrdOutputView.h */,
+				8F6208381DD44E0300E9A306 /* LrdOutputView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8FDC2E261DD561B60009E639 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E5C1DD5E2160009E639 /* MyselfPublicCell.h */,
+				8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */,
+				8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */,
+				8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */,
+				8FDC2E331DD564320009E639 /* YouZhiShangHuCell.h */,
+				8FDC2E341DD564320009E639 /* YouZhiShangHuCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		8FDC2E271DD561C30009E639 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E281DD561D30009E639 /* 首页 */,
+				8FDC2E291DD561DD0009E639 /* 优质现货 */,
+				8FDC2E2A1DD561F20009E639 /* 优质现货详情 */,
+				8FDC2E2F1DD5626E0009E639 /* 优质商户 */,
+				8FDC2E551DD5D34E0009E639 /* 企业快速买货 */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8FDC2E281DD561D30009E639 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				8F02FE501DA887740051EDFC /* HomeVC.h */,
+				8F02FE511DA887740051EDFC /* HomeVC.m */,
+			);
+			name = "首页";
+			sourceTree = "<group>";
+		};
+		8FDC2E291DD561DD0009E639 /* 优质现货 */ = {
+			isa = PBXGroup;
+			children = (
+				8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */,
+				8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */,
+			);
+			name = "优质现货";
+			sourceTree = "<group>";
+		};
+		8FDC2E2A1DD561F20009E639 /* 优质现货详情 */ = {
+			isa = PBXGroup;
+			children = (
+				8F62083A1DD45B7B00E9A306 /* XiangQingVC.h */,
+				8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */,
+			);
+			name = "优质现货详情";
+			sourceTree = "<group>";
+		};
+		8FDC2E2B1DD5622A0009E639 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				8F02FE6A1DA89B850051EDFC /* Engine.h */,
+				8F02FE6B1DA89B850051EDFC /* Engine.m */,
+				8F6208341DD41ABE00E9A306 /* ToolClass.h */,
+				8F6208351DD41ABE00E9A306 /* ToolClass.m */,
+			);
+			name = Engine;
+			sourceTree = "<group>";
+		};
+		8FDC2E2F1DD5626E0009E639 /* 优质商户 */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E2C1DD562620009E639 /* YouZhiShangHuVC.h */,
+				8FDC2E2D1DD562620009E639 /* YouZhiShangHuVC.m */,
+			);
+			name = "优质商户";
+			sourceTree = "<group>";
+		};
+		8FDC2E4B1DD5D2850009E639 /* SGTopTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E4C1DD5D2850009E639 /* SGTopTitleView.h */,
+				8FDC2E4D1DD5D2850009E639 /* SGTopTitleView.m */,
+				8FDC2E4E1DD5D2850009E639 /* UIView+SGExtension.h */,
+				8FDC2E4F1DD5D2850009E639 /* UIView+SGExtension.m */,
+			);
+			path = SGTopTitleView;
+			sourceTree = "<group>";
+		};
+		8FDC2E551DD5D34E0009E639 /* 企业快速买货 */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E521DD5D3490009E639 /* QiYeKuaiSuMaiVC.h */,
+				8FDC2E531DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m */,
+				8FDC2E561DD5D4D00009E639 /* MyselfPublicVC.h */,
+				8FDC2E571DD5D4D00009E639 /* MyselfPublicVC.m */,
+				8FDC2E591DD5D4EB0009E639 /* WeiTuoPublicVC.h */,
+				8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */,
+				8FDC2E5F1DD603160009E639 /* YuYinPublicVC.h */,
+				8FDC2E601DD603160009E639 /* YuYinPublicVC.m */,
+			);
+			name = "企业快速买货";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -785,8 +945,12 @@
 				8FCD4F921DA8B4D300CB113C /* UIImage+GIF.m in Sources */,
 				8F02FE581DA887CC0051EDFC /* MyVC.m in Sources */,
 				8F02FE8A1DA89F6B0051EDFC /* ASIHTTPRequest.m in Sources */,
+				8FDC2E501DD5D2850009E639 /* SGTopTitleView.m in Sources */,
+				8FDC2E411DD581CF0009E639 /* MessageCell.m in Sources */,
 				8F02FE8C1DA89F6B0051EDFC /* ASINetworkQueue.m in Sources */,
+				8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */,
 				8FCD4FA51DA8B4D300CB113C /* TAAbstractDotView.m in Sources */,
+				8FDC2E641DD610430009E639 /* FaBuViewController.m in Sources */,
 				8FCD4F9D1DA8B4D300CB113C /* UIProgressView+AFNetworking.m in Sources */,
 				8FCD4FA11DA8B4D300CB113C /* LCProgressHUD.m in Sources */,
 				8FCD4F971DA8B4D300CB113C /* UIView+WebCacheOperation.m in Sources */,
@@ -795,6 +959,7 @@
 				8FCD4F9F1DA8B4D300CB113C /* UIWebView+AFNetworking.m in Sources */,
 				8FCD4F831DA8B4D300CB113C /* AFSecurityPolicy.m in Sources */,
 				8F02FE4C1DA887390051EDFC /* BaseNavigationController.m in Sources */,
+				8FDC2E471DD5AE3E0009E639 /* LoginVC.m in Sources */,
 				8FCD4F8A1DA8B4D300CB113C /* SDImageCache.m in Sources */,
 				8FCD4FA21DA8B4D300CB113C /* MBProgressHUD.m in Sources */,
 				8FCD4F811DA8B4D300CB113C /* AFHTTPSessionManager.m in Sources */,
@@ -816,23 +981,29 @@
 				8FCD4FA61DA8B4D300CB113C /* TAAnimatedDotView.m in Sources */,
 				8FCD4F8C1DA8B4D300CB113C /* SDWebImageDecoder.m in Sources */,
 				8F62083F1DD45B9200E9A306 /* sssViewController.m in Sources */,
+				8FDC2E3B1DD57A0F0009E639 /* MessageVC.m in Sources */,
 				8F02FE8F1DA89F890051EDFC /* Reachability.m in Sources */,
+				8FDC2E441DD5A20B0009E639 /* MyRenZhengVC.m in Sources */,
 				8FCD4F801DA8B4D300CB113C /* AFHTTPRequestOperationManager.m in Sources */,
 				8FCD4F961DA8B4D300CB113C /* UIImageView+WebCache.m in Sources */,
 				8FCD4F8F1DA8B4D300CB113C /* SDWebImageManager.m in Sources */,
 				8F02FE521DA887740051EDFC /* HomeVC.m in Sources */,
 				8FCD4F7F1DA8B4D300CB113C /* AFHTTPRequestOperation.m in Sources */,
+				8FDC2E581DD5D4D00009E639 /* MyselfPublicVC.m in Sources */,
 				8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */,
 				8FCD4F871DA8B4D300CB113C /* AFURLSessionManager.m in Sources */,
 				8F02FE861DA89F6B0051EDFC /* ASIDataCompressor.m in Sources */,
+				8FDC2E511DD5D2850009E639 /* UIView+SGExtension.m in Sources */,
 				8FCD4F881DA8B4D300CB113C /* MKAnnotationView+WebCache.m in Sources */,
 				8FCD4F9C1DA8B4D300CB113C /* UIImageView+AFNetworking.m in Sources */,
 				8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */,
 				8FCD4F821DA8B4D300CB113C /* AFNetworkReachabilityManager.m in Sources */,
 				8FCD4F861DA8B4D300CB113C /* AFURLResponseSerialization.m in Sources */,
+				8FDC2E541DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m in Sources */,
 				8FCD4F851DA8B4D300CB113C /* AFURLRequestSerialization.m in Sources */,
 				8FCD4F931DA8B4D300CB113C /* UIImage+MultiFormat.m in Sources */,
 				8FCD4FAA1DA8B4D300CB113C /* SDCycleScrollView.m in Sources */,
+				8FDC2E611DD603160009E639 /* YuYinPublicVC.m in Sources */,
 				8FCD4F9A1DA8B4D300CB113C /* UIAlertView+AFNetworking.m in Sources */,
 				8FCD4F9B1DA8B4D300CB113C /* UIButton+AFNetworking.m in Sources */,
 				8FCD4FA31DA8B4D300CB113C /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
@@ -846,11 +1017,16 @@
 				8FCD4FA91DA8B4D300CB113C /* SDCollectionViewCell.m in Sources */,
 				8FCD4FA71DA8B4D300CB113C /* TADotView.m in Sources */,
 				8FCD4FA41DA8B4D300CB113C /* UIView+SDAutoLayout.m in Sources */,
+				8FDC2E4A1DD5CB600009E639 /* RegistVC.m in Sources */,
 				8F02FE1A1DA883FE0051EDFC /* AppDelegate.m in Sources */,
+				8FDC2E381DD56B0A0009E639 /* SetViewController.m in Sources */,
 				8F02FE171DA883FE0051EDFC /* main.m in Sources */,
+				8FDC2E351DD564320009E639 /* YouZhiShangHuCell.m in Sources */,
 				8F02FE6C1DA89B850051EDFC /* Engine.m in Sources */,
+				8FDC2E2E1DD562620009E639 /* YouZhiShangHuVC.m in Sources */,
 				8F02FE851DA89F6B0051EDFC /* ASIAuthenticationDialog.m in Sources */,
 				8FCD4F981DA8B4D300CB113C /* AFNetworkActivityIndicatorManager.m in Sources */,
+				8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

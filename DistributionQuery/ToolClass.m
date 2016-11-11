@@ -9,6 +9,18 @@
 #import "ToolClass.h"
 
 @implementation ToolClass
+
+#pragma mark --判断是否登录（登录YES）
++(BOOL)isLogin{
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        return NO;
+    }else{
+        return YES;
+    }
+    
+}
+
 #pragma mark --适配高度
 +(CGFloat)cellContentViewWith{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -18,6 +30,11 @@
     }
     return width;
 }
+
+
+
+
+
 #pragma mark --根据图片url获取图片尺寸
 +(CGSize)getImageSizeWithURL:(id)imageURL
 {
