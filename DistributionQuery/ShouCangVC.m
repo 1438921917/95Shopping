@@ -1,34 +1,31 @@
 //
-//  QiYeKuaiSuMaiVC.m
+//  ShouCangVC.m
 //  DistributionQuery
 //
-//  Created by Macx on 16/11/11.
+//  Created by Macx on 16/11/12.
 //  Copyright © 2016年 Macx. All rights reserved.
 //
 
-#import "QiYeKuaiSuMaiVC.h"
+#import "ShouCangVC.h"
 #import "SGTopTitleView.h"
-#import "MyselfPublicVC.h"
-#import "WeiTuoPublicVC.h"
-@interface QiYeKuaiSuMaiVC ()<SGTopTitleViewDelegate,UIScrollViewDelegate>
+#import "TongHangShangPinVC.h"
+#import "QiuGouShangPinVC.h"
+@interface ShouCangVC ()<SGTopTitleViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) SGTopTitleView *topTitleView;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @end
 
-@implementation QiYeKuaiSuMaiVC
--(void)viewWillAppear:(BOOL)animated{
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
-    self.navigationController.navigationBarHidden=NO;
-}
+@implementation ShouCangVC
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"企业快速买货";
+    self.title=@"收藏";
     self.automaticallyAdjustsScrollViewInsets=NO;
    // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
-     [self setupChildViewController];
-    self.titles = @[@"自己发布",@"委托发布"];
+    [self setupChildViewController];
+    self.titles = @[@"同行商品",@"求购商品"];
     self.topTitleView = [SGTopTitleView topTitleViewWithFrame:CGRectMake(0, 69,ScreenWidth, 44)];
     _topTitleView.staticTitleArr = [NSArray arrayWithArray:_titles];
     _topTitleView.backgroundColor=[UIColor whiteColor];
@@ -50,10 +47,11 @@
     
     [self.view addSubview:_mainScrollView];
     
-    MyselfPublicVC *oneVC = [[MyselfPublicVC alloc] init];
+    TongHangShangPinVC *oneVC = [[TongHangShangPinVC alloc] init];
     [self.mainScrollView addSubview:oneVC.view];
     [self addChildViewController:oneVC];
     [self.view insertSubview:_mainScrollView belowSubview:_topTitleView];
+
 }
 #pragma mark - - - SGTopScrollMenu代理方法
 - (void)SGTopTitleView:(SGTopTitleView *)topTitleView didSelectTitleAtIndex:(NSInteger)index{
@@ -82,11 +80,11 @@
 // 添加所有子控制器
 - (void)setupChildViewController {
     // 未领取
-    MyselfPublicVC *oneVC = [[MyselfPublicVC alloc] init];
+    TongHangShangPinVC *oneVC = [[TongHangShangPinVC alloc] init];
     [self addChildViewController:oneVC];
     
     // 领取
-    WeiTuoPublicVC *twoVC = [[WeiTuoPublicVC alloc] init];
+    QiuGouShangPinVC *twoVC = [[QiuGouShangPinVC alloc] init];
     [self addChildViewController:twoVC];
     
 }
@@ -108,7 +106,6 @@
     [self.topTitleView staticTitleLabelSelecteded:selLabel];
     
 }
-
 
 
 - (void)didReceiveMemoryWarning {

@@ -1,38 +1,29 @@
 //
-//  YouZhiShangHuVC.m
+//  TongHangShangPinVC.m
 //  DistributionQuery
 //
-//  Created by Macx on 16/11/11.
+//  Created by Macx on 16/11/12.
 //  Copyright © 2016年 Macx. All rights reserved.
 //
 
-#import "YouZhiShangHuVC.h"
-#import "YouZhiShangHuCell.h"
-@interface YouZhiShangHuVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "TongHangShangPinVC.h"
+#import "YouZhiXianHuoCell.h"
+@interface TongHangShangPinVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @end
 
-@implementation YouZhiShangHuVC
+@implementation TongHangShangPinVC
 
--(void)viewWillAppear:(BOOL)animated{
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
-    self.navigationController.navigationBarHidden=NO;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //   self.view.backgroundColor=[UIColor whiteColor];
-    // [self.navigationItem setTitle:@"优质现货"];
-    self.automaticallyAdjustsScrollViewInsets=NO;
-    self.title=@"优质现货";
-   // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
     [self CreatTableView];
 }
 #pragma mark --创建表
 -(void)CreatTableView
 {
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+50, ScreenWidth, ScreenHeight-64-50) style:UITableViewStylePlain];
     }
     _tableView.dataSource=self;
     _tableView.delegate=self;
@@ -46,16 +37,23 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
-    YouZhiShangHuCell * cell =[YouZhiShangHuCell cellWithTableView:tableView CellID:CellIdentifier];
+    YouZhiXianHuoCell * cell =[YouZhiXianHuoCell cellWithTableView:tableView CellID:CellIdentifier];
+    cell.chaKanBtn.sd_layout
+    .widthIs(220/2)
+    .heightIs(23);
+    [cell.chaKanBtn setBackgroundImage:[UIImage imageNamed:@"shoucnag_phone-1"] forState:0];
+    [cell.chaKanBtn setTitle:@"4000238438" forState:0];
+    cell.chaKanBtn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
+    [cell.chaKanBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
+    [cell.chaKanBtn setTitleColor:[UIColor redColor] forState:0];
+    cell.chaKanBtn.titleLabel.font=[UIFont systemFontOfSize:13];
    // [cell.chaKanBtn addTarget:self action:@selector(chaKan:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 95;
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

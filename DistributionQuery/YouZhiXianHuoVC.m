@@ -24,7 +24,7 @@
     // [self.navigationItem setTitle:@"优质现货"];
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=@"优质现货";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
+   // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
     [self CreatTableView];
 }
 

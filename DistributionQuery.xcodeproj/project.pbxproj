@@ -32,7 +32,6 @@
 		8F6208361DD41ABE00E9A306 /* ToolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208351DD41ABE00E9A306 /* ToolClass.m */; };
 		8F6208391DD44E0300E9A306 /* LrdOutputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208381DD44E0300E9A306 /* LrdOutputView.m */; };
 		8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */; };
-		8F62083F1DD45B9200E9A306 /* sssViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62083E1DD45B9200E9A306 /* sssViewController.m */; };
 		8F6C931E1DD2BFF90067CC8F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F6C931D1DD2BFF90067CC8F /* Info.plist */; };
 		8FCD4F111DA8A13100CB113C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCD4F101DA8A13100CB113C /* libsqlite3.tbd */; };
 		8FCD4F131DA8A13A00CB113C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCD4F121DA8A13A00CB113C /* libz.tbd */; };
@@ -101,6 +100,11 @@
 		8FDC2E641DD610430009E639 /* FaBuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E631DD610430009E639 /* FaBuViewController.m */; };
 		8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */; };
 		8FEE743D1DD40DB700470D75 /* YouZhiXianHuoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */; };
+		8FF4A7D91DD6B40C00C5C743 /* GuanLiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7D81DD6B40C00C5C743 /* GuanLiVC.m */; };
+		8FF4A7DC1DD6B43B00C5C743 /* GuanLiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7DB1DD6B43B00C5C743 /* GuanLiCell.m */; };
+		8FF4A7E01DD6C99800C5C743 /* ShouCangVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7DF1DD6C99800C5C743 /* ShouCangVC.m */; };
+		8FF4A7E31DD6C9C400C5C743 /* TongHangShangPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7E21DD6C9C400C5C743 /* TongHangShangPinVC.m */; };
+		8FF4A7E61DD6C9DB00C5C743 /* QiuGouShangPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7E51DD6C9DB00C5C743 /* QiuGouShangPinVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,8 +182,6 @@
 		8F6208381DD44E0300E9A306 /* LrdOutputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LrdOutputView.m; sourceTree = "<group>"; };
 		8F62083A1DD45B7B00E9A306 /* XiangQingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiangQingVC.h; sourceTree = "<group>"; };
 		8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiangQingVC.m; sourceTree = "<group>"; };
-		8F62083D1DD45B9200E9A306 /* sssViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sssViewController.h; sourceTree = "<group>"; };
-		8F62083E1DD45B9200E9A306 /* sssViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sssViewController.m; sourceTree = "<group>"; };
 		8F6C931D1DD2BFF90067CC8F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FCD4F101DA8A13100CB113C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8FCD4F121DA8A13A00CB113C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -314,6 +316,16 @@
 		8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiXianHuoVC.m; sourceTree = "<group>"; };
 		8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoCell.h; sourceTree = "<group>"; };
 		8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiXianHuoCell.m; sourceTree = "<group>"; };
+		8FF4A7D71DD6B40C00C5C743 /* GuanLiVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanLiVC.h; sourceTree = "<group>"; };
+		8FF4A7D81DD6B40C00C5C743 /* GuanLiVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanLiVC.m; sourceTree = "<group>"; };
+		8FF4A7DA1DD6B43B00C5C743 /* GuanLiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanLiCell.h; sourceTree = "<group>"; };
+		8FF4A7DB1DD6B43B00C5C743 /* GuanLiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanLiCell.m; sourceTree = "<group>"; };
+		8FF4A7DE1DD6C99800C5C743 /* ShouCangVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouCangVC.h; sourceTree = "<group>"; };
+		8FF4A7DF1DD6C99800C5C743 /* ShouCangVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShouCangVC.m; sourceTree = "<group>"; };
+		8FF4A7E11DD6C9C400C5C743 /* TongHangShangPinVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongHangShangPinVC.h; sourceTree = "<group>"; };
+		8FF4A7E21DD6C9C400C5C743 /* TongHangShangPinVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongHangShangPinVC.m; sourceTree = "<group>"; };
+		8FF4A7E41DD6C9DB00C5C743 /* QiuGouShangPinVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiuGouShangPinVC.h; sourceTree = "<group>"; };
+		8FF4A7E51DD6C9DB00C5C743 /* QiuGouShangPinVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiuGouShangPinVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,8 +451,6 @@
 				8F02FE4B1DA887390051EDFC /* BaseNavigationController.m */,
 				8F02FE5E1DA88CD00051EDFC /* BaseTableBarVC.h */,
 				8F02FE5F1DA88CD00051EDFC /* BaseTableBarVC.m */,
-				8F62083D1DD45B9200E9A306 /* sssViewController.h */,
-				8F62083E1DD45B9200E9A306 /* sssViewController.m */,
 			);
 			name = BaseViewController;
 			sourceTree = "<group>";
@@ -471,18 +481,12 @@
 			children = (
 				8F02FE561DA887CC0051EDFC /* MyVC.h */,
 				8F02FE571DA887CC0051EDFC /* MyVC.m */,
-				8FDC2E361DD56B0A0009E639 /* SetViewController.h */,
-				8FDC2E371DD56B0A0009E639 /* SetViewController.m */,
-				8FDC2E391DD57A0F0009E639 /* MessageVC.h */,
-				8FDC2E3A1DD57A0F0009E639 /* MessageVC.m */,
-				8FDC2E3F1DD581CF0009E639 /* MessageCell.h */,
-				8FDC2E401DD581CF0009E639 /* MessageCell.m */,
-				8FDC2E421DD5A20B0009E639 /* MyRenZhengVC.h */,
-				8FDC2E431DD5A20B0009E639 /* MyRenZhengVC.m */,
-				8FDC2E451DD5AE3E0009E639 /* LoginVC.h */,
-				8FDC2E461DD5AE3E0009E639 /* LoginVC.m */,
-				8FDC2E481DD5CB600009E639 /* RegistVC.h */,
-				8FDC2E491DD5CB600009E639 /* RegistVC.m */,
+				8FF4A7E71DD6C9E200C5C743 /* 收藏 */,
+				8FF4A7DD1DD6C97100C5C743 /* 管理 */,
+				8FF4A7D61DD6B30600C5C743 /* 设置 */,
+				8FF4A7D51DD6B2FB00C5C743 /* 个人公司资料 */,
+				8FF4A7D41DD6B2D900C5C743 /* 我要认证 */,
+				8FF4A7D31DD6B2CD00C5C743 /* 登录注册 */,
 			);
 			name = MyViewController;
 			sourceTree = "<group>";
@@ -808,6 +812,70 @@
 			name = "企业快速买货";
 			sourceTree = "<group>";
 		};
+		8FF4A7D31DD6B2CD00C5C743 /* 登录注册 */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E451DD5AE3E0009E639 /* LoginVC.h */,
+				8FDC2E461DD5AE3E0009E639 /* LoginVC.m */,
+				8FDC2E481DD5CB600009E639 /* RegistVC.h */,
+				8FDC2E491DD5CB600009E639 /* RegistVC.m */,
+			);
+			name = "登录注册";
+			sourceTree = "<group>";
+		};
+		8FF4A7D41DD6B2D900C5C743 /* 我要认证 */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E421DD5A20B0009E639 /* MyRenZhengVC.h */,
+				8FDC2E431DD5A20B0009E639 /* MyRenZhengVC.m */,
+			);
+			name = "我要认证";
+			sourceTree = "<group>";
+		};
+		8FF4A7D51DD6B2FB00C5C743 /* 个人公司资料 */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E391DD57A0F0009E639 /* MessageVC.h */,
+				8FDC2E3A1DD57A0F0009E639 /* MessageVC.m */,
+				8FDC2E3F1DD581CF0009E639 /* MessageCell.h */,
+				8FDC2E401DD581CF0009E639 /* MessageCell.m */,
+			);
+			name = "个人公司资料";
+			sourceTree = "<group>";
+		};
+		8FF4A7D61DD6B30600C5C743 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				8FDC2E361DD56B0A0009E639 /* SetViewController.h */,
+				8FDC2E371DD56B0A0009E639 /* SetViewController.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		8FF4A7DD1DD6C97100C5C743 /* 管理 */ = {
+			isa = PBXGroup;
+			children = (
+				8FF4A7D71DD6B40C00C5C743 /* GuanLiVC.h */,
+				8FF4A7D81DD6B40C00C5C743 /* GuanLiVC.m */,
+				8FF4A7DA1DD6B43B00C5C743 /* GuanLiCell.h */,
+				8FF4A7DB1DD6B43B00C5C743 /* GuanLiCell.m */,
+			);
+			name = "管理";
+			sourceTree = "<group>";
+		};
+		8FF4A7E71DD6C9E200C5C743 /* 收藏 */ = {
+			isa = PBXGroup;
+			children = (
+				8FF4A7DE1DD6C99800C5C743 /* ShouCangVC.h */,
+				8FF4A7DF1DD6C99800C5C743 /* ShouCangVC.m */,
+				8FF4A7E11DD6C9C400C5C743 /* TongHangShangPinVC.h */,
+				8FF4A7E21DD6C9C400C5C743 /* TongHangShangPinVC.m */,
+				8FF4A7E41DD6C9DB00C5C743 /* QiuGouShangPinVC.h */,
+				8FF4A7E51DD6C9DB00C5C743 /* QiuGouShangPinVC.m */,
+			);
+			name = "收藏";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -961,6 +1029,7 @@
 				8F02FE4C1DA887390051EDFC /* BaseNavigationController.m in Sources */,
 				8FDC2E471DD5AE3E0009E639 /* LoginVC.m in Sources */,
 				8FCD4F8A1DA8B4D300CB113C /* SDImageCache.m in Sources */,
+				8FF4A7E31DD6C9C400C5C743 /* TongHangShangPinVC.m in Sources */,
 				8FCD4FA21DA8B4D300CB113C /* MBProgressHUD.m in Sources */,
 				8FCD4F811DA8B4D300CB113C /* AFHTTPSessionManager.m in Sources */,
 				8FCD4F8B1DA8B4D300CB113C /* SDWebImageCompat.m in Sources */,
@@ -968,6 +1037,7 @@
 				8FCD4FA81DA8B4D300CB113C /* TAPageControl.m in Sources */,
 				8F02FE871DA89F6B0051EDFC /* ASIDataDecompressor.m in Sources */,
 				8FCD4F951DA8B4D300CB113C /* UIImageView+HighlightedWebCache.m in Sources */,
+				8FF4A7D91DD6B40C00C5C743 /* GuanLiVC.m in Sources */,
 				8FCD4F901DA8B4D300CB113C /* SDWebImagePrefetcher.m in Sources */,
 				8FCD4F8E1DA8B4D300CB113C /* SDWebImageDownloaderOperation.m in Sources */,
 				8F02FE4F1DA8875D0051EDFC /* BaseViewController.m in Sources */,
@@ -980,7 +1050,6 @@
 				8F02FE881DA89F6B0051EDFC /* ASIDownloadCache.m in Sources */,
 				8FCD4FA61DA8B4D300CB113C /* TAAnimatedDotView.m in Sources */,
 				8FCD4F8C1DA8B4D300CB113C /* SDWebImageDecoder.m in Sources */,
-				8F62083F1DD45B9200E9A306 /* sssViewController.m in Sources */,
 				8FDC2E3B1DD57A0F0009E639 /* MessageVC.m in Sources */,
 				8F02FE8F1DA89F890051EDFC /* Reachability.m in Sources */,
 				8FDC2E441DD5A20B0009E639 /* MyRenZhengVC.m in Sources */,
@@ -993,6 +1062,7 @@
 				8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */,
 				8FCD4F871DA8B4D300CB113C /* AFURLSessionManager.m in Sources */,
 				8F02FE861DA89F6B0051EDFC /* ASIDataCompressor.m in Sources */,
+				8FF4A7DC1DD6B43B00C5C743 /* GuanLiCell.m in Sources */,
 				8FDC2E511DD5D2850009E639 /* UIView+SGExtension.m in Sources */,
 				8FCD4F881DA8B4D300CB113C /* MKAnnotationView+WebCache.m in Sources */,
 				8FCD4F9C1DA8B4D300CB113C /* UIImageView+AFNetworking.m in Sources */,
@@ -1007,11 +1077,13 @@
 				8FCD4F9A1DA8B4D300CB113C /* UIAlertView+AFNetworking.m in Sources */,
 				8FCD4F9B1DA8B4D300CB113C /* UIButton+AFNetworking.m in Sources */,
 				8FCD4FA31DA8B4D300CB113C /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
+				8FF4A7E61DD6C9DB00C5C743 /* QiuGouShangPinVC.m in Sources */,
 				8FCD4FAB1DA8B4D300CB113C /* UIView+SDExtension.m in Sources */,
 				8F6208361DD41ABE00E9A306 /* ToolClass.m in Sources */,
 				8FCD4F9E1DA8B4D300CB113C /* UIRefreshControl+AFNetworking.m in Sources */,
 				8FCD4F941DA8B4D300CB113C /* UIImage+WebP.m in Sources */,
 				8FCD4F911DA8B4D300CB113C /* UIButton+WebCache.m in Sources */,
+				8FF4A7E01DD6C99800C5C743 /* ShouCangVC.m in Sources */,
 				8F02FE601DA88CD00051EDFC /* BaseTableBarVC.m in Sources */,
 				8F02FE891DA89F6B0051EDFC /* ASIFormDataRequest.m in Sources */,
 				8FCD4FA91DA8B4D300CB113C /* SDCollectionViewCell.m in Sources */,

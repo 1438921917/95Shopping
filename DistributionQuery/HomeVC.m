@@ -38,8 +38,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      self.automaticallyAdjustsScrollViewInsets=NO;
+    self.backHomeBtn.hidden=YES;
     //[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
-     [self.navigationItem setTitle:@""];
+    // [self.navigationItem setTitle:@""];
+     self.title=@"";
      [self CreatBgScrollView];//背景screr
      [self CreatTextFiled];//导航条
      [self CreatLunBoTu];//轮播图

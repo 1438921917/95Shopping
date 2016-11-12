@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"入驻发布";
-   
+    self.backHomeBtn.hidden=YES;
 //    self.oneVC.view.backgroundColor=[UIColor yellowColor];
 //    [self.oneVC.publicBtn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
 }

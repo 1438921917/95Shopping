@@ -9,6 +9,8 @@
 #import "MyVC.h"
 #import "SetViewController.h"
 #import "LoginVC.h"
+#import "GuanLiVC.h"
+#import "ShouCangVC.h"
 @interface MyVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * dataArray;
@@ -21,7 +23,9 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets=NO;
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
+    self.title=@"我的";
+    self.backHomeBtn.hidden=YES;
+   // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
     //self.na
     [self CreatDataArr];//数据源
     [self CreatTableView];//创建表
@@ -197,6 +201,34 @@
   
     return cell;
 }
+#pragma mark --表的点击
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==0) {
+        if (indexPath.row==0) {
+            //管理
+            GuanLiVC * vc =[GuanLiVC new];
+            vc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            //收藏
+            ShouCangVC* vc =[ShouCangVC new];
+            vc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if(indexPath.section==1){
+        if (indexPath.row==0) {
+            //雇佣经纪人
+        }else if (indexPath.row==1){
+            //消息反馈
+        }else{
+            //服务充值
+        }
+    }else{
+        //关于95
+    }
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
