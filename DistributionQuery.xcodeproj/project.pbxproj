@@ -105,6 +105,8 @@
 		8FF4A7E01DD6C99800C5C743 /* ShouCangVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7DF1DD6C99800C5C743 /* ShouCangVC.m */; };
 		8FF4A7E31DD6C9C400C5C743 /* TongHangShangPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7E21DD6C9C400C5C743 /* TongHangShangPinVC.m */; };
 		8FF4A7E61DD6C9DB00C5C743 /* QiuGouShangPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7E51DD6C9DB00C5C743 /* QiuGouShangPinVC.m */; };
+		8FF4A7EA1DD6E8C300C5C743 /* LeftMyAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7E91DD6E8C300C5C743 /* LeftMyAdressCell.m */; };
+		8FF4A7F01DD6E90A00C5C743 /* RightMyAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7EF1DD6E90A00C5C743 /* RightMyAddressCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -326,6 +328,10 @@
 		8FF4A7E21DD6C9C400C5C743 /* TongHangShangPinVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongHangShangPinVC.m; sourceTree = "<group>"; };
 		8FF4A7E41DD6C9DB00C5C743 /* QiuGouShangPinVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiuGouShangPinVC.h; sourceTree = "<group>"; };
 		8FF4A7E51DD6C9DB00C5C743 /* QiuGouShangPinVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiuGouShangPinVC.m; sourceTree = "<group>"; };
+		8FF4A7E81DD6E8C300C5C743 /* LeftMyAdressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMyAdressCell.h; sourceTree = "<group>"; };
+		8FF4A7E91DD6E8C300C5C743 /* LeftMyAdressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMyAdressCell.m; sourceTree = "<group>"; };
+		8FF4A7EE1DD6E90A00C5C743 /* RightMyAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMyAddressCell.h; sourceTree = "<group>"; };
+		8FF4A7EF1DD6E90A00C5C743 /* RightMyAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMyAddressCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -753,6 +759,10 @@
 			children = (
 				8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */,
 				8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */,
+				8FF4A7E81DD6E8C300C5C743 /* LeftMyAdressCell.h */,
+				8FF4A7E91DD6E8C300C5C743 /* LeftMyAdressCell.m */,
+				8FF4A7EE1DD6E90A00C5C743 /* RightMyAddressCell.h */,
+				8FF4A7EF1DD6E90A00C5C743 /* RightMyAddressCell.m */,
 			);
 			name = "优质现货";
 			sourceTree = "<group>";
@@ -1058,6 +1068,7 @@
 				8FCD4F8F1DA8B4D300CB113C /* SDWebImageManager.m in Sources */,
 				8F02FE521DA887740051EDFC /* HomeVC.m in Sources */,
 				8FCD4F7F1DA8B4D300CB113C /* AFHTTPRequestOperation.m in Sources */,
+				8FF4A7EA1DD6E8C300C5C743 /* LeftMyAdressCell.m in Sources */,
 				8FDC2E581DD5D4D00009E639 /* MyselfPublicVC.m in Sources */,
 				8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */,
 				8FCD4F871DA8B4D300CB113C /* AFURLSessionManager.m in Sources */,
@@ -1066,6 +1077,7 @@
 				8FDC2E511DD5D2850009E639 /* UIView+SGExtension.m in Sources */,
 				8FCD4F881DA8B4D300CB113C /* MKAnnotationView+WebCache.m in Sources */,
 				8FCD4F9C1DA8B4D300CB113C /* UIImageView+AFNetworking.m in Sources */,
+				8FF4A7F01DD6E90A00C5C743 /* RightMyAddressCell.m in Sources */,
 				8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */,
 				8FCD4F821DA8B4D300CB113C /* AFNetworkReachabilityManager.m in Sources */,
 				8FCD4F861DA8B4D300CB113C /* AFURLResponseSerialization.m in Sources */,
