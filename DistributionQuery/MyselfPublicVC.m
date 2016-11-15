@@ -50,6 +50,15 @@
     _tableView.backgroundColor=COLOR;
     [self.view addSubview:_tableView];
     [self CreatView3];
+    UITapGestureRecognizer * tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+    [_tableView addGestureRecognizer:tap];
+    
+
+
+}
+-(void)tap:(UITapGestureRecognizer*)tap{
+    NSLog(@"点击了");
+    [_tableView endEditing:YES];
 }
 #pragma mark --创建图片
 -(void)CreatView3{

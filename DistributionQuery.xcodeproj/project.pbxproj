@@ -108,7 +108,7 @@
 		8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */; };
 		8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */; };
 		8FDC2E611DD603160009E639 /* YuYinPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E601DD603160009E639 /* YuYinPublicVC.m */; };
-		8FDC2E641DD610430009E639 /* FaBuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E631DD610430009E639 /* FaBuViewController.m */; };
+		8FE5B1691DDA98310069B82F /* ScanCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B1681DDA98310069B82F /* ScanCodeCell.m */; };
 		8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */; };
 		8FEE743D1DD40DB700470D75 /* YouZhiXianHuoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */; };
 		8FF4A7D91DD6B40C00C5C743 /* GuanLiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7D81DD6B40C00C5C743 /* GuanLiVC.m */; };
@@ -345,8 +345,8 @@
 		8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfPublicCell.m; sourceTree = "<group>"; };
 		8FDC2E5F1DD603160009E639 /* YuYinPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuYinPublicVC.h; sourceTree = "<group>"; };
 		8FDC2E601DD603160009E639 /* YuYinPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuYinPublicVC.m; sourceTree = "<group>"; };
-		8FDC2E621DD610430009E639 /* FaBuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaBuViewController.h; sourceTree = "<group>"; };
-		8FDC2E631DD610430009E639 /* FaBuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaBuViewController.m; sourceTree = "<group>"; };
+		8FE5B1671DDA98310069B82F /* ScanCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeCell.h; sourceTree = "<group>"; };
+		8FE5B1681DDA98310069B82F /* ScanCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeCell.m; sourceTree = "<group>"; };
 		8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoVC.h; sourceTree = "<group>"; };
 		8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiXianHuoVC.m; sourceTree = "<group>"; };
 		8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoCell.h; sourceTree = "<group>"; };
@@ -509,8 +509,8 @@
 			children = (
 				8F02FE531DA887B40051EDFC /* ScanCodeVC.h */,
 				8F02FE541DA887B40051EDFC /* ScanCodeVC.m */,
-				8FDC2E621DD610430009E639 /* FaBuViewController.h */,
-				8FDC2E631DD610430009E639 /* FaBuViewController.m */,
+				8FE5B1671DDA98310069B82F /* ScanCodeCell.h */,
+				8FE5B1681DDA98310069B82F /* ScanCodeCell.m */,
 			);
 			name = SaoMaViewController;
 			sourceTree = "<group>";
@@ -1132,7 +1132,6 @@
 				8F03A5301DD9BF4D00833E19 /* GuYongJingJiRenVC.m in Sources */,
 				8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */,
 				8FCD4FA51DA8B4D300CB113C /* TAAbstractDotView.m in Sources */,
-				8FDC2E641DD610430009E639 /* FaBuViewController.m in Sources */,
 				8FCD4F9D1DA8B4D300CB113C /* UIProgressView+AFNetworking.m in Sources */,
 				8FCD4FA11DA8B4D300CB113C /* LCProgressHUD.m in Sources */,
 				8FCD4F971DA8B4D300CB113C /* UIView+WebCacheOperation.m in Sources */,
@@ -1147,6 +1146,7 @@
 				8FCD4FA21DA8B4D300CB113C /* MBProgressHUD.m in Sources */,
 				8FCD4F811DA8B4D300CB113C /* AFHTTPSessionManager.m in Sources */,
 				8F03A5291DD9A84D00833E19 /* pinyin.c in Sources */,
+				8FE5B1691DDA98310069B82F /* ScanCodeCell.m in Sources */,
 				8FCD4F8B1DA8B4D300CB113C /* SDWebImageCompat.m in Sources */,
 				8FEE743D1DD40DB700470D75 /* YouZhiXianHuoCell.m in Sources */,
 				8FCD4FA81DA8B4D300CB113C /* TAPageControl.m in Sources */,
