@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface MyRenZhengVC : BaseViewController
-
+{
+    UIButton * upbtn;
+}
 @end

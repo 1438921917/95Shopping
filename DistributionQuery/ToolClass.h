@@ -16,5 +16,29 @@
 +(CGFloat)cellContentViewWith;
 #pragma mark --根据图片url获取图片尺寸
 +(CGSize)getImageSizeWithURL:(id)imageURL;
+#pragma mark --判断字符串是不是空
++(NSString*)isString:(id)str;
+#pragma mark -- 拨打电话
++(void)tellPhone:(NSString*)tell;
+
+
+#pragma mark -  计算内容文本的高度方法
++ (CGFloat)HeightForText:(NSString *)text withSizeOfLabelFont:(CGFloat)font withWidthOfContent:(CGFloat)contentWidth;
+
+#pragma mark -  计算字符串长度
++ (CGFloat)WidthForString:(NSString *)text withSizeOfFont:(CGFloat)font;
+
+#pragma mark -  json转换
++(id )getObjectFromJsonString:(NSString *)jsonString;
++(NSString *)getJsonStringFromObject:(id)object;
+
+#pragma mark --存储Plist文件
++(void)savePlist:(id)SaveDic name:(NSString*)plistName;
+#pragma mark --读取plist文件
++(NSMutableDictionary*)duquPlistWenJianPlistName:(NSString*)plistname;
++(NSMutableArray*)duquArrayPlistWenJianPlistName:(NSString*)plistname;
+
+#pragma mark --删除plist文件
++(void)deleagtePlistName:(NSString*)plistName;
 
 @end

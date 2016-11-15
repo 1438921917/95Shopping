@@ -8,6 +8,7 @@
 
 #import "XiangQingVC.h"
 #import "YouZhiXianHuoCell.h"
+#import "XiangQingModel.h"
 @interface XiangQingVC ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
      SDCycleScrollView *cycleScrollView2;
@@ -19,21 +20,48 @@
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)UIButton * upBtn;
 @property(nonatomic,strong)UIButton * nextBtn;
-
+@property(nonatomic,strong)NSMutableArray * dataArray;
 @end
 @implementation XiangQingVC
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-  //  [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
+ 
     self.title=@"详情页";
+    _dataArray=[NSMutableArray new];
+    [self jieXiXiangQingYeData];
     [self CreatBgScrollView];//背景界面
-    [self CreatView1];//轮播图
-    [self CreatView2];//具体参数
-    [self CreatView3];//详细信息
-    [self CreatTwoBtn];//2个按钮
-    [self CreatView4];//猜你喜欢表格
+   // [self CreatView1];//轮播图
+//    [self CreatView2];//具体参数
+//    [self CreatView3];//详细信息
+//    [self CreatTwoBtn];//2个按钮
+//    [self CreatView4];//猜你喜欢表格
 }
+
+#pragma mark --解析详情页的数据
+-(void)jieXiXiangQingYeData{
+    [Engine tableViewXiangQingJieMianMessageID:@"7458" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"])
+        {
+            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+                [LCProgressHUD showMessage:@"Item3无数据"];
+            }else{
+                NSDictionary * dicc =[dic objectForKey:@"Item3"];
+                    XiangQingModel * md =[[XiangQingModel alloc]initWithXiangXiDic:dicc];
+                    [_dataArray addObject:md];
+                
+            }
+             [self CreatView1];
+        }else{
+             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+
+
 #pragma mark --创建背景的滚动试图
 -(void)CreatBgScrollView{
     _bgScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
@@ -44,6 +72,7 @@
 }
 #pragma mark --创建view1轮播图
 -(void)CreatView1{
+    NSLog(@"输出看看结果%lu",_dataArray.count);
     _view1=[UIView new];
     _view1.backgroundColor=[UIColor whiteColor];
     [_bgScrollView addSubview:_view1];
@@ -66,9 +95,10 @@
         // NSLog(@">>>>>  %ld", (long)index);
         
     };
+    XiangQingModel * md =_dataArray[0];
    //标题
     UILabel * titleLable =[UILabel new];
-    titleLable.text=@"出售183*7米的青岛产球磨机";
+    titleLable.text=md.titleName;//@"出售183*7米的青岛产球磨机";
     titleLable.numberOfLines=0;
     [_view1 sd_addSubviews:@[titleLable]];
     titleLable.sd_layout
@@ -89,7 +119,7 @@
     
     //价格
     UILabel * priceLabel =[UILabel new];
-    priceLabel.text=@"¥11.5万";
+    priceLabel.text=[NSString stringWithFormat:@"¥%@万",md.priceName];//@"¥11.5万";
     priceLabel.textColor=[UIColor redColor];
     [_view1 sd_addSubviews:@[priceLabel]];
     priceLabel.sd_layout
@@ -100,7 +130,7 @@
     
     //编号
     UILabel * bianHao =[UILabel new];
-    bianHao.text=@"编号  001号";
+    bianHao.text=[NSString stringWithFormat:@"编号  %@号",md.bianHaoName];//@"编号  001号";
     bianHao.alpha=.5;
     bianHao.font=[UIFont systemFontOfSize:13];
     [_view1 sd_addSubviews:@[bianHao]];
@@ -137,7 +167,7 @@
     .heightIs(28/2);
     //电话号码
     UILabel * phoneNumberLable =[UILabel new];
-    phoneNumberLable.text=@"联系电话 400-1234-360";
+    phoneNumberLable.text=[NSString stringWithFormat:@"联系电话 %@",md.phoneName];//@"联系电话 400-1234-360";
     phoneNumberLable.alpha=.8;
     phoneNumberLable.font=[UIFont systemFontOfSize:13];
     [viewColor sd_addSubviews:@[phoneNumberLable]];
@@ -158,9 +188,8 @@
     .widthIs(70)
     .heightIs(20);
     
-    
-    
     [_view1 setupAutoHeightWithBottomView:viewColor bottomMargin:10];
+    [self CreatView2];//具体参数
 }
 #pragma mark --创建view2具体参数
 -(void)CreatView2{
@@ -240,6 +269,9 @@
     .heightRatioToView(xingHaoLabel,1);
     [addressLabel setSingleLineAutoResizeWithMaxWidth:ScreenWidth];
     [_view2 setupAutoHeightWithBottomView:numberLabel bottomMargin:15];
+    [self CreatView3];//详细信息
+   
+
 }
 
 
@@ -288,7 +320,8 @@
     
     
     [_view3 setupAutoHeightWithBottomView:contentLabel bottomMargin:20];
-    
+    [self CreatTwoBtn];//2个按钮
+ 
     
 }
 #pragma mark --创建2个按钮
@@ -306,6 +339,7 @@
         .topSpaceToView(_view3,20);
         
     }
+       [self CreatView4];//猜你喜欢表格
 }
 
 #pragma mark --猜你喜欢

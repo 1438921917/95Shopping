@@ -32,6 +32,181 @@
 }
 
 
+#pragma mark --判断字符串是不是空
++(NSString*)isString:(id)str{
+    NSString * string =nil;
+    if (str==nil || str==[NSNull null] || [str isEqualToString:@"(null)"]) {
+        string=@"";
+    }else{
+        string=[NSString stringWithFormat:@"%@",str];
+    }
+    
+    
+    return string;
+}
+
+
+#pragma mark -- 拨打电话
++(void)tellPhone:(NSString*)tell{
+    //联系我们
+    NSString *allString = [NSString stringWithFormat:@"tel:%@",tell];
+    NSString*telUrl =[allString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];
+}
+
+#pragma mark -  计算内容文本的高度方法
++ (CGFloat)HeightForText:(NSString *)text withSizeOfLabelFont:(CGFloat)font withWidthOfContent:(CGFloat)contentWidth
+{
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:font]};
+    CGSize size = CGSizeMake(contentWidth, 2000);
+    CGRect frame = [text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+    return frame.size.height;
+}
+
+#pragma mark -  计算字符串长度
++ (CGFloat)WidthForString:(NSString *)text withSizeOfFont:(CGFloat)font
+{
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:font]};
+    CGSize size = [text sizeWithAttributes:dict];
+    return size.width;
+}
+
+#pragma mark -  json转换
++(id )getObjectFromJsonString:(NSString *)jsonString
+{
+    NSError *error = nil;
+    if (jsonString) {
+        id rev=[NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUnicodeStringEncoding] options:NSJSONReadingMutableLeaves error:&error];
+        if (error==nil) {
+            return rev;
+        }
+        else
+        {
+            return nil;
+        }
+    }
+    return nil;
+}
+
++(NSString *)getJsonStringFromObject:(id)object
+{
+    if ([NSJSONSerialization isValidJSONObject:object])
+        
+    {
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object options:0 error:nil];
+        
+        
+        
+        return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+    }
+    
+    return nil;
+}
+
+
+
+
+
+#pragma mark --存储Plist文件
++(void)savePlist:(id)SaveDic name:(NSString*)plistName{
+    
+    //获取路径对象
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //获取完整路径
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * name =[NSString stringWithFormat:@"%@.plist",plistName];
+    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:name];
+    NSLog(@"输出路径%@",plistPath);
+    [SaveDic writeToFile:plistPath atomically:YES];
+    
+    
+}
+
+
+
+
+
+
+
+#pragma mark --读取plist文件
++(NSMutableDictionary*)duquPlistWenJianPlistName:(NSString*)plistname{
+    
+    //获取路径对象
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //获取完整路径
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * name =[NSString stringWithFormat:@"%@.plist",plistname];
+    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:name];
+    // NSLog(@"输出路径%@",plistPath);
+    //读取输出
+    NSMutableDictionary *writeData=[[NSMutableDictionary alloc]initWithContentsOfFile:plistPath];
+    // NSLog(@"write data is :%@",writeData);
+    return writeData;
+}
++(NSMutableArray*)duquArrayPlistWenJianPlistName:(NSString*)plistname{
+    //获取路径对象
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //获取完整路径
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * name =[NSString stringWithFormat:@"%@.plist",plistname];
+    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:name];
+    // NSLog(@"输出路径%@",plistPath);
+    //读取输出
+    // NSMutableDictionary *writeData=[[NSMutableDictionary alloc]initWithContentsOfFile:plistPath];
+    // NSLog(@"write data is :%@",writeData);
+    
+    NSMutableArray *writeData =[[NSMutableArray alloc]initWithContentsOfFile:plistPath];
+    
+    return writeData;
+    
+}
+
+#pragma mark --删除plist文件
++(void)deleagtePlistName:(NSString*)plistName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //获取完整路径
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * name =[NSString stringWithFormat:@"%@.plist",plistName];
+    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:name];
+    DeleteSingleFile(plistPath);
+}
+
+
+BOOL DeleteSingleFile(NSString *filePath){
+    NSError *err = nil;
+    
+    if (nil == filePath) {
+        return NO;
+    }
+    
+    NSFileManager *appFileManager = [NSFileManager defaultManager];
+    
+    if (![appFileManager fileExistsAtPath:filePath]) {
+        return YES;
+    }
+    
+    if (![appFileManager isDeletableFileAtPath:filePath]) {
+        return NO;
+    }
+    
+    return [appFileManager removeItemAtPath:filePath error:&err];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

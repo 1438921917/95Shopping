@@ -17,7 +17,8 @@
  */
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
-#define SERVICE  @"http://101.200.133.10:9089/"
+#define SER_VICE  @"http://api.hs95.com/"
+#define IMAGE_TITLE @"http://www.hs95.com"
 #define COLOR [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]
 #define TITLE_FOUNT 18
 #define NSUSE_DEFO [NSUserDefaults standardUserDefaults]

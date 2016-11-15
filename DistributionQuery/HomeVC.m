@@ -11,6 +11,8 @@
 #import "LrdOutputView.h"
 #import "YouZhiShangHuVC.h"
 #import "QiYeKuaiSuMaiVC.h"
+#import "HomeModel.h"
+#import "ZuiXinCaiGouVC.h"
 @interface HomeVC ()<UIScrollViewDelegate,SDCycleScrollViewDelegate,LrdOutputViewDelegate>
 {
     SDCycleScrollView *cycleScrollView2;
@@ -27,30 +29,63 @@
 @property (nonatomic, assign) CGFloat alphaMemory;
 @property(nonatomic,strong)NSArray *menuArr;
 @property (nonatomic, strong) LrdOutputView *outputView;//搜索商品下拉菜单
+@property(nonatomic,strong)NSMutableArray * tejiaArray;
 @end
 
 @implementation HomeVC
 -(void)viewWillAppear:(BOOL)animated
 {
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    [_bgScrollView  setContentOffset:CGPointZero animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      self.automaticallyAdjustsScrollViewInsets=NO;
     self.backHomeBtn.hidden=YES;
-    //[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
-    // [self.navigationItem setTitle:@""];
-     self.title=@"";
+    self.title=@"";
+    
+    _tejiaArray=[NSMutableArray new];
+    // [self TeJiaZhuanQuData];//首页特价专区数据解析
      [self CreatBgScrollView];//背景screr
      [self CreatTextFiled];//导航条
      [self CreatLunBoTu];//轮播图
      [self CreatBtnFore];//4个btn
      [self CreatView2];//拨打电话
      [self CreatView3];//特价专区
-     [self CreatView4];//设备专区
-     [self CreatView5];//物资专区
+//     [self CreatView4];//设备专区
+//     [self CreatView5];//物资专区
 }
+
+#pragma mark --首页特价专区数据解析
+-(void)TeJiaZhuanQuData{
+    [Engine FirstTeJiaZhuanQusuccess:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+                 [LCProgressHUD showMessage:@"Item3是空"];;
+            }else{
+                NSArray * item3Arr =[dic objectForKey:@"Item3"];
+                for (NSDictionary * dicc in item3Arr )
+                {
+                    HomeModel * teJiaModel =[[HomeModel alloc]initWithTeJiaDic:dicc];
+                    [_tejiaArray addObject:teJiaModel];
+                }
+            }
+            
+        }
+        else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+        
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+
+
+
 
 #pragma mark --创建背景的滚动试图
 -(void)CreatBgScrollView{
@@ -218,12 +253,13 @@
     
     
 }
-
+#pragma mark --4个按钮
 -(void)view1Btn:(UIButton*)btn{
    // NSLog(@"输出%lu",btn.tag);
     if (btn.tag==0) {
         //优质现货
         YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
+        vc.tagg=1;
         vc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag==1){
@@ -233,6 +269,10 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (btn.tag==2){
         //最新采购
+        ZuiXinCaiGouVC * vc =[ZuiXinCaiGouVC new];
+        vc.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:vc animated:YES];
+
     }else if (btn.tag==3){
         //企业快色买货
         QiYeKuaiSuMaiVC* vc =[QiYeKuaiSuMaiVC new];
@@ -285,6 +325,7 @@
 
 #pragma mark --创建view3（特价专区）
 -(void)CreatView3{
+    NSLog(@"有个数吗%lu",_tejiaArray.count);
     _view3=[UIView new];
     _view3.backgroundColor=[UIColor whiteColor];
     [_bgScrollView sd_addSubviews:@[_view3]];
@@ -317,6 +358,8 @@
     //点击进入
     UIButton *btn =[UIButton buttonWithType:UIButtonTypeCustom];
     [btn setBackgroundImage:[UIImage imageNamed:@"arrow_right"] forState:0];
+    btn.tag=10;
+    [btn addTarget:self action:@selector(tejiaBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_view3 sd_addSubviews:@[btn]];
     btn.sd_layout
     .rightSpaceToView(_view3,10)
@@ -325,15 +368,106 @@
     .heightIs(40/3);
     //特价专区滚动图
     UIScrollView * priceScrollview =[[UIScrollView alloc]init];
-    priceScrollview.backgroundColor=[UIColor yellowColor];
-    priceScrollview.contentSize=CGSizeMake(ScreenWidth+200, 100);
+    priceScrollview.showsHorizontalScrollIndicator = NO;
     [_view3 sd_addSubviews:@[priceScrollview]];
     priceScrollview.sd_layout
     .leftSpaceToView(_view3,0)
     .rightSpaceToView(_view3,0)
     .topSpaceToView(linview,10)
     .heightIs(100);
+    
     [_view3 setupAutoHeightWithBottomView:priceScrollview bottomMargin:10];
+    //解析特价专区数据
+    [Engine FirstTeJiaZhuanQusuccess:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+                [LCProgressHUD showMessage:@"Item3是空"];;
+            }else{
+                NSArray * item3Arr =[dic objectForKey:@"Item3"];
+                for (int i=0;i<item3Arr.count;i++ )
+                {
+                    NSDictionary * dicc =item3Arr[i];
+                    HomeModel * md =[[HomeModel alloc]initWithTeJiaDic:dicc];
+                    NSLog(@"输出看%@",md.imageview);
+                    UIImageView * imageTejia =[[UIImageView alloc]init];
+                    [imageTejia setImageWithURL:[NSURL URLWithString:md.imageview] placeholderImage:[UIImage imageNamed:@"login_banner"]];
+                    [priceScrollview sd_addSubviews:@[imageTejia]];
+                    imageTejia.sd_layout
+                    .leftSpaceToView(priceScrollview,10+(100+10)*i)
+                    .topSpaceToView(priceScrollview,0)
+                    .widthIs(100)
+                    .heightIs(80);
+                    CGFloat k =100*item3Arr.count +10*(item3Arr.count+1);
+                    priceScrollview.contentSize=CGSizeMake(k, 100);
+                    UILabel * nameLabel =[UILabel new];
+                    nameLabel.font=[UIFont systemFontOfSize:15];
+                    nameLabel.text=md.sheBeiName;
+                    [priceScrollview sd_addSubviews:@[nameLabel]];
+                    nameLabel.sd_layout
+                    .centerXEqualToView(imageTejia)
+                    .topSpaceToView(imageTejia,0)
+                    .heightIs(20);
+                    [nameLabel setSingleLineAutoResizeWithMaxWidth:100];
+                   // [_tejiaArray addObject:teJiaModel];
+                }
+            }
+            
+        }
+        else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+        
+        
+    } error:^(NSError *error) {
+        
+    }];
+    
+//    if (_tejiaArray.count==0) {
+//        
+//    }else{
+//        for (int i =0; i<_tejiaArray.count; i++) {
+//            HomeModel * md =_tejiaArray[i];
+//            NSLog(@"输出看%@",md.imageview);
+//           // CGSize  size =[ToolClass getImageSizeWithURL:md.imageview];
+//            UIImageView * imageTejia =[[UIImageView alloc]init];
+//            [imageTejia setImageWithURL:[NSURL URLWithString:md.imageview] placeholderImage:[UIImage imageNamed:@"login_banner"]];
+//            [priceScrollview sd_addSubviews:@[imageTejia]];
+//            imageTejia.sd_layout
+//            .leftSpaceToView(priceScrollview,10+(100+10)*i)
+//            .topSpaceToView(priceScrollview,0)
+//            .widthIs(100)
+//            .heightIs(80);
+//            CGFloat k =100*_tejiaArray.count +10*(_tejiaArray.count+1);
+//            
+//            priceScrollview.contentSize=CGSizeMake(k, 100);
+//            UILabel * nameLabel =[UILabel new];
+//            nameLabel.font=[UIFont systemFontOfSize:15];
+//            nameLabel.text=md.sheBeiName;
+//            [priceScrollview sd_addSubviews:@[nameLabel]];
+//            nameLabel.sd_layout
+//            .centerXEqualToView(imageTejia)
+//            .topSpaceToView(imageTejia,0)
+//            .heightIs(20);
+//            [nameLabel setSingleLineAutoResizeWithMaxWidth:100];
+//            
+//        }
+//       
+//    }
+//   
+//    
+    
+    
+    
+    [self CreatView4];//设备专区
+   // [self CreatView5];//物资专区
+}
+#pragma mark --特价专区点击进入
+-(void)tejiaBtn:(UIButton*)btn{
+    YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
+    vc.tagg=btn.tag;
+    vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark --创建view4设备专区
 -(void)CreatView4{
@@ -369,6 +503,8 @@
     //点击进入
     UIButton *btn =[UIButton buttonWithType:UIButtonTypeCustom];
     [btn setBackgroundImage:[UIImage imageNamed:@"arrow_right"] forState:0];
+    btn.tag=11;
+    [btn addTarget:self action:@selector(tejiaBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_view4 sd_addSubviews:@[btn]];
     btn.sd_layout
     .rightSpaceToView(_view4,10)
@@ -396,7 +532,8 @@
     
     
     
-    
+   
+    [self CreatView5];//物资专区
     
 }
 #pragma mark --创建view5物资专区
@@ -433,6 +570,8 @@
     //点击进入
     UIButton *btn =[UIButton buttonWithType:UIButtonTypeCustom];
     [btn setBackgroundImage:[UIImage imageNamed:@"arrow_right"] forState:0];
+      btn.tag=12;
+    [btn addTarget:self action:@selector(tejiaBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_view5 sd_addSubviews:@[btn]];
     btn.sd_layout
     .rightSpaceToView(_view5,10)
@@ -441,7 +580,7 @@
     .heightIs(40/3);
     
     //物资专区文字
-    NSArray * arr =@[@"钢结构",@"废金属",@"配件",@"再生资源",@"纺织",@"造纸",@"塑料",@"制冷"];
+    NSArray * arr =@[@"钢结构",@"废金属",@"配件",@"再生资源"];
     for (int i =0; i<arr.count; i++) {
         UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
         // btn.backgroundColor=[UIColor redColor];
@@ -450,7 +589,7 @@
         [btn setTitleColor:[UIColor blackColor] forState:0];
         [_view5 sd_addSubviews:@[btn]];
         btn.sd_layout
-        .leftSpaceToView(_view5,0+((ScreenWidth-0)/4+0)*(i%4))
+        .leftSpaceToView(_view5,0+((ScreenWidth-0)/4+0)*(i/1))
         .topSpaceToView(linview,0+(ScreenWidth/8+0)*(i/4))
         .widthIs(ScreenWidth/4)
         .heightIs(ScreenWidth/8);

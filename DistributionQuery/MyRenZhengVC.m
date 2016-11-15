@@ -8,7 +8,7 @@
 
 #import "MyRenZhengVC.h"
 
-@interface MyRenZhengVC ()
+@interface MyRenZhengVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIView * view1;
 @property(nonatomic,strong)UIView * view2;
 @property(nonatomic,strong)UIImageView * imageview;
@@ -44,9 +44,9 @@
     .heightIs(20);
     [nameLabel setSingleLineAutoResizeWithMaxWidth:200];
    
-    UIButton * upbtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    upbtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [upbtn addTarget:self action:@selector(upbtnphoto:) forControlEvents:UIControlEventTouchUpInside];
-    [upbtn setImage:[UIImage imageNamed:@"renzheng_add"] forState:0];
+    [upbtn setBackgroundImage:[UIImage imageNamed:@"renzheng_add"] forState:0];
     [_view1 sd_addSubviews:@[upbtn]];
 //    413 212
     upbtn.sd_layout
@@ -60,7 +60,7 @@
 
 #pragma mark --上传身份证照片
 -(void)upbtnphoto:(UIButton*)btn{
-    
+    [self dioayongXiangCe];
 }
 
 #pragma mark --照片实例
@@ -94,12 +94,12 @@
     .heightIs(20);
     [nameLabel setSingleLineAutoResizeWithMaxWidth:200];
     
-    UIButton * upbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [upbtn addTarget:self action:@selector(upbtnphoto:) forControlEvents:UIControlEventTouchUpInside];
-    [upbtn setImage:[UIImage imageNamed:@"renzheng_add1"] forState:0];
-    [_view2 sd_addSubviews:@[upbtn]];
+    UIButton * upbtn2=[UIButton buttonWithType:UIButtonTypeCustom];
+    [upbtn2 addTarget:self action:@selector(upbtnphoto:) forControlEvents:UIControlEventTouchUpInside];
+    [upbtn2 setImage:[UIImage imageNamed:@"renzheng_add1"] forState:0];
+    [_view2 sd_addSubviews:@[upbtn2]];
     //    413 212
-    upbtn.sd_layout
+    upbtn2.sd_layout
     .leftSpaceToView(nameLabel,25)
     .topEqualToView(nameLabel)
     .widthIs(413/2)
@@ -107,19 +107,21 @@
     [_view2 setupAutoHeightWithBottomView:upbtn bottomMargin:10];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark --调用系统相册
+-(void)dioayongXiangCe
+{
+    UIImagePickerController * imagePicker =[UIImagePickerController new];
+   // [imagePicker.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg1"] forBarMetrics:UIBarMetricsDefault];
+    
+    imagePicker.delegate = self;
+    imagePicker.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.allowsEditing=YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    [upbtn setBackgroundImage:image forState:0];
+  //  NSLog(@"输出%@",editingInfo);
+     [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
-
 @end

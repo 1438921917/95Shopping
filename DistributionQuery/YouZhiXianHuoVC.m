@@ -27,7 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    self.title=@"优质现货";
+    if (_tagg==1) {
+        self.title=@"优质现货";
+    }else if (_tagg==10){
+        self.title=@"特价专区";
+        [self shuJuJieXiDataPage:@"1" HangYe:@"0"];
+    }else if (_tagg==11){
+        self.title=@"设备专区";
+    }else if (_tagg==12){
+        self.title=@"物资专区";
+    }
+    
     NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"行业", nil];
     _bgview=[[UIButton alloc]init];
     _bgview.frame=CGRectMake(0, 0, ScreenWidth, ScreenHeight-64);
@@ -38,6 +48,23 @@
    [self CreatBtnTitle:titleArr];
    [self CreatTableView];
 }
+
+#pragma mark --数据解析
+-(void)shuJuJieXiDataPage:(NSString*)page HangYe:(NSString*)hangye{
+    [Engine tejiaZhuanQuLieBiaoHangYeID:hangye DiQu:@"0" GuanJianZi:@"0" Page:page PageSize:@"10" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+
+
 
 #pragma mark --创建下拉的Button
 -(void)CreatBtnTitle:(NSMutableArray*)arr{

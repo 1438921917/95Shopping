@@ -9,7 +9,7 @@
 #import "SetViewController.h"
 #import "MessageVC.h"
 #import "MyRenZhengVC.h"
-@interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SetViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * dataArray;
 @end
@@ -66,6 +66,7 @@
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.section==0) {
         imageview.image=[UIImage imageNamed:@"my_photo"];
+        imageview.sd_cornerRadius=@(40);
         imageview.sd_layout
         .rightSpaceToView(cell,20)
         .centerYEqualToView(cell)
@@ -85,6 +86,7 @@
     
     if (indexPath.section==0) {
         //更换头像
+        [self dioayongXiangCe];
     }
     else if (indexPath.section==1) {
         //个人资料、公司资料
@@ -116,15 +118,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark --调用系统相册
+-(void)dioayongXiangCe
+{
+    UIImagePickerController * imagePicker =[UIImagePickerController new];
+    // [imagePicker.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bg1"] forBarMetrics:UIBarMetricsDefault];
+    
+    imagePicker.delegate = self;
+    imagePicker.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.allowsEditing=YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
-*/
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    //  NSLog(@"输出%@",editingInfo);
+    UITableViewCell * cell =[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+     UIImageView * imageview =(UIImageView *)[cell viewWithTag:1];
+    imageview.image=image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
