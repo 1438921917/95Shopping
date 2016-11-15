@@ -64,8 +64,8 @@
 }
 
 #pragma mark --3.特价专区列表
-+(void)tejiaZhuanQuLieBiaoHangYeID:(NSString*)category DiQu:(NSString*)area GuanJianZi:(NSString*)keyword Page:(NSString*)page PageSize:(NSString*)pagesize success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@",SER_VICE,category,area,keyword,page,pagesize];
++(void)tejiaZhuanQuLieBiaoHangYeID:(NSString*)category DiQu:(NSString*)area GuanJianZi:(NSString*)keyword Page:(NSString*)page PageSize:(NSString*)pagesize GongQiu:(NSString*)gq TeJia:(NSString*)tejia  success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@&Discount=%@&Business=%@",SER_VICE,category,area,keyword,page,pagesize,tejia,gq];
     NSLog(@"3.特价专区列表%@",urlStr);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

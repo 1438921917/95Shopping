@@ -37,7 +37,7 @@
     .leftSpaceToView(_view1,10)
     .rightSpaceToView(_view1,10)
     .topSpaceToView(_view1,10)
-    .heightIs(257*(ScreenWidth-20)/690);
+    .heightIs(360*(ScreenWidth-20)/690);
     [_view1 setupAutoHeightWithBottomView:imageview bottomMargin:10];
     [self CreatView2];
 }

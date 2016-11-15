@@ -44,7 +44,7 @@
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "UIKit+AFNetworking.h"//异步加载图片
 #import "LCProgressHUD.h"
-
+#import "MJRefresh.h"
 
 
 

@@ -92,11 +92,12 @@
     .widthIs(209/2)
     .heightIs(156/2);
     //titleLabel
+  
     _titleLabel.sd_layout
     .leftSpaceToView(_leftImage,15)
     .topSpaceToView(self.contentView,10)
     .autoHeightRatio(0);
-    [_titleLabel setSingleLineAutoResizeWithMaxWidth:ScreenWidth-100];
+    [_titleLabel setSingleLineAutoResizeWithMaxWidth:ScreenWidth-150];
     //担
     _imagedan.sd_layout
     .leftSpaceToView(_titleLabel,5)
@@ -135,10 +136,20 @@
     .heightIs(43/2);
    
     
-    [self.contentView setupAutoHeightWithBottomView:_chaKanBtn bottomMargin:10];
+    [self setupAutoHeightWithBottomView:_chaKanBtn bottomMargin:10];
     
 }
-
+-(void)setModel:(HomeModel *)model
+{
+    _model=model;
+    _titleLabel.text=model.titleName;//@"出售海泰500T注塑机";
+    [_leftImage setImageWithURL:[NSURL URLWithString:model.imageview] placeholderImage:[UIImage imageNamed:@"xianhuo_pic1"]];
+    _cityLabel.text=model.cityName;//@"河北-石家庄";
+    _taishuLabel.text=[NSString stringWithFormat:@"%@台",model.taishuName];//@"10台";
+    _priceLabel.text=[NSString stringWithFormat:@"%@元",model.priceName];//@"8000元";
+    
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

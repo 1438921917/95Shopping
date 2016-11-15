@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomeModel.h"
 @interface YouZhiXianHuoCell : UITableViewCell
 @property(nonatomic,strong)UIButton * chaKanBtn;//立即查看
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
+@property(nonatomic,retain)HomeModel * model;
 @end

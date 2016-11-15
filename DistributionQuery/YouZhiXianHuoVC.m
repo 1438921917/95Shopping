@@ -11,6 +11,7 @@
 #import "XiangQingVC.h"
 #import "LeftMyAdressCell.h"
 #import "RightMyAddressCell.h"
+#import "HomeModel.h"
 @interface YouZhiXianHuoVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)UITableView*leftTabelView;
@@ -18,6 +19,9 @@
 @property(nonatomic,strong)UIButton * bgview;
 @property(nonatomic,strong)UIButton * button1;
 @property(nonatomic,strong)UIButton * button2;
+@property(nonatomic,strong)NSMutableArray * dataArray;
+@property(nonatomic,assign)int AAA;
+@property (nonatomic, strong) MJRefreshComponent *myRefreshView;
 @end
 @implementation YouZhiXianHuoVC
 -(void)viewWillAppear:(BOOL)animated{
@@ -27,15 +31,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets=NO;
+    _dataArray=[NSMutableArray new];
     if (_tagg==1) {
         self.title=@"优质现货";
+        
     }else if (_tagg==10){
         self.title=@"特价专区";
-        [self shuJuJieXiDataPage:@"1" HangYe:@"0"];
+        // [self shuJuJieXiDataPage:@"1" TeJia:@"1"];
     }else if (_tagg==11){
         self.title=@"设备专区";
+         // [self shuJuJieXiDataPage:@"1" TeJia:@"1"];
     }else if (_tagg==12){
         self.title=@"物资专区";
+          //[self shuJuJieXiDataPage:@"1" TeJia:@"1"];
     }
     
     NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"行业", nil];
@@ -50,15 +58,37 @@
 }
 
 #pragma mark --数据解析
--(void)shuJuJieXiDataPage:(NSString*)page HangYe:(NSString*)hangye{
-    [Engine tejiaZhuanQuLieBiaoHangYeID:hangye DiQu:@"0" GuanJianZi:@"0" Page:page PageSize:@"10" success:^(NSDictionary *dic) {
+-(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te{
+    //GongQiu 1优质现货 2最新采购
+   
+    [Engine tejiaZhuanQuLieBiaoHangYeID:@"0" DiQu:@"0" GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:te success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             
+            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+                 [LCProgressHUD showMessage:@"Item3没有数据"];
+            }else{
+                NSArray * array =[dic objectForKey:@"Item3"];
+                 NSMutableArray * array2=[NSMutableArray new];
+                for (NSDictionary * dicc in array) {
+                    HomeModel * md =[[HomeModel alloc]initWithYouZhiXianHuoDic:dicc];
+                    [array2 addObject:md];
+                }
+                if (self.myRefreshView == _tableView.header) {
+                    _dataArray = array2;
+                    _tableView.footer.hidden = _dataArray.count==0?YES:NO;
+                }else if(self.myRefreshView == _tableView.footer){
+                    [_dataArray addObjectsFromArray:array2];
+                }
+                
+                
+            }
+            [_tableView reloadData];
+            [_myRefreshView  endRefreshing];
         }else{
-            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            [LCProgressHUD showMessage:[dic objectForKey:@"msg"]];
+             [_myRefreshView endRefreshing];
         }
-        
     } error:^(NSError *error) {
         
     }];
@@ -172,6 +202,35 @@
     _tableView.dataSource=self;
     _tableView.delegate=self;
     [self.view addSubview:_tableView];
+    //刷新操作
+    __weak typeof (self) weakSelf =self;
+    _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+         NSLog(@"往下拉了");
+        weakSelf.myRefreshView = weakSelf.tableView.header;
+        if (_tagg==1) {
+            [self shuJuJieXiDataPage:@"1" TeJia:@"0"];
+        }else{
+            [self shuJuJieXiDataPage:@"1" TeJia:@"1"];
+        }
+        
+    }];
+    
+    // 马上进入刷新状态
+    [_tableView.header beginRefreshing];
+    //..上拉刷新
+    _tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+         weakSelf.myRefreshView = weakSelf.tableView.footer;
+        NSLog(@"往上拉了");
+        _AAA=_AAA+1;
+        if (_tagg==1) {
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0"];
+        }else{
+            [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1"];
+        }
+       
+    }];
+    _tableView.footer.hidden = YES;
+
     
     
 }
@@ -182,7 +241,7 @@
     }else if (tableView==_rightTabelView){
      return 20;
     }else{
-     return 10;
+     return _dataArray.count;
     }
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -201,6 +260,7 @@
         NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
         YouZhiXianHuoCell * cell =[YouZhiXianHuoCell cellWithTableView:tableView CellID:CellIdentifier];
         [cell.chaKanBtn addTarget:self action:@selector(chaKan:) forControlEvents:UIControlEventTouchUpInside];
+        cell.model=_dataArray[indexPath.row];
         return cell;
   
     }
@@ -230,11 +290,19 @@
     }else if (tableView==_rightTabelView){
         return 44;
     }else{
-        return 95;
+        return [_tableView cellHeightForIndexPath:indexPath model:_dataArray[indexPath.row]keyPath:@"model" cellClass:[YouZhiXianHuoCell class] contentViewWidth:[ToolClass  cellContentViewWith]];
     }
 
 }
-
+- (CGFloat)cellContentViewWith
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    // 适配ios7
+    if ([UIApplication sharedApplication].statusBarOrientation != UIInterfaceOrientationPortrait && [[UIDevice currentDevice].systemVersion floatValue] < 8) {
+        width = [UIScreen mainScreen].bounds.size.height;
+    }
+    return width;
+}
 #pragma mark --立即查看
 -(void)chaKan:(UIButton*)btn{
     XiangQingVC * vc =[XiangQingVC new];

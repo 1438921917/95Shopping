@@ -17,4 +17,6 @@
 @property (nonatomic,copy)NSString * taishuName;
 @property(nonatomic,copy)NSString * sheBeiName;
 -(id)initWithTeJiaDic:(NSDictionary*)dic;
+//优质现货
+-(id)initWithYouZhiXianHuoDic:(NSDictionary*)dic;
 @end
