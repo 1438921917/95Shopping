@@ -128,6 +128,9 @@
 		8FE5B47E1DDB30D50069B82F /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B4691DDB30D50069B82F /* UIScrollView+MJExtension.m */; };
 		8FE5B47F1DDB30D50069B82F /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B46B1DDB30D50069B82F /* UIScrollView+MJRefresh.m */; };
 		8FE5B4801DDB30D50069B82F /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B46D1DDB30D50069B82F /* UIView+MJExtension.m */; };
+		8FEC53551DDBFC31000328FA /* JinDianChaKanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC53541DDBFC31000328FA /* JinDianChaKanVC.m */; };
+		8FEC53591DDC2969000328FA /* JinDianChaKanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC53581DDC2969000328FA /* JinDianChaKanCell.m */; };
+		8FEC535C1DDC2D85000328FA /* AllShangPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC535B1DDC2D85000328FA /* AllShangPinVC.m */; };
 		8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */; };
 		8FEE743D1DD40DB700470D75 /* YouZhiXianHuoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */; };
 		8FF4A7D91DD6B40C00C5C743 /* GuanLiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4A7D81DD6B40C00C5C743 /* GuanLiVC.m */; };
@@ -404,6 +407,12 @@
 		8FE5B46B1DDB30D50069B82F /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		8FE5B46C1DDB30D50069B82F /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		8FE5B46D1DDB30D50069B82F /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		8FEC53531DDBFC31000328FA /* JinDianChaKanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinDianChaKanVC.h; sourceTree = "<group>"; };
+		8FEC53541DDBFC31000328FA /* JinDianChaKanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JinDianChaKanVC.m; sourceTree = "<group>"; };
+		8FEC53571DDC2969000328FA /* JinDianChaKanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinDianChaKanCell.h; sourceTree = "<group>"; };
+		8FEC53581DDC2969000328FA /* JinDianChaKanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JinDianChaKanCell.m; sourceTree = "<group>"; };
+		8FEC535A1DDC2D85000328FA /* AllShangPinVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllShangPinVC.h; sourceTree = "<group>"; };
+		8FEC535B1DDC2D85000328FA /* AllShangPinVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllShangPinVC.m; sourceTree = "<group>"; };
 		8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoVC.h; sourceTree = "<group>"; };
 		8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiXianHuoVC.m; sourceTree = "<group>"; };
 		8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiXianHuoCell.h; sourceTree = "<group>"; };
@@ -894,9 +903,11 @@
 			children = (
 				8FDC2E281DD561D30009E639 /* 首页 */,
 				8FDC2E291DD561DD0009E639 /* 优质现货 */,
-				8FDC2E2A1DD561F20009E639 /* 优质现货详情 */,
 				8FDC2E2F1DD5626E0009E639 /* 优质商户 */,
+				8F03A53A1DD9D8DC00833E19 /* 最新采购 */,
 				8FDC2E551DD5D34E0009E639 /* 企业快速买货 */,
+				8FDC2E2A1DD561F20009E639 /* 优质现货详情 */,
+				8FEC53561DDBFC36000328FA /* 进店查看 */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -908,7 +919,6 @@
 				8F02FE511DA887740051EDFC /* HomeVC.m */,
 				8F03A5141DD9504100833E19 /* HomeModel.h */,
 				8F03A5151DD9504100833E19 /* HomeModel.m */,
-				8F03A53A1DD9D8DC00833E19 /* 最新采购 */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -1074,6 +1084,19 @@
 				8FE5B4631DDB30D50069B82F /* MJRefreshStateHeader.m */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		8FEC53561DDBFC36000328FA /* 进店查看 */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC53531DDBFC31000328FA /* JinDianChaKanVC.h */,
+				8FEC53541DDBFC31000328FA /* JinDianChaKanVC.m */,
+				8FEC535A1DDC2D85000328FA /* AllShangPinVC.h */,
+				8FEC535B1DDC2D85000328FA /* AllShangPinVC.m */,
+				8FEC53571DDC2969000328FA /* JinDianChaKanCell.h */,
+				8FEC53581DDC2969000328FA /* JinDianChaKanCell.m */,
+			);
+			name = "进店查看";
 			sourceTree = "<group>";
 		};
 		8FF4A7D31DD6B2CD00C5C743 /* 登录注册 */ = {
@@ -1287,6 +1310,7 @@
 				8FCD4FA51DA8B4D300CB113C /* TAAbstractDotView.m in Sources */,
 				8FCD4F9D1DA8B4D300CB113C /* UIProgressView+AFNetworking.m in Sources */,
 				8FCD4FA11DA8B4D300CB113C /* LCProgressHUD.m in Sources */,
+				8FEC535C1DDC2D85000328FA /* AllShangPinVC.m in Sources */,
 				8FCD4F971DA8B4D300CB113C /* UIView+WebCacheOperation.m in Sources */,
 				8F02FE8B1DA89F6B0051EDFC /* ASIInputStream.m in Sources */,
 				8FCD4F841DA8B4D300CB113C /* AFURLConnectionOperation.m in Sources */,
@@ -1324,6 +1348,7 @@
 				8F03A53D1DD9D93300833E19 /* ZuiXinCaiGouCell.m in Sources */,
 				8FCD4F891DA8B4D300CB113C /* NSData+ImageContentType.m in Sources */,
 				8F02FE551DA887B40051EDFC /* ScanCodeVC.m in Sources */,
+				8FEC53591DDC2969000328FA /* JinDianChaKanCell.m in Sources */,
 				8F02FE1D1DA883FE0051EDFC /* ViewController.m in Sources */,
 				8F02FE881DA89F6B0051EDFC /* ASIDownloadCache.m in Sources */,
 				8FCD4FA61DA8B4D300CB113C /* TAAnimatedDotView.m in Sources */,
@@ -1384,6 +1409,7 @@
 				8FCD4FA71DA8B4D300CB113C /* TADotView.m in Sources */,
 				8FE5B47D1DDB30D50069B82F /* MJRefreshConst.m in Sources */,
 				8FCD4FA41DA8B4D300CB113C /* UIView+SDAutoLayout.m in Sources */,
+				8FEC53551DDBFC31000328FA /* JinDianChaKanVC.m in Sources */,
 				8FDC2E4A1DD5CB600009E639 /* RegistVC.m in Sources */,
 				8F02FE1A1DA883FE0051EDFC /* AppDelegate.m in Sources */,
 				8FDC2E381DD56B0A0009E639 /* SetViewController.m in Sources */,

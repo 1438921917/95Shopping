@@ -225,7 +225,7 @@
         if (_tagg==1) {
         [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0"];
         }else{
-            [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1"];
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1"];
         }
        
     }];
@@ -259,6 +259,7 @@
     }else{
         NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
         YouZhiXianHuoCell * cell =[YouZhiXianHuoCell cellWithTableView:tableView CellID:CellIdentifier];
+        cell.chaKanBtn.tag=indexPath.row;
         [cell.chaKanBtn addTarget:self action:@selector(chaKan:) forControlEvents:UIControlEventTouchUpInside];
         cell.model=_dataArray[indexPath.row];
         return cell;
@@ -268,13 +269,15 @@
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    HomeModel * md =_dataArray[indexPath.row];
     if (tableView==_leftTabelView) {
         [self CreatRightTableView:ScreenWidth-ScreenWidth/2.5 Xzhou:ScreenWidth/2.5 Gzhou:ScreenHeight/1.5];
     }else if (tableView==_rightTabelView){
         
     }else{
         XiangQingVC * vc =[XiangQingVC new];
+        vc.messageID=md.messageID;
+        NSLog(@"messageID=%@",md.messageID);
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -305,7 +308,9 @@
 }
 #pragma mark --立即查看
 -(void)chaKan:(UIButton*)btn{
+    HomeModel * md =_dataArray[btn.tag];
     XiangQingVC * vc =[XiangQingVC new];
+    vc.messageID=md.messageID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

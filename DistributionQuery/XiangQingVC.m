@@ -9,6 +9,7 @@
 #import "XiangQingVC.h"
 #import "YouZhiXianHuoCell.h"
 #import "XiangQingModel.h"
+#import "JinDianChaKanVC.h"
 @interface XiangQingVC ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
      SDCycleScrollView *cycleScrollView2;
@@ -40,7 +41,8 @@
 
 #pragma mark --解析详情页的数据
 -(void)jieXiXiangQingYeData{
-    [Engine tableViewXiangQingJieMianMessageID:@"7458" success:^(NSDictionary *dic) {
+    //@"7458" _messageID
+    [Engine tableViewXiangQingJieMianMessageID:_messageID success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"])
         {
@@ -142,12 +144,15 @@
     //进店查看
     UIButton * chaKanBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     [chaKanBtn setImage:[UIImage imageNamed:@"xiangqing_bt"] forState:0];
+    [chaKanBtn addTarget:self action:@selector(chakanBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
     [_view1 sd_addSubviews:@[chaKanBtn]];
     chaKanBtn.sd_layout
     .rightEqualToView(btnXing)
     .centerYEqualToView(priceLabel)
     .widthIs(128/2)
     .heightIs(44/2);
+    
     //颜色的view
     UIView * viewColor =[UIView new];
     viewColor.backgroundColor=COLOR;
@@ -187,12 +192,34 @@
     .centerYEqualToView(viewColor)
     .widthIs(70)
     .heightIs(20);
-    
-    [_view1 setupAutoHeightWithBottomView:viewColor bottomMargin:10];
-    [self CreatView2];//具体参数
+    if (_tagg==2) {
+        viewColor.hidden=YES;
+        [chaKanBtn setImage:[UIImage imageNamed:@"xiangqing_bt1(1)"] forState:0];
+        [_view1 setupAutoHeightWithBottomView:chaKanBtn bottomMargin:10];
+
+    }else{
+        [_view1 setupAutoHeightWithBottomView:viewColor bottomMargin:10];
+
+    }
+       [self CreatView2];//具体参数
 }
+#pragma mark --进店查看按钮
+-(void)chakanBtn:(UIButton*)btn{
+    if (_tagg==2) {
+        //短信联系
+         [LCProgressHUD showMessage:@"点击了短信联系"];
+    }else{
+        //进店查看
+        JinDianChaKanVC * vc =[JinDianChaKanVC new];
+        vc.tagg=1;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+}
+
 #pragma mark --创建view2具体参数
 -(void)CreatView2{
+     XiangQingModel * md =_dataArray[0];
     _view2=[UIView new];
     _view2.backgroundColor=[UIColor whiteColor];
     [_bgScrollView sd_addSubviews:@[_view2]];
@@ -224,7 +251,7 @@
     
     //型号
     UILabel * xingHaoLabel =[UILabel new];
-    xingHaoLabel.text=@"型号   G5h520";
+    xingHaoLabel.text=[NSString stringWithFormat:@"型号   %@",md.xinagHaoName];//@"型号   G5h520";
     xingHaoLabel.font=[UIFont systemFontOfSize:15];
     xingHaoLabel.alpha=.6;
     [_view2 sd_addSubviews:@[xingHaoLabel]];
@@ -235,7 +262,7 @@
     [xingHaoLabel setSingleLineAutoResizeWithMaxWidth:ScreenWidth];
     //产地
     UILabel * chanDiLabel =[UILabel new];
-    chanDiLabel.text=@"产地   河北-石家庄";
+    chanDiLabel.text=[NSString stringWithFormat:@"产地   %@",md.chanDiName];//@"产地   河北-石家庄";
     chanDiLabel.textAlignment=0;
     chanDiLabel.font=[UIFont systemFontOfSize:15];
     chanDiLabel.alpha=.6;
@@ -247,7 +274,7 @@
     [chanDiLabel setSingleLineAutoResizeWithMaxWidth:ScreenWidth];
     //数量
     UILabel * numberLabel =[UILabel new];
-    numberLabel.text=@"数量   50台";
+    numberLabel.text=[NSString stringWithFormat:@"数量   %@台",md.shuLiangName];//@"数量   50台";
     numberLabel.font=[UIFont systemFontOfSize:15];
     numberLabel.alpha=.6;
     [_view2 sd_addSubviews:@[numberLabel]];
@@ -258,7 +285,7 @@
     [numberLabel setSingleLineAutoResizeWithMaxWidth:ScreenWidth];
     //所在地
     UILabel * addressLabel =[UILabel new];
-    addressLabel.text=@"所在地   山东-济南";
+    addressLabel.text=[NSString stringWithFormat:@"所在地   %@",md.suozaiDiName];//@"所在地   山东-济南";
     addressLabel.font=[UIFont systemFontOfSize:15];
     addressLabel.alpha=.6;
     addressLabel.textAlignment=0;
@@ -278,6 +305,7 @@
 
 #pragma mark --创建view3详细信息
 -(void)CreatView3{
+     XiangQingModel * md =_dataArray[0];
     _view3=[UIView new];
     _view3.backgroundColor=[UIColor whiteColor];
     [_bgScrollView sd_addSubviews:@[_view3]];
@@ -308,7 +336,7 @@
     [titleName setSingleLineAutoResizeWithMaxWidth:150];
     UILabel * contentLabel =[UILabel new];
     contentLabel.numberOfLines=0;
-    contentLabel.text=@"以上是；爱黑发盒饭发发发爱阿狸的骄傲骄傲和山地和大海癌变VC啊了骄傲的两大考虑AV克拉vkajkdkd王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮";
+    contentLabel.text=md.xiangXiName;//@"以上是；爱黑发盒饭发发发爱阿狸的骄傲骄傲和山地和大海癌变VC啊了骄傲的两大考虑AV克拉vkajkdkd王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮王璇是个大傻子是个山炮";
     contentLabel.font=[UIFont systemFontOfSize:13];
     contentLabel.alpha=.6;
     [_view3 sd_addSubviews:@[contentLabel]];

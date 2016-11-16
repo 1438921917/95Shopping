@@ -9,5 +9,12 @@
 #import "BaseViewController.h"
 
 @interface XiangQingVC : BaseViewController
+@property(nonatomic,copy)NSString * messageID;
+/*
+ tagg==1. 从优质现货>>店铺查看
+ tagg==2,  优质现货详情页(没有进店查看，没有联系电话)
+ 
+ */
+@property(nonatomic,assign)NSInteger tagg;
 
 @end

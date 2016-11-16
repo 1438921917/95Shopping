@@ -10,6 +10,7 @@
 #import "YouZhiShangHuCell.h"
 #import "LeftMyAdressCell.h"
 #import "RightMyAddressCell.h"
+#import "JinDianChaKanVC.h"
 @interface YouZhiShangHuVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)UITableView*leftTabelView;
@@ -187,7 +188,10 @@
     }else if (tableView==_rightTabelView){
         
     }else{
-        
+        //优质商户详情页(和进店查看一样)
+        JinDianChaKanVC * vc =[JinDianChaKanVC new];
+        vc.tagg=2;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -42,7 +42,7 @@
           NSLog(@"cc输出%@",_cityName);
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_LookCount"]]];
         _sheBeiName=[ToolClass isString:[dic objectForKey:@"C_ProductName"]];
-
+        _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Id"]]];
         
     }
     

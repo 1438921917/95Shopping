@@ -16,6 +16,7 @@
 @property (nonatomic,copy)NSString * cityName;
 @property (nonatomic,copy)NSString * taishuName;
 @property(nonatomic,copy)NSString * sheBeiName;
+@property(nonatomic,copy)NSString * messageID;
 -(id)initWithTeJiaDic:(NSDictionary*)dic;
 //优质现货
 -(id)initWithYouZhiXianHuoDic:(NSDictionary*)dic;

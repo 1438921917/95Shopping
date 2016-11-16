@@ -26,8 +26,8 @@
 #pragma mark --创建数据源
 -(void)CreatDataArr{
     NSArray * arr1 =@[@"头像"];
-    NSArray * arr2=@[@"个人资料",@"公司资料"];
-    NSArray * arr3 =@[@"我要认证"];
+    NSArray * arr2=@[@"个人资料",@"公司资料",@"我要认证"];
+    NSArray * arr3 =@[@"退出"];
     _dataArray=[[NSMutableArray alloc]initWithObjects:arr1,arr2,arr3, nil];
 }
 #pragma mark --创建表

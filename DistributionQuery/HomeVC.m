@@ -337,8 +337,8 @@
     //特价专区
     UILabel * label =[UILabel new];
     label.text=@"特价专区";
-    label.textColor=[UIColor blackColor];
-    label.alpha=.6;
+    label.textColor=[UIColor redColor];
+   // label.alpha=.6;
     label.font=[UIFont systemFontOfSize:16];
      [_view3 sd_addSubviews:@[label]];
     label.sd_layout
@@ -482,8 +482,8 @@
     //特价专区
     UILabel * label =[UILabel new];
     label.text=@"设备专区";
-    label.textColor=[UIColor blackColor];
-    label.alpha=.6;
+    label.textColor=[UIColor redColor];
+   // label.alpha=.6;
     label.font=[UIFont systemFontOfSize:16];
     [_view4 sd_addSubviews:@[label]];
     label.sd_layout
@@ -549,8 +549,8 @@
     //特价专区
     UILabel * label =[UILabel new];
     label.text=@"物资专区";
-    label.textColor=[UIColor blackColor];
-    label.alpha=.6;
+    label.textColor=[UIColor redColor];
+   // label.alpha=.6;
     label.font=[UIFont systemFontOfSize:16];
     [_view5 sd_addSubviews:@[label]];
     label.sd_layout

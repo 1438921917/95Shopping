@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomeModel.h"
 @interface ZuiXinCaiGouCell : UITableViewCell
 
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
+@property(nonatomic,retain)HomeModel * model;
 @end
