@@ -15,6 +15,7 @@
 #import "GuYongJingJiRenVC.h"
 #import "FuWuChongZhiVC.h"
 #import "GuanYu95VC.h"
+#import "XiaoXiTongZhiVC.h"
 @interface MyVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * dataArray;
@@ -238,6 +239,9 @@
     }else if(indexPath.section==2){
         if (indexPath.row==0) {
             //消息通知
+            XiaoXiTongZhiVC * vc =[XiaoXiTongZhiVC new];
+            vc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else{
             //意见反馈
             SuggestionVC * vc =[SuggestionVC new];
