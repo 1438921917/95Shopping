@@ -25,6 +25,7 @@
 /*
  *   头文件
  */
+#ifdef __OBJC__
 #import "HomeVC.h"
 #import "ScanCodeVC.h"
 #import "MyVC.h"
@@ -43,9 +44,19 @@
 #import "UIView+SDAutoLayout.h"
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "UIKit+AFNetworking.h"//异步加载图片
-#import "LCProgressHUD.h"
-#import "MJRefresh.h"
-
-
+#import "LCProgressHUD.h"//提示语
+#import "MJRefresh.h"//刷新用
+#import "BDRecognizerViewController.h"//百度语音
+#import "BDRecognizerViewDelegate.h"//百度语音
+#import "BDVoiceRecognitionClient.h"//语音识别
+#import "BDVRRawDataRecognizer.h"
+#import "BDVRFileRecognizer.h"
+#import "BDVRConstants.h"
+#import "BDVRSConfig.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "BDVRCustomRecognitonViewController.h"
+#import "BDVRClientUIManager.h"
+#endif
 
 #endif /* PrefixHeader_pch */
