@@ -50,12 +50,7 @@
 
 }
 
-#pragma mark --注册
--(void)registBtn:(UIButton*)btn{
-    RegistVC * vc =[RegistVC new];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
+
 
 #pragma mark--  创建天空的图片
 -(void)CreatTopImageView{
@@ -71,6 +66,7 @@
 -(void)CreatView{
     _bgview=[[UIView alloc]init];
     _bgview.backgroundColor=[UIColor whiteColor];
+    _bgview.userInteractionEnabled=YES;
     [self.view sd_addSubviews:@[_bgview]];
     _bgview.sd_layout
     .leftSpaceToView(self.view,0)
@@ -80,6 +76,7 @@
     //手机号
     _phoneText=[[UITextField alloc]init];
     _phoneText.placeholder=@"手机号";
+     _phoneText.keyboardType=UIKeyboardTypePhonePad;
     _phoneText.alpha=1;
     _phoneText.leftView =[self imageViewNameStr:@"phone"];
     _phoneText.leftViewMode = UITextFieldViewModeAlways;
@@ -104,6 +101,7 @@
     _pwdText=[[UITextField alloc]init];
     _pwdText.placeholder=@"请输入密码";
     _pwdText.alpha=1;
+     _pwdText.keyboardType=UIKeyboardTypePhonePad;
     _pwdText.leftView =[self imageViewNameStr:@"login_ps"];
     _pwdText.leftViewMode = UITextFieldViewModeAlways;
     [_bgview sd_addSubviews:@[_pwdText]];
@@ -127,9 +125,10 @@
     _codeBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     _codeBtn.backgroundColor=COLOR;
     [_codeBtn setTitle:@"获取验证码" forState:0];
+   
     [_codeBtn setTitleColor:[UIColor blackColor] forState:0];
     _codeBtn.titleLabel.font=[UIFont systemFontOfSize:15];
-    
+     [_codeBtn addTarget:self action:@selector(yanzhengCode:) forControlEvents:UIControlEventTouchUpInside];
     [_bgview sd_addSubviews:@[_codeBtn]];
     _codeBtn.sd_layout
     .widthIs(100)
@@ -141,6 +140,7 @@
     //请输入验证码
     _codeText=[[UITextField alloc]init];
     _codeText.placeholder=@"请输入验证码";
+     _codeText.keyboardType=UIKeyboardTypePhonePad;
     _codeText.leftView =[self imageViewNameStr:@"login_yanzhnegma"];
     _codeText.leftViewMode = UITextFieldViewModeAlways;
     [_bgview sd_addSubviews:@[_codeText]];
@@ -167,6 +167,7 @@
     [_forgetBtn setTitleColor:[UIColor redColor] forState:0];
     _forgetBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     _forgetBtn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
+   // [_forgetBtn addTarget:self action:@selector(wangji:) forControlEvents:UIControlEventTouchUpInside];
     [_bgview sd_addSubviews:@[_forgetBtn]];
     _forgetBtn.sd_layout
     .widthIs(100)
@@ -179,6 +180,54 @@
     
     
 }
+
+#pragma mark --获取验证码
+-(void)yanzhengCode:(UIButton*)sender{
+    NSLog(@"手机号%@",_phoneText.text);
+    [LCProgressHUD showLoading:@"正在获取验证码..."];
+    [Engine getCodePhone:_phoneText.text typeStr:@"2" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            [LCProgressHUD hide];
+            //实现倒计时
+            __block int timeout=60; //倒计时时间
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+            dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+            dispatch_source_set_event_handler(_timer, ^{
+                if(timeout<=0){ //倒计时结束，关闭
+                    dispatch_source_cancel(_timer);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //设置界面的按钮显示 根据自己需求设置
+                        [sender setTitle:@"发送验证码" forState:UIControlStateNormal];
+                        sender.userInteractionEnabled = YES;
+                    });
+                }
+                else{
+                    int seconds = timeout % 60;
+                    NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //设置界面的按钮显示 根据自己需求设置
+                        //NSLog(@"____%@",strTime);
+                        [UIView beginAnimations:nil context:nil];
+                        [UIView setAnimationDuration:1];
+                        [sender setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
+                        [UIView commitAnimations];
+                        sender.userInteractionEnabled = NO;
+                    });
+                    timeout--;
+                }
+            });
+            dispatch_resume(_timer);
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"msg"]];
+        }
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark --登录按钮
 -(void)CreatLoginBtn{
     //登录
@@ -188,6 +237,7 @@
     [_loginBtn setTitle:@"登录" forState:0];
     [_loginBtn setTitleColor:[UIColor whiteColor] forState:0];
     _loginBtn.sd_cornerRadius=@(5);
+    [_loginBtn addTarget:self action:@selector(loginButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view sd_addSubviews:@[_loginBtn]];
     _loginBtn.sd_layout
     .leftEqualToView(_lineView3)
@@ -196,6 +246,50 @@
     .topSpaceToView(_bgview,0);
 
 }
+
+
+#pragma mark --点击登录按钮
+-(void)loginButton:(UIButton*)btn{
+    [Engine loginAccountPhoneNumber:_phoneText.text Pwd:_pwdText.text CodeStr:_codeText.text success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+           [[NSUserDefaults standardUserDefaults]setObject:[dic objectForKey:@"Item2"] forKey:@"token"];
+            [NSUSE_DEFO synchronize];
+            NSDictionary * item3 =[dic objectForKey:@"Item3"];
+            [self saveSomeMessageDic:item3];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
+#pragma mark --存储登录信息
+-(void)saveSomeMessageDic:(NSDictionary*)dic{
+    //1.存储用户名
+    NSMutableDictionary * saveDic=[NSMutableDictionary new];
+    [saveDic setObject:[dic objectForKey:@"M_UserName"] forKey:@"M_UserName"];
+    [ToolClass savePlist:saveDic name:@"Login"];
+    
+    
+}
+
+
+#pragma mark --注册
+-(void)registBtn:(UIButton*)btn{
+    RegistVC * vc =[RegistVC new];
+    vc.userNamePswBlock=^(NSString*user,NSString*psw){
+        _phoneText.text=user;
+        _pwdText.text=psw;
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 -(UIButton*)imageViewNameStr:(NSString*)imageName{
     UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:imageName] forState:0];

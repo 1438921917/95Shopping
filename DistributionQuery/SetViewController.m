@@ -89,14 +89,32 @@
         [self dioayongXiangCe];
     }
     else if (indexPath.section==1) {
-        //个人资料、公司资料
-        MessageVC * vc =[MessageVC new];
-        vc.tagg=indexPath.row;
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (indexPath.row==2) {
+            //我要认证
+            MyRenZhengVC * vc =[MyRenZhengVC new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            //个人资料、公司资料
+            MessageVC * vc =[MessageVC new];
+            vc.tagg=indexPath.row;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
     }else if (indexPath.section==2){
-        //我要认证
-        MyRenZhengVC * vc =[MyRenZhengVC new];
-        [self.navigationController pushViewController:vc animated:YES];
+        UIAlertController * actionView =[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"是否退出" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action1 =[UIAlertAction actionWithTitle:@"确认" style:0 handler:^(UIAlertAction * _Nonnull action) {
+            //删除Login.plist文件
+            [ToolClass deleagtePlistName:@"Login.plist"];
+            //移除token
+            [NSUSE_DEFO removeObjectForKey:@"token"];
+            [NSUSE_DEFO synchronize];
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        UIAlertAction * action2 =[UIAlertAction actionWithTitle:@"取消" style:0 handler:nil];
+        [actionView addAction:action2];
+         [actionView addAction:action1];
+        [self presentViewController:actionView animated:YES completion:nil];
     }
 }
 

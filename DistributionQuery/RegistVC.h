@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface RegistVC : BaseViewController
-
+@property(nonatomic,copy)void(^userNamePswBlock)(NSString*user,NSString*psw);
 @end

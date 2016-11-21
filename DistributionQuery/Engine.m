@@ -10,24 +10,69 @@
 
 #import "AFNetworking.h"
 @implementation Engine
-#pragma mark --获取首页轮播图
-+(void)getFirstImagesuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-//    NSString * urlStr =[NSString stringWithFormat:@"%@MobileIndex/MGetNews.ashx",SERVICE];
-//     NSURL * url = [NSURL URLWithString:urlStr];
-//    __weak ASIFormDataRequest * req = [ASIFormDataRequest requestWithURL:url];
-//    [req setCompletionBlock:^{
-//        
-//         NSLog(@">>>%@",req.responseString);
-//        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:req.responseData options:NSJSONReadingMutableContainers error:nil];
-//        aSuccess(dic);
-//    }];
-//    [req startAsynchronous];
-//    [req  setFailedBlock:^{
-//         NSLog(@"失败%@",req.responseString);
-//    }];
- 
+
+#pragma mark --1.会员注册
++(void)zhuCeAccountPhoneNumber:(NSString*)str Pwd:(NSString*)pwd CodeStr:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Member/Register?Mobile=%@&Password=%@&Code=%@",SER_VICE,str,pwd,code];
+    NSLog(@"会员注册%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    
+    
+    [manager POST:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"1.会员注册%@",str);
+        
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LCProgressHUD showFailure:@"会员注册"];
+        NSLog(@"会员注册%@",error);
+    }];
+    
+    
+    
 }
-#pragma mark --1.获取首页特价专区
+#pragma mark --2.会员登录
++(void)loginAccountPhoneNumber:(NSString*)str Pwd:(NSString*)pwd CodeStr:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Login/Login?Mobile=%@&Password=%@&Code=%@",SER_VICE,str,pwd,code];
+    NSLog(@"2.会员登录%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    
+    
+    [manager POST:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"2.会员登录%@",str);
+        
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+        NSLog(@"2.会员登录%@",error);
+    }];
+    
+}
+
+#pragma mark --3.获取验证码
++(void)getCodePhone:(NSString*)phone typeStr:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Login/GetCode?Mobile=%@&Type=%@",SER_VICE,phone,type];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    NSLog(@"获取验证码%@",urlStr);
+    [manager POST:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"获取验证码%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LCProgressHUD showFailure:@"获取验证码"];
+        NSLog(@"获取验证码%@",error);
+    }];
+    
+    
+}
+
+
+
+#pragma mark --5.获取首页特价专区
 +(void)FirstTeJiaZhuanQusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetDiscountList?Count=10",SER_VICE];
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
@@ -45,25 +90,10 @@
 }
 
 
-#pragma mark --2.列表详情界面
-+(void)tableViewXiangQingJieMianMessageID:(NSString*)messageId success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-   // http://api.hs95.com/Commodity/GetDetail?Id=7458
-    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetDetail?Id=%@",SER_VICE,messageId];
-    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
-    [manager POST:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"2.列表详情界面%@",str);
-        
-        aSuccess(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [LCProgressHUD showFailure:@"请检查网络连接"];
-        NSLog(@"列表详情界面%@",error);
-    }];
-    
-}
 
-#pragma mark --3.特价专区列表
+
+
+#pragma mark --6.1（优质现货1，最新采购2）特价专区列表
 +(void)tejiaZhuanQuLieBiaoHangYeID:(NSString*)category DiQu:(NSString*)area GuanJianZi:(NSString*)keyword Page:(NSString*)page PageSize:(NSString*)pagesize GongQiu:(NSString*)gq TeJia:(NSString*)tejia  success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@&Discount=%@&Business=%@",SER_VICE,category,area,keyword,page,pagesize,tejia,gq];
     NSLog(@"3.特价专区列表%@",urlStr);
@@ -77,6 +107,23 @@
         [LCProgressHUD showFailure:@"请检查网络连接"];
         NSLog(@"3.特价专区列表%@",error);
     }];
+}
+#pragma mark --6.2.列表详情界面
++(void)tableViewXiangQingJieMianMessageID:(NSString*)messageId success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    // http://api.hs95.com/Commodity/GetDetail?Id=7458
+    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetDetail?Id=%@",SER_VICE,messageId];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"2.列表详情界面%@",str);
+        
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LCProgressHUD showFailure:@"请检查网络连接"];
+        NSLog(@"列表详情界面%@",error);
+    }];
+    
 }
 
 @end

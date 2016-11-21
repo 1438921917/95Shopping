@@ -23,7 +23,10 @@
 @end
 
 @implementation MyVC
-
+-(void)viewWillAppear:(BOOL)animated
+{
+     [self CreatTableView];//创建表
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -33,7 +36,7 @@
    // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
     //self.na
     [self CreatDataArr];//数据源
-    [self CreatTableView];//创建表
+   // [self CreatTableView];//创建表
 }
 
 #pragma mark --创建数据源
@@ -94,8 +97,9 @@
     
     
     //标题
+    NSDictionary * dicc =[ToolClass duquPlistWenJianPlistName:@"Login"];
     UILabel * titleLabel=[UILabel new];
-    titleLabel.text=@"江苏物业公司经理";
+    titleLabel.text=[dicc objectForKey:@"M_UserName"];//@"江苏物业公司经理";
     titleLabel.alpha=.8;
     [headView sd_addSubviews:@[titleLabel]];
     titleLabel.sd_layout

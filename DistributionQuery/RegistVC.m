@@ -56,6 +56,7 @@
     
     //手机号
     _phoneText=[[UITextField alloc]init];
+    _phoneText.keyboardType=UIKeyboardTypePhonePad;
     _phoneText.placeholder=@"手机号";
     _phoneText.alpha=1;
     _phoneText.leftView =[self imageViewNameStr:@"phone"];
@@ -81,6 +82,7 @@
     _pwdText=[[UITextField alloc]init];
     _pwdText.placeholder=@"请输入密码";
     _pwdText.alpha=1;
+     _pwdText.keyboardType=UIKeyboardTypePhonePad;
     _pwdText.leftView =[self imageViewNameStr:@"login_ps"];
     _pwdText.leftViewMode = UITextFieldViewModeAlways;
     [_bgview sd_addSubviews:@[_pwdText]];
@@ -104,6 +106,7 @@
     _quePwdText=[[UITextField alloc]init];
     _quePwdText.placeholder=@"请确认密码";
     _quePwdText.alpha=1;
+    _quePwdText.keyboardType=UIKeyboardTypePhonePad;
     _quePwdText.leftView =[self imageViewNameStr:@"login_ps"];
     _quePwdText.leftViewMode = UITextFieldViewModeAlways;
     [_bgview sd_addSubviews:@[_quePwdText]];
@@ -129,6 +132,7 @@
     _codeBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     _codeBtn.backgroundColor=COLOR;
     [_codeBtn setTitle:@"获取验证码" forState:0];
+    [_codeBtn addTarget:self action:@selector(codeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_codeBtn setTitleColor:[UIColor blackColor] forState:0];
     _codeBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     
@@ -143,6 +147,7 @@
     //请输入验证码
     _codeText=[[UITextField alloc]init];
     _codeText.placeholder=@"请输入验证码";
+    _codeText.keyboardType=UIKeyboardTypePhonePad;
     _codeText.leftView =[self imageViewNameStr:@"login_yanzhnegma"];
     _codeText.leftViewMode = UITextFieldViewModeAlways;
     [_bgview sd_addSubviews:@[_codeText]];
@@ -177,12 +182,83 @@
     [_commentBtn setTitle:@"提交入驻" forState:0];
     [_commentBtn setTitleColor:[UIColor whiteColor] forState:0];
     _commentBtn.sd_cornerRadius=@(5);
+    [_commentBtn addTarget:self action:@selector(tijiaoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view sd_addSubviews:@[_commentBtn]];
     _commentBtn.sd_layout
     .leftEqualToView(_lineView3)
     .rightEqualToView(_lineView3)
     .heightIs(40)
     .topSpaceToView(_bgview,10);
+    
+}
+#pragma mark --获取验证码
+-(void)codeBtnClick:(UIButton*)sender{
+    NSLog(@"手机号%@",_phoneText.text);
+    [LCProgressHUD showLoading:@"正在获取验证码..."];
+    [Engine getCodePhone:_phoneText.text typeStr:@"1" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+           [LCProgressHUD hide];
+            //实现倒计时
+            __block int timeout=60; //倒计时时间
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+            dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+            dispatch_source_set_event_handler(_timer, ^{
+                if(timeout<=0){ //倒计时结束，关闭
+                    dispatch_source_cancel(_timer);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //设置界面的按钮显示 根据自己需求设置
+                        [sender setTitle:@"发送验证码" forState:UIControlStateNormal];
+                        sender.userInteractionEnabled = YES;
+                    });
+                }
+                else{
+                    int seconds = timeout % 60;
+                    NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //设置界面的按钮显示 根据自己需求设置
+                        //NSLog(@"____%@",strTime);
+                        [UIView beginAnimations:nil context:nil];
+                        [UIView setAnimationDuration:1];
+                        [sender setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
+                        [UIView commitAnimations];
+                        sender.userInteractionEnabled = NO;
+                    });
+                    timeout--;
+                }
+            });
+            dispatch_resume(_timer);
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"msg"]];
+        }
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+#pragma mark --提交
+-(void)tijiaoBtn:(UIButton*)btn{
+    /*
+     phoneText;//手机号
+     pwdText;//请输入密码
+     codeText;//输入验证码
+     */
+     NSLog(@"手机号%@",_phoneText.text);
+     NSLog(@"密码%@",_pwdText.text);
+     NSLog(@"验证码%@",_codeText.text);
+    [Engine zhuCeAccountPhoneNumber:_phoneText.text Pwd:_pwdText.text CodeStr:_codeText.text success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+           self.userNamePswBlock(_phoneText.text,_pwdText.text);
+          [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+    
     
 }
 - (void)didReceiveMemoryWarning {

@@ -202,11 +202,7 @@
 -(void)CreatLunBoTu{
     NSArray * arr =@[@"banner"];
     [self remoteImageLoaded:arr];
-//    [Engine getFirstImagesuccess:^(NSDictionary *dic) {
-//        
-//    } error:^(NSError *error) {
-//        
-//    }];
+
 }
 //获取网络图片
 - (void)remoteImageLoaded:(NSArray*)arr{
