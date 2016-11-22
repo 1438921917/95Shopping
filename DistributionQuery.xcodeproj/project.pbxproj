@@ -111,6 +111,8 @@
 		8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */; };
 		8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */; };
 		8FDC2E611DD603160009E639 /* YuYinPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E601DD603160009E639 /* YuYinPublicVC.m */; };
+		8FE247F41DE3EF5D006AD175 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE247F31DE3EF5D006AD175 /* CityModel.m */; };
+		8FE247F71DE41CB3006AD175 /* HangYeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE247F61DE41CB3006AD175 /* HangYeModel.m */; };
 		8FE5B1691DDA98310069B82F /* ScanCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B1681DDA98310069B82F /* ScanCodeCell.m */; };
 		8FE5B46E1DDB30D50069B82F /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B4441DDB30D50069B82F /* MJRefreshAutoFooter.m */; };
 		8FE5B46F1DDB30D50069B82F /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B4461DDB30D50069B82F /* MJRefreshBackFooter.m */; };
@@ -376,6 +378,10 @@
 		8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfPublicCell.m; sourceTree = "<group>"; };
 		8FDC2E5F1DD603160009E639 /* YuYinPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuYinPublicVC.h; sourceTree = "<group>"; };
 		8FDC2E601DD603160009E639 /* YuYinPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuYinPublicVC.m; sourceTree = "<group>"; };
+		8FE247F21DE3EF5D006AD175 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		8FE247F31DE3EF5D006AD175 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		8FE247F51DE41CB3006AD175 /* HangYeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HangYeModel.h; sourceTree = "<group>"; };
+		8FE247F61DE41CB3006AD175 /* HangYeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HangYeModel.m; sourceTree = "<group>"; };
 		8FE5B1671DDA98310069B82F /* ScanCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeCell.h; sourceTree = "<group>"; };
 		8FE5B1681DDA98310069B82F /* ScanCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeCell.m; sourceTree = "<group>"; };
 		8FE5B4431DDB30D50069B82F /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
@@ -947,6 +953,10 @@
 				8FF4A7E91DD6E8C300C5C743 /* LeftMyAdressCell.m */,
 				8FF4A7EE1DD6E90A00C5C743 /* RightMyAddressCell.h */,
 				8FF4A7EF1DD6E90A00C5C743 /* RightMyAddressCell.m */,
+				8FE247F21DE3EF5D006AD175 /* CityModel.h */,
+				8FE247F31DE3EF5D006AD175 /* CityModel.m */,
+				8FE247F51DE41CB3006AD175 /* HangYeModel.h */,
+				8FE247F61DE41CB3006AD175 /* HangYeModel.m */,
 			);
 			name = "优质现货";
 			sourceTree = "<group>";
@@ -1323,6 +1333,7 @@
 				8F02FE8C1DA89F6B0051EDFC /* ASINetworkQueue.m in Sources */,
 				8F03A5301DD9BF4D00833E19 /* GuYongJingJiRenVC.m in Sources */,
 				8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */,
+				8FE247F41DE3EF5D006AD175 /* CityModel.m in Sources */,
 				8FCD4FA51DA8B4D300CB113C /* TAAbstractDotView.m in Sources */,
 				8FCD4F9D1DA8B4D300CB113C /* UIProgressView+AFNetworking.m in Sources */,
 				8FCD4FA11DA8B4D300CB113C /* LCProgressHUD.m in Sources */,
@@ -1397,6 +1408,7 @@
 				8FF4A7F01DD6E90A00C5C743 /* RightMyAddressCell.m in Sources */,
 				8FEE742E1DD407C400470D75 /* YouZhiXianHuoVC.m in Sources */,
 				8FE5B47A1DDB30D50069B82F /* MJRefreshNormalHeader.m in Sources */,
+				8FE247F71DE41CB3006AD175 /* HangYeModel.m in Sources */,
 				8FCD4F821DA8B4D300CB113C /* AFNetworkReachabilityManager.m in Sources */,
 				8FCD4F861DA8B4D300CB113C /* AFURLResponseSerialization.m in Sources */,
 				8FDC2E541DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m in Sources */,

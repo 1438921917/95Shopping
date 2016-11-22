@@ -28,4 +28,15 @@ typedef void (^ErrorBlock)(NSError*error);
 
 #pragma mark --6.2.列表详情界面
 +(void)tableViewXiangQingJieMianMessageID:(NSString*)messageId success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --6获取顶级产品分类
++(void)getHangYeChanPinFenLeisuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --7根据行业获取分类
++(void)getHangYeWithID:(NSString*)Idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+
+#pragma mark --9获取省级地区
++(void)getShengJiDiQusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --10.根据省获取市
++(void)getCityWithShengCode:(NSString*)code uccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 @end

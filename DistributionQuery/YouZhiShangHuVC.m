@@ -11,6 +11,8 @@
 #import "LeftMyAdressCell.h"
 #import "RightMyAddressCell.h"
 #import "JinDianChaKanVC.h"
+#import "CityModel.h"
+#import "HangYeModel.h"
 @interface YouZhiShangHuVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)UITableView*leftTabelView;
@@ -18,6 +20,10 @@
 @property(nonatomic,strong)UIButton * bgview;
 @property(nonatomic,strong)UIButton * button1;
 @property(nonatomic,strong)UIButton * button2;
+//顶级数组
+@property(nonatomic,strong)NSMutableArray * shengArr;
+@property(nonatomic,strong)NSMutableArray * cityArr;
+@property(nonatomic,assign)NSInteger btntag;//用来区分左右按钮
 @end
 
 @implementation YouZhiShangHuVC
@@ -31,6 +37,8 @@
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=@"优质商户";
+    _shengArr=[NSMutableArray new];
+    _cityArr=[NSMutableArray new];
     [self CreatTableView];
     NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"行业", nil];
     _bgview=[[UIButton alloc]init];
@@ -74,9 +82,11 @@
 #pragma mark --topBtn点击状态
 -(void)butTitleClink:(UIButton*)btn{
     btn.selected=!btn.selected;
+     _btntag=btn.tag;
     if (btn.tag==0) {
         //点击的是第一个
         if (btn.selected==YES) {
+             [self shengFenData];
             _tableView.scrollEnabled=NO;
             [_tableView setContentOffset:CGPointZero animated:NO];
             [_tableView addSubview:_bgview];
@@ -92,7 +102,9 @@
         
     }else{
         //点击的是第二个
+       
         if (btn.selected==YES) {
+             [self getHangYeAll];
             _tableView.scrollEnabled=NO;
             [_tableView setContentOffset:CGPointZero animated:NO];
             [_tableView addSubview:_bgview];
@@ -106,6 +118,48 @@
         _button2=btn;
     }
 }
+
+#pragma mark --获取全国省份
+-(void)shengFenData{
+    [_shengArr removeAllObjects];
+    [Engine getShengJiDiQusuccess:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * arr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in arr)
+            {
+                CityModel * model =[[CityModel alloc]initWithShengDic:dicc];
+                [_shengArr addObject:model];
+            }
+            
+            [_leftTabelView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+#pragma mark --获取所有行业
+-(void)getHangYeAll{
+    [_shengArr removeAllObjects];
+    [Engine getHangYeChanPinFenLeisuccess:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * arr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in arr) {
+                HangYeModel * md =[[HangYeModel alloc]initWithHangYeAllDic:dicc];
+                [_shengArr addObject:md];
+            }
+            [_leftTabelView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark --灰色按钮点击取消
 -(void)bgViewBtn{
     [self dissmiss];
@@ -116,7 +170,7 @@
 #pragma mark --创建左边表格
 -(void)CreatLeftTableVeiw{
     
-    _leftTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+51, ScreenWidth/2.5, ScreenHeight/1.5) style:UITableViewStylePlain];
+    _leftTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+51, ScreenWidth/2, ScreenHeight/1.5) style:UITableViewStylePlain];
     _leftTabelView.dataSource=self;
     _leftTabelView.delegate=self;
     _leftTabelView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -152,9 +206,9 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView==_leftTabelView) {
-        return 15;
+        return _shengArr.count;
     }else if (tableView==_rightTabelView){
-        return 20;
+        return _cityArr.count;
     }else{
         return 10;
     }
@@ -163,13 +217,30 @@
     
     if (tableView==_leftTabelView) {
         
-        UITableViewCell * cell1 =[LeftMyAdressCell cellWithTableView:tableView];
+        LeftMyAdressCell * cell1 =[LeftMyAdressCell cellWithTableView:tableView];
         cell1.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (_btntag==0) {
+            //点击的是城市给城市赋值
+            CityModel * md =_shengArr[indexPath.row];
+            cell1.name=md.shengName;
+        }else{
+            //点击的是行业，给行业赋值
+            HangYeModel * md =_shengArr[indexPath.row];
+            cell1.name=md.HYname;
+        }
+
         return cell1;
     }else if (tableView==_rightTabelView)
     {
-        UITableViewCell * cell1 =[RightMyAddressCell cellWithTableView:tableView];
-        cell1.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        RightMyAddressCell * cell1 =[RightMyAddressCell cellWithTableView:tableView];
+        if (_btntag==0) {
+            CityModel * md =_cityArr[indexPath.row];
+            cell1.name=md.cityName;
+        }else{
+            HangYeModel * md =_cityArr[indexPath.row];
+            cell1.name=md.HYname;
+        }
+        
         return cell1;
     }else{
         NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
@@ -184,9 +255,29 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView==_leftTabelView) {
-        [self CreatRightTableView:ScreenWidth-ScreenWidth/2.5 Xzhou:ScreenWidth/2.5 Gzhou:ScreenHeight/1.5];
+        [self CreatRightTableView:ScreenWidth-ScreenWidth/2 Xzhou:ScreenWidth/2 Gzhou:ScreenHeight/1.5];
+        if (_btntag==0) {
+            CityModel * mdd =_shengArr[indexPath.row];
+            [self shengWithCity:mdd];
+        }else{
+            HangYeModel * md =_shengArr[indexPath.row];
+            [self genJuIddGetHangYe:md];
+        }
+
     }else if (tableView==_rightTabelView){
+        if (_btntag==0) {
+            CityModel * mdd=_cityArr[indexPath.row];
+            _button1.selected=NO;
+            [_button1 setTitle:mdd.cityName forState:0];
+            _button1.titleLabel.font=[UIFont systemFontOfSize:14];
+        }else{
+            HangYeModel * mdd =_cityArr[indexPath.row];
+            _button2.selected=NO;
+            [_button2 setTitle:mdd.HYname forState:0];
+            _button2.titleLabel.font=[UIFont systemFontOfSize:14];
+        }
         
+        [self dissmiss];
     }else{
         //优质商户详情页(和进店查看一样)
         JinDianChaKanVC * vc =[JinDianChaKanVC new];
@@ -194,6 +285,49 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+#pragma mark --根据省去解析市级
+-(void)shengWithCity:(CityModel*)mdd{
+    [_cityArr removeAllObjects];
+    [Engine getCityWithShengCode:mdd.shengCode uccess:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * cityA =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in cityA)
+            {
+                CityModel * mmd =[[CityModel alloc]initWithCityDic:dicc];
+                [_cityArr addObject:mmd];
+            }
+            
+            [_rightTabelView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+#pragma mark --根据ID获取行业分类
+-(void)genJuIddGetHangYe:(HangYeModel*)md{
+    [_cityArr removeAllObjects];//把之前的城市清楚，换成行业数据
+    [Engine getHangYeWithID:md.HYidd success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * arr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in arr) {
+                HangYeModel * md =[[HangYeModel alloc]initWithHangYeAllDic:dicc];
+                [_cityArr addObject:md];
+            }
+            [_rightTabelView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView==_leftTabelView) {

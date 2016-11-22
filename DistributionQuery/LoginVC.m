@@ -220,7 +220,7 @@
             });
             dispatch_resume(_timer);
         }else{
-            [LCProgressHUD showMessage:[dic objectForKey:@"msg"]];
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
         }
         
     } error:^(NSError *error) {

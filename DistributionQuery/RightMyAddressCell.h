@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RightMyAddressCell : UITableViewCell
+
 +(instancetype)cellWithTableView:(UITableView*)tableView;
+@property(nonatomic,copy)NSString * name;
 @end

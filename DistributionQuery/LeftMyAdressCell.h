@@ -10,5 +10,5 @@
 
 @interface LeftMyAdressCell : UITableViewCell
 +(instancetype)cellWithTableView:(UITableView*)tableView;
-
+@property(nonatomic,copy)NSString * name;
 @end
