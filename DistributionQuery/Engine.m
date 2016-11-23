@@ -177,7 +177,7 @@
 
 }
 #pragma mark --10.根据省获取市
-+(void)getCityWithShengCode:(NSString*)code uccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
++(void)getCityWithShengCode:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Area/GetCityList?Id=%@",SER_VICE,code];
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager POST:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -191,6 +191,31 @@
         NSLog(@"根据省获取市%@",error);
     }];
     
+}
+#pragma mark --12修改个人资料
++(void)XiuGaiMenZiLiaoNiCheng:(NSString*)nicheng Name:(NSString*)name Sheng:(NSString*)sheng City:(NSString*)city Xian:(NSString*)xian success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@Member/ModifyPersonal",SER_VICE];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"Id"];
+    [dic setObject:nicheng forKey:@"NickName"];
+    [dic setObject:name forKey:@"RealName"];
+    [dic setObject:sheng forKey:@"Province"];
+    [dic setObject:city forKey:@"City"];
+    
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"修改个人资料%@",str);
+        
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LCProgressHUD showFailure:@"请检查网络连接"];
+        NSLog(@"修改个人资料%@",error);
+    }];
+
     
 }
 @end

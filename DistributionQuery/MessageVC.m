@@ -8,9 +8,13 @@
 
 #import "MessageVC.h"
 #import "MessageCell.h"
+#import "CityChooseVC.h"
 @interface MessageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray*nameArray;
+@property(nonatomic,copy)NSString * diquText;
+@property(nonatomic,copy)NSString * shengCode;
+@property(nonatomic,copy)NSString* cityCode;
 @end
 
 @implementation MessageVC
@@ -23,9 +27,44 @@
     }else{
         self.title=@"公司资料";
     }
-    
+    [self tijiaoBtn];
     [self CreatNameArr];
     [self CreatTableView];
+    
+//   XiuGaiMenZiLiaoNiCheng 
+    
+}
+#pragma mark --提交按钮
+-(void)tijiaoBtn{
+    //搜索按钮
+   UIButton* _rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_rightBtn setTitle:@"提交" forState:0];
+    [_rightBtn setTitleColor:[UIColor redColor] forState:0];
+    [_rightBtn addTarget:self action:@selector(tijiaoBtn:) forControlEvents:UIControlEventTouchUpInside];
+    _rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+    _rightBtn.frame=CGRectMake(0, 0, 50, 15);
+    UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:_rightBtn];
+    self.navigationItem.rightBarButtonItems=@[rightBtn];
+
+}
+#pragma mark --提价
+-(void)tijiaoBtn:(UIButton*)btn{
+    if (_tagg==0) {
+        //个人资料
+        MessageCell * cell1 =[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        MessageCell * cell2 =[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+
+        NSLog(@"昵称%@",cell1.textfield.text);
+        NSLog(@"姓名%@",cell2.textfield.text);
+        [Engine XiuGaiMenZiLiaoNiCheng:@"昵称" Name:@"五名" Sheng:_shengCode City:_cityCode Xian:nil success:^(NSDictionary *dic) {
+            
+        } error:^(NSError *error) {
+            
+        }];
+    }else{
+        //公司资料
+    }
+    
 }
 #pragma mark --创建数据源
 -(void)CreatNameArr{
@@ -104,6 +143,27 @@
     return cell;
     
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_tagg==0) {
+        //个人资料
+        if (indexPath.section==0) {
+        }else{
+            //所在地区
+            CityChooseVC * vc =[CityChooseVC new];
+            vc.citynameBlock=^(NSString *name,NSString*shiCode,NSString*shengCodea){
+                _diquText=name;
+                _cityCode=shiCode;
+                _shengCode=shengCodea;
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        //公司资料
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;

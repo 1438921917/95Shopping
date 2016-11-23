@@ -387,7 +387,7 @@
 #pragma mark --根据省去解析市级
 -(void)shengWithCity:(CityModel*)mdd{
     [_cityArr removeAllObjects];
-    [Engine getCityWithShengCode:mdd.shengCode uccess:^(NSDictionary *dic) {
+    [Engine getCityWithShengCode:mdd.shengCode success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             NSArray * cityA =[dic objectForKey:@"Item3"];

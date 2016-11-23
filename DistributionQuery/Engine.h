@@ -38,5 +38,9 @@ typedef void (^ErrorBlock)(NSError*error);
 #pragma mark --9获取省级地区
 +(void)getShengJiDiQusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --10.根据省获取市
-+(void)getCityWithShengCode:(NSString*)code uccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
++(void)getCityWithShengCode:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --12修改个人资料
++(void)XiuGaiMenZiLiaoNiCheng:(NSString*)nicheng Name:(NSString*)name Sheng:(NSString*)sheng City:(NSString*)city Xian:(NSString*)xian success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
 @end

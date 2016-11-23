@@ -25,6 +25,7 @@
     if (self) {
         _cityName=[dic objectForKey:@"c_name"];
         _cityCode=[NSString stringWithFormat:@"%@",[dic objectForKey:@"c_code"]];
+        _cityShengCode=[NSString stringWithFormat:@"%@",[dic objectForKey:@"c_pid"]];
     }
     
     return self;

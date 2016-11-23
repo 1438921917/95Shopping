@@ -111,6 +111,7 @@
 		8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */; };
 		8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */; };
 		8FDC2E611DD603160009E639 /* YuYinPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E601DD603160009E639 /* YuYinPublicVC.m */; };
+		8FE219A21DE538F1000C1D71 /* CityChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE219A11DE538F1000C1D71 /* CityChooseVC.m */; };
 		8FE247F41DE3EF5D006AD175 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE247F31DE3EF5D006AD175 /* CityModel.m */; };
 		8FE247F71DE41CB3006AD175 /* HangYeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE247F61DE41CB3006AD175 /* HangYeModel.m */; };
 		8FE5B1691DDA98310069B82F /* ScanCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B1681DDA98310069B82F /* ScanCodeCell.m */; };
@@ -378,6 +379,8 @@
 		8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfPublicCell.m; sourceTree = "<group>"; };
 		8FDC2E5F1DD603160009E639 /* YuYinPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuYinPublicVC.h; sourceTree = "<group>"; };
 		8FDC2E601DD603160009E639 /* YuYinPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuYinPublicVC.m; sourceTree = "<group>"; };
+		8FE219A01DE538F1000C1D71 /* CityChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseVC.h; sourceTree = "<group>"; };
+		8FE219A11DE538F1000C1D71 /* CityChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseVC.m; sourceTree = "<group>"; };
 		8FE247F21DE3EF5D006AD175 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
 		8FE247F31DE3EF5D006AD175 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		8FE247F51DE41CB3006AD175 /* HangYeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HangYeModel.h; sourceTree = "<group>"; };
@@ -508,6 +511,7 @@
 				8F02FE5A1DA887F20051EDFC /* HomeViewController */,
 				8F02FE5B1DA888050051EDFC /* SaoMaViewController */,
 				8F02FE5C1DA8881A0051EDFC /* MyViewController */,
+				8FF4A7D31DD6B2CD00C5C743 /* 登录注册 */,
 				8F02FE491DA886DE0051EDFC /* System */,
 				8F02FE151DA883FE0051EDFC /* Supporting Files */,
 			);
@@ -601,12 +605,7 @@
 			children = (
 				8F02FE561DA887CC0051EDFC /* MyVC.h */,
 				8F02FE571DA887CC0051EDFC /* MyVC.m */,
-				8F07E6191DDD5C3B0045EA74 /* XiaoXiTongZhiVC.h */,
-				8F07E61A1DDD5C3B0045EA74 /* XiaoXiTongZhiVC.m */,
-				8F07E61C1DDD5CF30045EA74 /* XitongTongZhiVC.h */,
-				8F07E61D1DDD5CF30045EA74 /* XitongTongZhiVC.m */,
-				8F07E61F1DDD5D0B0045EA74 /* ShangXinVC.h */,
-				8F07E6201DDD5D0B0045EA74 /* ShangXinVC.m */,
+				8FE219991DE52F20000C1D71 /* 消息通知 */,
 				8F03A5361DD9D8A500833E19 /* 关于95 */,
 				8F03A5321DD9BF5D00833E19 /* 雇佣经济人 */,
 				8F03A5311DD9BF5300833E19 /* 服务充值 */,
@@ -617,7 +616,6 @@
 				8FF4A7D61DD6B30600C5C743 /* 设置 */,
 				8FF4A7D51DD6B2FB00C5C743 /* 个人公司资料 */,
 				8FF4A7D41DD6B2D900C5C743 /* 我要认证 */,
-				8FF4A7D31DD6B2CD00C5C743 /* 登录注册 */,
 			);
 			name = MyViewController;
 			sourceTree = "<group>";
@@ -654,6 +652,8 @@
 				8F03A5271DD9A84D00833E19 /* pinyin.h */,
 				8F03A5241DD9A84D00833E19 /* ChineseString.h */,
 				8F03A5251DD9A84D00833E19 /* ChineseString.m */,
+				8FE219A01DE538F1000C1D71 /* CityChooseVC.h */,
+				8FE219A11DE538F1000C1D71 /* CityChooseVC.m */,
 			);
 			name = "城市选择";
 			sourceTree = "<group>";
@@ -1018,6 +1018,19 @@
 			name = "企业快速买货";
 			sourceTree = "<group>";
 		};
+		8FE219991DE52F20000C1D71 /* 消息通知 */ = {
+			isa = PBXGroup;
+			children = (
+				8F07E6191DDD5C3B0045EA74 /* XiaoXiTongZhiVC.h */,
+				8F07E61A1DDD5C3B0045EA74 /* XiaoXiTongZhiVC.m */,
+				8F07E61C1DDD5CF30045EA74 /* XitongTongZhiVC.h */,
+				8F07E61D1DDD5CF30045EA74 /* XitongTongZhiVC.m */,
+				8F07E61F1DDD5D0B0045EA74 /* ShangXinVC.h */,
+				8F07E6201DDD5D0B0045EA74 /* ShangXinVC.m */,
+			);
+			name = "消息通知";
+			sourceTree = "<group>";
+		};
 		8FE5B4411DDB30D50069B82F /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1359,6 +1372,7 @@
 				8FE5B4761DDB30D50069B82F /* MJRefreshBackGifFooter.m in Sources */,
 				8FE5B4791DDB30D50069B82F /* MJRefreshGifHeader.m in Sources */,
 				8FE5B4801DDB30D50069B82F /* UIView+MJExtension.m in Sources */,
+				8FE219A21DE538F1000C1D71 /* CityChooseVC.m in Sources */,
 				8FCD4FA81DA8B4D300CB113C /* TAPageControl.m in Sources */,
 				8F03A5351DD9D29200833E19 /* GuanYu95VC.m in Sources */,
 				8F02FE871DA89F6B0051EDFC /* ASIDataDecompressor.m in Sources */,

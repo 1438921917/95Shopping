@@ -16,5 +16,6 @@
 #pragma mark --城市解析
 @property(nonatomic,copy)NSString * cityName;
 @property(nonatomic,copy)NSString * cityCode;
+@property(nonatomic,copy)NSString * cityShengCode;
 -(id)initWithCityDic:(NSDictionary*)dic;
 @end

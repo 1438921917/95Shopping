@@ -253,7 +253,8 @@
     [Engine loginAccountPhoneNumber:_phoneText.text Pwd:_pwdText.text CodeStr:_codeText.text success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
-           [[NSUserDefaults standardUserDefaults]setObject:[dic objectForKey:@"Item2"] forKey:@"token"];
+            [NSUSE_DEFO setObject:[dic objectForKey:@"Item2"] forKey:@"token"];
+            [NSUSE_DEFO setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]] forKey:@"mid"];
             [NSUSE_DEFO synchronize];
             NSDictionary * item3 =[dic objectForKey:@"Item3"];
             [self saveSomeMessageDic:item3];
@@ -273,6 +274,7 @@
     //1.存储用户名
     NSMutableDictionary * saveDic=[NSMutableDictionary new];
     [saveDic setObject:[dic objectForKey:@"M_UserName"] forKey:@"M_UserName"];
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]] forKey:@"M_Id"];
     [ToolClass savePlist:saveDic name:@"Login"];
     
     
