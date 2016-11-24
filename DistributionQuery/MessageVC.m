@@ -15,6 +15,7 @@
 @property(nonatomic,copy)NSString * diquText;
 @property(nonatomic,copy)NSString * shengCode;
 @property(nonatomic,copy)NSString* cityCode;
+@property(nonatomic,strong) NSDictionary * dataDic;
 @end
 
 @implementation MessageVC
@@ -22,13 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"token>>>%@",[NSUSE_DEFO objectForKey:@"token"]);
+    NSLog(@"mid>>>%@",[NSUSE_DEFO objectForKey:@"mid"]);
     if (_tagg==0) {
        self.title=@"个人资料";
     }else{
         self.title=@"公司资料";
     }
     [self tijiaoBtn];
-    [self CreatNameArr];
+    [self CreatNameArr];//数据源
     [self CreatTableView];
     
 //   XiuGaiMenZiLiaoNiCheng 
@@ -56,8 +59,20 @@
 
         NSLog(@"昵称%@",cell1.textfield.text);
         NSLog(@"姓名%@",cell2.textfield.text);
-        [Engine XiuGaiMenZiLiaoNiCheng:@"昵称" Name:@"五名" Sheng:_shengCode City:_cityCode Xian:nil success:^(NSDictionary *dic) {
-            
+        NSLog(@"省份%@",_shengCode);
+        NSLog(@"城市%@",_cityCode);
+        ;
+        [LCProgressHUD showLoading:@"正在提交，请稍后..."];
+        [Engine XiuGaiMenZiLiaoNiCheng:cell1.textfield.text Name:cell2.textfield.text Sheng:[self stringText:_shengCode Text2:[_dataDic objectForKey:@"M_Province"]] City:[self stringText:_cityCode Text2:[_dataDic objectForKey:@"M_City"]] Xian:nil success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"0"]) {
+                NSDictionary * item3Dic =[dic objectForKey:@"Item3"];
+                [self saveSomeMessageDic:item3Dic];
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }
         } error:^(NSError *error) {
             
         }];
@@ -66,10 +81,30 @@
     }
     
 }
+#pragma mark --存储登录信息
+-(void)saveSomeMessageDic:(NSDictionary*)dic{
+    //1.存储用户名
+    NSMutableDictionary * saveDic=[NSMutableDictionary new];
+    [saveDic setObject:[dic objectForKey:@"M_UserName"] forKey:@"M_UserName"];
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]] forKey:@"M_Id"];
+    //存真实名字
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_RealName"]] forKey:@"M_RealName"];
+    //存昵称
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_NickName"]] forKey:@"M_NickName"];
+    //省code
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Province"]] forKey:@"M_Province"];
+    //市code
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_City"]] forKey:@"M_City"];
+    [ToolClass savePlist:saveDic name:@"Login"];
+    
+    
+}
 #pragma mark --创建数据源
 -(void)CreatNameArr{
     NSArray * arr1;
     NSArray * arr2;
+     _dataDic =[ToolClass duquPlistWenJianPlistName:@"Login"];
+    NSLog(@"有没有%@",_dataDic);
     if (_tagg==0) {
          arr1 =@[@"昵称",@"真实姓名"];
          arr2 =@[@"所在地区"];
@@ -112,14 +147,33 @@
         //个人资料
         if (indexPath.section==0) {
             if (indexPath.row==0) {
-                 cell.textfield.placeholder=@"请填写昵称";
+                NSString * nike =[_dataDic objectForKey:@"M_NickName"];
+                if (nike==nil) {
+                  cell.textfield.placeholder=@"请填写昵称";
+                }else{
+                  cell.textfield.text=nike;
+                }
+                
             }else{
-                 cell.textfield.placeholder=@"请填写姓名";
+                 NSString * name =[_dataDic objectForKey:@"M_RealName"];
+                if (name==nil) {
+                    cell.textfield.placeholder=@"请填写姓名";
+                }else{
+                    cell.textfield.text=name;
+                }
+                
             }
            
         }else{
             cell.textfield.enabled=NO;
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            cell.textfield.textAlignment=2;
+            [cell sd_addSubviews:@[cell.textfield]];
+            cell.textfield.sd_layout
+            .widthIs(180)
+            .rightSpaceToView(cell,25);
+            cell.textfield.text=_diquText;
+            //cell.textfield.backgroundColor=[UIColor redColor];
         }
         
         
@@ -130,7 +184,8 @@
                 cell.textfield.placeholder=@"请填写公司名字";
                 cell.textfield.sd_layout.widthIs(150);
             }else{
-                cell.textfield.placeholder=@"请填写姓名";
+                cell.textfield.enabled=NO;
+                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             }
             
         }else{
@@ -156,11 +211,27 @@
                 _diquText=name;
                 _cityCode=shiCode;
                 _shengCode=shengCodea;
+                [_tableView reloadData];
             };
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else{
         //公司资料
+        if (indexPath.section==0) {
+            if (indexPath.row==1) {
+                
+            }
+        }else{
+            //所在场所
+            CityChooseVC * vc =[CityChooseVC new];
+            vc.citynameBlock=^(NSString *name,NSString*shiCode,NSString*shengCodea){
+                _diquText=name;
+                _cityCode=shiCode;
+                _shengCode=shengCodea;
+                [_tableView reloadData];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
@@ -176,7 +247,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//text1是从后面界面传过来的，text2是从上个界面过来的_model
+-(NSString *)stringText:(NSString*)text1 Text2:(NSString*)text2{
+    
+    NSString * xx;
+    if (text1) {
+        xx=text1;
+    }else{
+        xx=text2;
+    }
+    
+    return xx;
+}
 /*
 #pragma mark - Navigation
 

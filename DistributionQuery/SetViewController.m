@@ -108,6 +108,7 @@
             [ToolClass deleagtePlistName:@"Login.plist"];
             //移除token
             [NSUSE_DEFO removeObjectForKey:@"token"];
+             [NSUSE_DEFO removeObjectForKey:@"mid"];
             [NSUSE_DEFO synchronize];
             [self.navigationController popViewControllerAnimated:YES];
         }];
@@ -154,6 +155,36 @@
      UIImageView * imageview =(UIImageView *)[cell viewWithTag:1];
     imageview.image=image;
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self shangChuanImage:image];
 }
-
+#pragma mark --上传图片
+-(void)shangChuanImage:(UIImage*)image{
+     NSData * imgData=  UIImageJPEGRepresentation(image, 0);
+    [LCProgressHUD showLoading:@"正在上传,请稍后..."];
+    //type:1.产品 2新闻 3.用户
+    [Engine ShangChuanImageData:imgData Type:@"3" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSString * urlImage =[dic objectForKey:@"Item2"];
+            [self saveImage:urlImage];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+#pragma mark --保存图片
+-(void)saveImage:(NSString*)url{
+    [Engine saveImageType:@"0" urlStr:url success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
 @end

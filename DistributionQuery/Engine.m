@@ -199,11 +199,16 @@
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
-    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"Id"];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:nicheng forKey:@"NickName"];
     [dic setObject:name forKey:@"RealName"];
+    if (sheng) {
     [dic setObject:sheng forKey:@"Province"];
+    }if (city) {
     [dic setObject:city forKey:@"City"];
+    }
+   
+    
     
     [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
@@ -217,5 +222,53 @@
     }];
 
     
+}
+#pragma mark --14上传图片来获取图片地址
++(void)ShangChuanImageData:(NSData*)dataImage Type:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@uploadfile/UpLoadProcess",SER_VICE];
+
+    //获得的data
+    NSData *imageData=dataImage;
+    //base编码后
+    NSString * endStr =[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
+    [dic setObject:endStr forKey:@"img"];
+    [dic setObject:type forKey:@"type"];
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"上传图片后返回的地址%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"上传图片后返回的地址%@",error);
+    }];
+
+}
+#pragma mark --15保存图片
++(void)saveImageType:(NSString*)type urlStr:(NSString*)url success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@uploadfile/SaveImg",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
+    [dic setObject:type forKey:@"Type"];
+    [dic setObject:url forKey:@"Url"];
+     NSLog(@"看看输出结果%@",[NSUSE_DEFO objectForKey:@"token"]);
+     NSLog(@"看看输出结果%@",[NSUSE_DEFO objectForKey:@"mid"]);
+     NSLog(@"看看输出结果%@",type);
+     NSLog(@"看看输出结果%@",url);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"15保存图片%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"15保存图片%@",error);
+    }];
 }
 @end

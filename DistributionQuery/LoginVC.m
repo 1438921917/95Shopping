@@ -254,10 +254,11 @@
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             [NSUSE_DEFO setObject:[dic objectForKey:@"Item2"] forKey:@"token"];
-            [NSUSE_DEFO setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]] forKey:@"mid"];
+            NSDictionary * item3Dic =[dic objectForKey:@"Item3"];
+            [NSUSE_DEFO setObject:[NSString stringWithFormat:@"%@",[item3Dic objectForKey:@"M_Id"]] forKey:@"mid"];
             [NSUSE_DEFO synchronize];
-            NSDictionary * item3 =[dic objectForKey:@"Item3"];
-            [self saveSomeMessageDic:item3];
+           // NSDictionary * item3 =[dic objectForKey:@"Item3"];
+            [self saveSomeMessageDic:item3Dic];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
