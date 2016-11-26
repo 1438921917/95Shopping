@@ -9,7 +9,7 @@
 #import "MyVC.h"
 #import "SetViewController.h"
 #import "LoginVC.h"
-#import "GuanLiVC.h"
+#import "GuanLiViewController.h"
 #import "ShouCangVC.h"
 #import "SuggestionVC.h"
 #import "GuYongJingJiRenVC.h"
@@ -218,7 +218,7 @@
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             //管理
-            GuanLiVC * vc =[GuanLiVC new];
+            GuanLiViewController * vc =[GuanLiViewController new];
             vc.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else{

@@ -12,6 +12,7 @@
 @interface SetViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * dataArray;
+@property(nonatomic,copy)NSString * headUrl;//头像地址
 @end
 
 @implementation SetViewController
@@ -20,6 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"设置";
+    [self getImageHead];
     [self CreatDataArr];//数据源
     [self CreatTableView];//表
 }
@@ -30,6 +32,25 @@
     NSArray * arr3 =@[@"退出"];
     _dataArray=[[NSMutableArray alloc]initWithObjects:arr1,arr2,arr3, nil];
 }
+
+#pragma mark --获取头像
+-(void)getImageHead{
+    [Engine huoQuImageWithType:@"0" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * imageHead =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc  in imageHead) {
+                _headUrl =[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"Img_Url"]];
+            }
+            [_tableView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark --创建表
 -(void)CreatTableView{
     if (!_tableView) {
@@ -65,7 +86,8 @@
     cell.textLabel.font=[UIFont systemFontOfSize:16];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     if (indexPath.section==0) {
-        imageview.image=[UIImage imageNamed:@"my_photo"];
+//        imageview.image=[UIImage imageNamed:@"my_photo"];
+        [imageview setImageWithURL:[NSURL URLWithString:_headUrl] placeholderImage:[UIImage imageNamed:@"my_photo"]];
         imageview.sd_cornerRadius=@(40);
         imageview.sd_layout
         .rightSpaceToView(cell,20)
@@ -176,6 +198,10 @@
 }
 #pragma mark --保存图片
 -(void)saveImage:(NSString*)url{
+    /*
+     type
+     0.头像 1.身份证 2营业执照 3.税务登记证 4.实地图片
+     */
     [Engine saveImageType:@"0" urlStr:url success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {

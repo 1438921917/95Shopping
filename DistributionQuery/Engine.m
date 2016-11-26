@@ -223,6 +223,34 @@
 
     
 }
+#pragma mark --13修改公司资料
++(void)XiuGaiCompanyZiLiaoName:(NSString*)gongsi Address:(NSString*)adress HangYeID:(NSString*)hangyeID success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@Member/ModifyCompany",SER_VICE];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
+    [dic setObject:gongsi forKey:@"Company"];
+    if (hangyeID) {
+        [dic setObject:hangyeID forKey:@"Category"];
+    }if (adress) {
+        [dic setObject:adress forKey:@"Address"];
+    }
+    
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"修改公司资料%@",str);
+        
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"修改公司资料%@",error);
+    }];
+
+    
+    
+}
 #pragma mark --14上传图片来获取图片地址
 +(void)ShangChuanImageData:(NSData*)dataImage Type:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@uploadfile/UpLoadProcess",SER_VICE];
@@ -251,16 +279,16 @@
 }
 #pragma mark --15保存图片
 +(void)saveImageType:(NSString*)type urlStr:(NSString*)url success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-    NSString * urlStr =[NSString stringWithFormat:@"%@uploadfile/SaveImg",SER_VICE];
+    NSString * urlStr =[NSString stringWithFormat:@"%@Member/SaveImg",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:type forKey:@"Type"];
     [dic setObject:url forKey:@"Url"];
-     NSLog(@"看看输出结果%@",[NSUSE_DEFO objectForKey:@"token"]);
-     NSLog(@"看看输出结果%@",[NSUSE_DEFO objectForKey:@"mid"]);
-     NSLog(@"看看输出结果%@",type);
-     NSLog(@"看看输出结果%@",url);
+     NSLog(@"token=%@",[NSUSE_DEFO objectForKey:@"token"]);
+     NSLog(@"UId=%@",[NSUSE_DEFO objectForKey:@"mid"]);
+     NSLog(@"Type=%@",type);
+     NSLog(@"Url=%@",url);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
@@ -269,6 +297,27 @@
         aSuccess(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"15保存图片%@",error);
+    }];
+}
+#pragma mark --17获取图片
++(void)huoQuImageWithType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Member/GetImg",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
+    [dic setObject:type forKey:@"Type"];
+//    NSLog(@"token=%@",[NSUSE_DEFO objectForKey:@"token"]);
+//    NSLog(@"UId=%@",[NSUSE_DEFO objectForKey:@"mid"]);
+//    NSLog(@"Type=%@",type);
+//    NSLog(@"Url=%@",url);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"17获取图片%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"17获取图片%@",error);
     }];
 }
 @end

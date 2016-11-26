@@ -54,7 +54,10 @@
         [btn setImage:[UIImage imageNamed:arr[i]] forState:0];
          [btn setImage:[UIImage imageNamed:sarr[i]] forState:UIControlStateSelected];
         btn.tag=i;
-        _lastBtn=btn;
+        if (i==0) {
+            btn.selected=YES;
+            _lastBtn=btn;
+        }
         [btn addTarget:self action:@selector(duanXinBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view sd_addSubviews:@[btn]];
          btn.sd_layout
@@ -78,8 +81,8 @@
 }
 #pragma mark --短信
 -(void)duanXinBtn:(UIButton*)btn{
+    _lastBtn.selected=!_lastBtn.selected;
     btn.selected=!btn.selected;
-    _lastBtn.selected=NO;
     _lastBtn=btn;
 }
 - (void)didReceiveMemoryWarning {

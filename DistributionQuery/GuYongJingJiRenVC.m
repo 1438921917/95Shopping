@@ -7,7 +7,8 @@
 //
 
 #import "GuYongJingJiRenVC.h"
-
+#import "SetViewController.h"
+#import "ChoosePeopleVC.h"
 @interface GuYongJingJiRenVC ()
 @property (nonatomic,strong)UIView * view1;
 @property (nonatomic,strong)UIView * view2;
@@ -106,6 +107,8 @@
         UIButton *btn =[UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:btnArr[i]] forState:0];
         [_view2 sd_addSubviews:@[btn]];
+        btn.tag=i;
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.sd_layout
         .leftSpaceToView(_view2,10+(ScreenWidth/2)*i)
         .widthIs((ScreenWidth-20)/2)
@@ -115,6 +118,17 @@
     
     
     
+}
+-(void)btnClick:(UIButton*)btn{
+    if (btn.tag==0) {
+        //我已符合
+        ChoosePeopleVC * vc =[ChoosePeopleVC new];
+         [self.navigationController pushViewController:vc animated:YES ];
+    }else{
+        //完善
+        SetViewController * vc =[SetViewController new];
+        [self.navigationController pushViewController:vc animated:YES ];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

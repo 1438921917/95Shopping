@@ -141,6 +141,8 @@
         UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:arr[i]] forState:0];
         [btn setImage:[UIImage imageNamed:arrClick[i]] forState:UIControlStateSelected];
+        btn.tag=i;
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView sd_addSubviews:@[btn]];
         CGFloat k =ScreenWidth/4;
         CGFloat g =k;
@@ -152,6 +154,13 @@
     }
     
     
+}
+
+-(void)btnClick:(UIButton*)btn{
+    if (self.moreButtonClickedBlock) {
+        self.moreButtonClickedBlock(btn,self.indexPath);
+    }
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

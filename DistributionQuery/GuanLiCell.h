@@ -10,6 +10,6 @@
 
 @interface GuanLiCell : UITableViewCell
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
-
-
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, copy) void (^moreButtonClickedBlock)(UIButton *btn,NSIndexPath *indexPath);
 @end

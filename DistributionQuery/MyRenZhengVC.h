@@ -11,5 +11,6 @@
 @interface MyRenZhengVC : BaseViewController
 {
     UIButton * upbtn;
+    UIButton * upbtn2;
 }
 @end

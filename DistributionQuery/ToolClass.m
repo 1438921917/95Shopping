@@ -44,6 +44,15 @@
     
     return string;
 }
+#pragma mark --设置字符传不同的颜色
++(NSMutableAttributedString *)attrStrFrom:(NSString *)titleStr intFond:(int)fond Color:(UIColor*)color numberStr:(NSString *)numberStr
+{
+    NSMutableAttributedString *arrString = [[NSMutableAttributedString alloc]initWithString:titleStr];
+    // 设置前面几个字串的格式:红色 13.0f字号
+    [arrString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fond],NSForegroundColorAttributeName:color}range:[titleStr rangeOfString:numberStr]];
+    
+    return arrString;
+}
 
 
 #pragma mark -- 拨打电话

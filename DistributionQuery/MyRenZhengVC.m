@@ -12,6 +12,9 @@
 @property(nonatomic,strong)UIView * view1;
 @property(nonatomic,strong)UIView * view2;
 @property(nonatomic,strong)UIImageView * imageview;
+@property(nonatomic,strong)UIButton* lastBtn;
+@property(nonatomic,strong)UIImage * image1;
+@property(nonatomic,strong)UIImage * image2;
 @end
 
 @implementation MyRenZhengVC
@@ -44,8 +47,12 @@
     .heightIs(20);
     [nameLabel setSingleLineAutoResizeWithMaxWidth:200];
    
+    
+    
     upbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [upbtn addTarget:self action:@selector(upbtnphoto:) forControlEvents:UIControlEventTouchUpInside];
+    [upbtn addTarget:self action:@selector(upbtnphoto:)
+    forControlEvents:UIControlEventTouchUpInside];
+    upbtn.tag=1;
     [upbtn setBackgroundImage:[UIImage imageNamed:@"renzheng_add"] forState:0];
     [_view1 sd_addSubviews:@[upbtn]];
 //    413 212
@@ -55,12 +62,39 @@
     .widthIs(413/2)
     .heightIs(242/2);
      [_view1 setupAutoHeightWithBottomView:upbtn bottomMargin:10];
+    if (_image1) {
+        NSLog(@"");
+    }else{
+        //获取身份证图片
+        [Engine huoQuImageWithType:@"1" success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"]) {
+                NSArray * imageHead =[dic objectForKey:@"Item3"];
+                for (NSDictionary * dicc  in imageHead) {
+                    NSString* Url =[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"Img_Url"]];
+                    [upbtn setBackgroundImageForState:0 withURL:[NSURL URLWithString:Url] placeholderImage:[UIImage imageNamed:@"renzheng_add"]];
+                }
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }
+        } error:^(NSError *error) {
+            
+        }];
+    }
     
 }
 
 #pragma mark --上传身份证照片
 -(void)upbtnphoto:(UIButton*)btn{
-    [self dioayongXiangCe];
+    _lastBtn=btn;
+      [self dioayongXiangCe];
+    if (btn.tag==1) {
+        //身份证照片
+       
+    }else{
+        //场地
+    }
+   
 }
 
 #pragma mark --照片实例
@@ -94,9 +128,10 @@
     .heightIs(20);
     [nameLabel setSingleLineAutoResizeWithMaxWidth:200];
     
-    UIButton * upbtn2=[UIButton buttonWithType:UIButtonTypeCustom];
+    upbtn2=[UIButton buttonWithType:UIButtonTypeCustom];
     [upbtn2 addTarget:self action:@selector(upbtnphoto:) forControlEvents:UIControlEventTouchUpInside];
-    [upbtn2 setImage:[UIImage imageNamed:@"renzheng_add1"] forState:0];
+    upbtn2.tag=2;
+    //[upbtn2 setBackgroundImage:[UIImage imageNamed:@"renzheng_add1"] forState:0];
     [_view2 sd_addSubviews:@[upbtn2]];
     //    413 212
     upbtn2.sd_layout
@@ -104,6 +139,29 @@
     .topEqualToView(nameLabel)
     .widthIs(413/2)
     .heightIs(242/2);
+    
+    if (_image2) {
+        
+    }else{
+        //获取身份证图片
+        [Engine huoQuImageWithType:@"4" success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"]) {
+                NSArray * imageHead =[dic objectForKey:@"Item3"];
+                for (NSDictionary * dicc  in imageHead) {
+                    NSString* Url =[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"Img_Url"]];
+                  //  [upbtn2 setImageForState:0 withURL:[NSURL URLWithString:Url] placeholderImage:[UIImage imageNamed:@"renzheng_add"]];
+                    [upbtn2 setBackgroundImageForState:0 withURL:[NSURL URLWithString:Url] placeholderImage:[UIImage imageNamed:@"renzheng_add"]];
+                }
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }
+        } error:^(NSError *error) {
+            
+        }];
+  
+    }
+    
     [_view2 setupAutoHeightWithBottomView:upbtn bottomMargin:10];
     
 }
@@ -120,8 +178,53 @@
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-    [upbtn setBackgroundImage:image forState:0];
+    if (_lastBtn.tag==1) {
+        [upbtn setBackgroundImage:image forState:0];
+        //tagg=1 省份正 tagg=4实地图片
+        [self shangChuanImage:image tagg:@"1"];
+        _image1=image;
+    }else{
+       [upbtn2 setBackgroundImage:image forState:0];
+        [self shangChuanImage:image tagg:@"4"];
+        _image2=image;
+    }
+   
   //  NSLog(@"输出%@",editingInfo);
      [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark --上传图片
+-(void)shangChuanImage:(UIImage*)image tagg:(NSString*)tag{
+    NSData * imgData=  UIImageJPEGRepresentation(image, 0);
+    [LCProgressHUD showLoading:@"正在上传,请稍后..."];
+    //type:1.产品 2新闻 3.用户
+    [Engine ShangChuanImageData:imgData Type:@"3" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSString * urlImage =[dic objectForKey:@"Item2"];
+            [self saveImage:urlImage tagg:tag];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
+#pragma mark --保存图片
+-(void)saveImage:(NSString*)url tagg:(NSString*)tag{
+    /*
+     type
+     0.头像 1.身份证 2营业执照 3.税务登记证 4.实地图片
+     */
+    [Engine saveImageType:tag urlStr:url success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
 }
 @end

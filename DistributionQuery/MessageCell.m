@@ -50,7 +50,7 @@
     .centerYEqualToView(self.contentView)
     .heightIs(20);
     [_nameLabel setSingleLineAutoResizeWithMaxWidth:150];
-    
+   // _textfield.backgroundColor=[UIColor yellowColor];
     _textfield.sd_layout
     .rightSpaceToView(self.contentView,15)
     .centerYEqualToView(_nameLabel)

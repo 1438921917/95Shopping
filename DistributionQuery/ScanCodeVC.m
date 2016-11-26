@@ -8,7 +8,7 @@
 
 #import "ScanCodeVC.h"
 #import "ScanCodeCell.h"
-
+#import "PublicTypeVC.h"
 @interface ScanCodeVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * nameArray;
@@ -33,6 +33,7 @@
     [rightBtn setTitleColor:[UIColor redColor] forState:0];
     rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     rightBtn.frame=CGRectMake(0, 0, 50, 15);
+    [rightBtn addTarget:self action:@selector(fabu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * rightBtnn =[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItems=@[rightBtnn];
 
@@ -222,6 +223,12 @@
         weakSelf.bgScrollview.contentSize=CGSizeMake(ScreenWidth, rect.origin.y+rect.size.height+10);
     };
     
+}
+#pragma mark --发布按钮
+-(void)fabu{
+    PublicTypeVC * vc =[PublicTypeVC new];
+    vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 /*
 #pragma mark - Navigation

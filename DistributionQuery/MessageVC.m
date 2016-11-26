@@ -9,13 +9,16 @@
 #import "MessageVC.h"
 #import "MessageCell.h"
 #import "CityChooseVC.h"
+#import "HangYeVC.h"
 @interface MessageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray*nameArray;
-@property(nonatomic,copy)NSString * diquText;
-@property(nonatomic,copy)NSString * shengCode;
-@property(nonatomic,copy)NSString* cityCode;
-@property(nonatomic,strong) NSDictionary * dataDic;
+@property(nonatomic,copy)NSString * diquText;//地区的名字
+@property(nonatomic,copy)NSString * shengCode;//省份的code
+@property(nonatomic,copy)NSString* cityCode;//城市的code
+@property(nonatomic,copy)NSString * hangYeName;//行业的名字
+@property(nonatomic,copy)NSString * hangYeCode;//行业code
+@property(nonatomic,strong)NSDictionary * dataDic;
 @end
 
 @implementation MessageVC
@@ -65,7 +68,7 @@
         [LCProgressHUD showLoading:@"正在提交，请稍后..."];
         [Engine XiuGaiMenZiLiaoNiCheng:cell1.textfield.text Name:cell2.textfield.text Sheng:[self stringText:_shengCode Text2:[_dataDic objectForKey:@"M_Province"]] City:[self stringText:_cityCode Text2:[_dataDic objectForKey:@"M_City"]] Xian:nil success:^(NSDictionary *dic) {
             NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
-            if ([item1 isEqualToString:@"0"]) {
+            if ([item1 isEqualToString:@"1"]) {
                 NSDictionary * item3Dic =[dic objectForKey:@"Item3"];
                 [self saveSomeMessageDic:item3Dic];
                 [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
@@ -78,6 +81,26 @@
         }];
     }else{
         //公司资料
+       
+        MessageCell * cell1 =[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        NSLog(@"公司名字=%@",cell1.textfield.text);
+        NSLog(@"行业id=%@",_hangYeCode);
+        NSLog(@"省份城市%@",_diquText);
+      //  NSLog(@"城市%@",_cityCode);
+        [Engine XiuGaiCompanyZiLiaoName:cell1.textfield.text Address:[self stringText:_diquText Text2:[_dataDic objectForKey:@"M_Address"]] HangYeID:[self stringText:_hangYeCode Text2:[_dataDic objectForKey:@"M_Category"]] success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"]) {
+                NSDictionary * item3dic =[dic objectForKey:@"Item3"];
+                [self saveSomeMessageDic:item3dic];
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }
+        } error:^(NSError *error) {
+            
+        }];
+        
     }
     
 }
@@ -95,6 +118,21 @@
     [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Province"]] forKey:@"M_Province"];
     //市code
     [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_City"]] forKey:@"M_City"];
+    //省name
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_ProvinceName"]] forKey:@"M_ProvinceName"];
+    //市name
+     [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_CityName"]] forKey:@"M_CityName"];
+    //公司的名字
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_CompanyName"]] forKey:@"M_CompanyName"];
+    //经营行业ID
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Category"]] forKey:@"M_Category"];
+    //经营行业name
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_CategoryName"]] forKey:@"M_CategoryName"];
+    //所在场所
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Address"]] forKey:@"M_Address"];
+    
+    
+    
     [ToolClass savePlist:saveDic name:@"Login"];
     
     
@@ -152,6 +190,7 @@
                   cell.textfield.placeholder=@"请填写昵称";
                 }else{
                   cell.textfield.text=nike;
+                    cell.textfield.sd_layout.widthIs(150);
                 }
                 
             }else{
@@ -165,6 +204,7 @@
             }
            
         }else{
+            NSString * name =[NSString stringWithFormat:@"%@-%@",[_dataDic objectForKey:@"M_ProvinceName"],[_dataDic objectForKey:@"M_CityName"]];
             cell.textfield.enabled=NO;
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             cell.textfield.textAlignment=2;
@@ -172,8 +212,7 @@
             cell.textfield.sd_layout
             .widthIs(180)
             .rightSpaceToView(cell,25);
-            cell.textfield.text=_diquText;
-            //cell.textfield.backgroundColor=[UIColor redColor];
+            cell.textfield.text=[self stringText:_diquText Text2:name];
         }
         
         
@@ -181,15 +220,36 @@
         //公司资料
         if (indexPath.section==0) {
             if (indexPath.row==0) {
-                cell.textfield.placeholder=@"请填写公司名字";
+                //公司名字
+                NSString * name =[_dataDic objectForKey:@"M_CompanyName"];
+                if (name) {
+                    cell.textfield.text=name;
+                }else{
+                     cell.textfield.placeholder=@"请填写公司名字";
+                }
+              
                 cell.textfield.sd_layout.widthIs(150);
             }else{
+                //经营行业
                 cell.textfield.enabled=NO;
                 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+                cell.textfield.textAlignment=2;
+                [cell sd_addSubviews:@[cell.textfield]];
+                cell.textfield.sd_layout
+                .widthIs(180)
+                .rightSpaceToView(cell,25);
+                cell.textfield.text=[self stringText:_hangYeName Text2:[_dataDic objectForKey:@"M_CategoryName"]];//_hangYeName;
             }
             
         }else{
            cell.textfield.enabled=NO;
+            cell.textfield.textAlignment=2;
+            [cell sd_addSubviews:@[cell.textfield]];
+            cell.textfield.sd_layout
+            .widthIs(180)
+           .rightSpaceToView(cell,25);
+            NSString * name =[_dataDic objectForKey:@"M_Address"];
+            cell.textfield.text=[self stringText:_diquText Text2:name];   ;
            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
 
@@ -219,7 +279,13 @@
         //公司资料
         if (indexPath.section==0) {
             if (indexPath.row==1) {
-                
+                HangYeVC * vc =[HangYeVC new];
+                vc.hangYeNameCidBlock=^(NSString*name,NSString*idd){
+                    _hangYeCode=idd;
+                    _hangYeName=name;
+                    [_tableView reloadData];
+                };
+                [self.navigationController pushViewController:vc animated:YES];
             }
         }else{
             //所在场所

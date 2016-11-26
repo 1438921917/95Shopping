@@ -43,6 +43,13 @@
 		8F07E61B1DDD5C3B0045EA74 /* XiaoXiTongZhiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F07E61A1DDD5C3B0045EA74 /* XiaoXiTongZhiVC.m */; };
 		8F07E61E1DDD5CF30045EA74 /* XitongTongZhiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F07E61D1DDD5CF30045EA74 /* XitongTongZhiVC.m */; };
 		8F07E6211DDD5D0B0045EA74 /* ShangXinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F07E6201DDD5D0B0045EA74 /* ShangXinVC.m */; };
+		8F16BC311DE7CCDD00172CB5 /* HangYeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC301DE7CCDD00172CB5 /* HangYeVC.m */; };
+		8F16BC371DE7E13A00172CB5 /* GuanLiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC361DE7E13A00172CB5 /* GuanLiViewController.m */; };
+		8F16BC3A1DE7E19E00172CB5 /* TuoGuanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC391DE7E19E00172CB5 /* TuoGuanVC.m */; };
+		8F16BC3D1DE8030400172CB5 /* DaShangJingJiRenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC3C1DE8030400172CB5 /* DaShangJingJiRenVC.m */; };
+		8F16BC411DE82C9800172CB5 /* ChoosePeopleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC401DE82C9800172CB5 /* ChoosePeopleVC.m */; };
+		8F16BC451DE82E5700172CB5 /* ChoosePeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC441DE82E5700172CB5 /* ChoosePeopleCell.m */; };
+		8F16BC481DE84B5F00172CB5 /* PublicTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */; };
 		8F6208361DD41ABE00E9A306 /* ToolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208351DD41ABE00E9A306 /* ToolClass.m */; };
 		8F6208391DD44E0300E9A306 /* LrdOutputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208381DD44E0300E9A306 /* LrdOutputView.m */; };
 		8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */; };
@@ -245,6 +252,20 @@
 		8F07E61D1DDD5CF30045EA74 /* XitongTongZhiVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XitongTongZhiVC.m; sourceTree = "<group>"; };
 		8F07E61F1DDD5D0B0045EA74 /* ShangXinVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangXinVC.h; sourceTree = "<group>"; };
 		8F07E6201DDD5D0B0045EA74 /* ShangXinVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangXinVC.m; sourceTree = "<group>"; };
+		8F16BC2F1DE7CCDD00172CB5 /* HangYeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HangYeVC.h; sourceTree = "<group>"; };
+		8F16BC301DE7CCDD00172CB5 /* HangYeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HangYeVC.m; sourceTree = "<group>"; };
+		8F16BC351DE7E13A00172CB5 /* GuanLiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanLiViewController.h; sourceTree = "<group>"; };
+		8F16BC361DE7E13A00172CB5 /* GuanLiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanLiViewController.m; sourceTree = "<group>"; };
+		8F16BC381DE7E19E00172CB5 /* TuoGuanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuoGuanVC.h; sourceTree = "<group>"; };
+		8F16BC391DE7E19E00172CB5 /* TuoGuanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuoGuanVC.m; sourceTree = "<group>"; };
+		8F16BC3B1DE8030400172CB5 /* DaShangJingJiRenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaShangJingJiRenVC.h; sourceTree = "<group>"; };
+		8F16BC3C1DE8030400172CB5 /* DaShangJingJiRenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaShangJingJiRenVC.m; sourceTree = "<group>"; };
+		8F16BC3F1DE82C9800172CB5 /* ChoosePeopleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleVC.h; sourceTree = "<group>"; };
+		8F16BC401DE82C9800172CB5 /* ChoosePeopleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleVC.m; sourceTree = "<group>"; };
+		8F16BC431DE82E5700172CB5 /* ChoosePeopleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleCell.h; sourceTree = "<group>"; };
+		8F16BC441DE82E5700172CB5 /* ChoosePeopleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleCell.m; sourceTree = "<group>"; };
+		8F16BC461DE84B5F00172CB5 /* PublicTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTypeVC.h; sourceTree = "<group>"; };
+		8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTypeVC.m; sourceTree = "<group>"; };
 		8F6208341DD41ABE00E9A306 /* ToolClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolClass.h; sourceTree = "<group>"; };
 		8F6208351DD41ABE00E9A306 /* ToolClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolClass.m; sourceTree = "<group>"; };
 		8F6208371DD44E0300E9A306 /* LrdOutputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LrdOutputView.h; sourceTree = "<group>"; };
@@ -596,6 +617,8 @@
 				8F02FE541DA887B40051EDFC /* ScanCodeVC.m */,
 				8FE5B1671DDA98310069B82F /* ScanCodeCell.h */,
 				8FE5B1681DDA98310069B82F /* ScanCodeCell.m */,
+				8F16BC461DE84B5F00172CB5 /* PublicTypeVC.h */,
+				8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */,
 			);
 			name = SaoMaViewController;
 			sourceTree = "<group>";
@@ -654,6 +677,8 @@
 				8F03A5251DD9A84D00833E19 /* ChineseString.m */,
 				8FE219A01DE538F1000C1D71 /* CityChooseVC.h */,
 				8FE219A11DE538F1000C1D71 /* CityChooseVC.m */,
+				8F16BC2F1DE7CCDD00172CB5 /* HangYeVC.h */,
+				8F16BC301DE7CCDD00172CB5 /* HangYeVC.m */,
 			);
 			name = "城市选择";
 			sourceTree = "<group>";
@@ -672,6 +697,7 @@
 			children = (
 				8F03A52E1DD9BF4D00833E19 /* GuYongJingJiRenVC.h */,
 				8F03A52F1DD9BF4D00833E19 /* GuYongJingJiRenVC.m */,
+				8F16BC421DE82CA700172CB5 /* 选择经济人 */,
 			);
 			name = "雇佣经济人";
 			sourceTree = "<group>";
@@ -694,6 +720,26 @@
 				8F03A53C1DD9D93300833E19 /* ZuiXinCaiGouCell.m */,
 			);
 			name = "最新采购";
+			sourceTree = "<group>";
+		};
+		8F16BC3E1DE8030800172CB5 /* 打赏经纪人 */ = {
+			isa = PBXGroup;
+			children = (
+				8F16BC3B1DE8030400172CB5 /* DaShangJingJiRenVC.h */,
+				8F16BC3C1DE8030400172CB5 /* DaShangJingJiRenVC.m */,
+			);
+			name = "打赏经纪人";
+			sourceTree = "<group>";
+		};
+		8F16BC421DE82CA700172CB5 /* 选择经济人 */ = {
+			isa = PBXGroup;
+			children = (
+				8F16BC3F1DE82C9800172CB5 /* ChoosePeopleVC.h */,
+				8F16BC401DE82C9800172CB5 /* ChoosePeopleVC.m */,
+				8F16BC431DE82E5700172CB5 /* ChoosePeopleCell.h */,
+				8F16BC441DE82E5700172CB5 /* ChoosePeopleCell.m */,
+			);
+			name = "选择经济人";
 			sourceTree = "<group>";
 		};
 		8FCD4F0F1DA8A13100CB113C /* Frameworks */ = {
@@ -1180,10 +1226,15 @@
 		8FF4A7DD1DD6C97100C5C743 /* 管理 */ = {
 			isa = PBXGroup;
 			children = (
+				8F16BC351DE7E13A00172CB5 /* GuanLiViewController.h */,
+				8F16BC361DE7E13A00172CB5 /* GuanLiViewController.m */,
 				8FF4A7D71DD6B40C00C5C743 /* GuanLiVC.h */,
 				8FF4A7D81DD6B40C00C5C743 /* GuanLiVC.m */,
+				8F16BC381DE7E19E00172CB5 /* TuoGuanVC.h */,
+				8F16BC391DE7E19E00172CB5 /* TuoGuanVC.m */,
 				8FF4A7DA1DD6B43B00C5C743 /* GuanLiCell.h */,
 				8FF4A7DB1DD6B43B00C5C743 /* GuanLiCell.m */,
+				8F16BC3E1DE8030800172CB5 /* 打赏经纪人 */,
 			);
 			name = "管理";
 			sourceTree = "<group>";
@@ -1336,6 +1387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F16BC3D1DE8030400172CB5 /* DaShangJingJiRenVC.m in Sources */,
 				8FCD4F921DA8B4D300CB113C /* UIImage+GIF.m in Sources */,
 				8F02FE581DA887CC0051EDFC /* MyVC.m in Sources */,
 				8FE5B4741DDB30D50069B82F /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -1362,6 +1414,8 @@
 				8FDC2E471DD5AE3E0009E639 /* LoginVC.m in Sources */,
 				8FCD4F8A1DA8B4D300CB113C /* SDImageCache.m in Sources */,
 				8FF4A7E31DD6C9C400C5C743 /* TongHangShangPinVC.m in Sources */,
+				8F16BC481DE84B5F00172CB5 /* PublicTypeVC.m in Sources */,
+				8F16BC311DE7CCDD00172CB5 /* HangYeVC.m in Sources */,
 				8FCD4FA21DA8B4D300CB113C /* MBProgressHUD.m in Sources */,
 				8FCD4F811DA8B4D300CB113C /* AFHTTPSessionManager.m in Sources */,
 				8F03A5291DD9A84D00833E19 /* pinyin.c in Sources */,
@@ -1373,6 +1427,7 @@
 				8FE5B4791DDB30D50069B82F /* MJRefreshGifHeader.m in Sources */,
 				8FE5B4801DDB30D50069B82F /* UIView+MJExtension.m in Sources */,
 				8FE219A21DE538F1000C1D71 /* CityChooseVC.m in Sources */,
+				8F16BC3A1DE7E19E00172CB5 /* TuoGuanVC.m in Sources */,
 				8FCD4FA81DA8B4D300CB113C /* TAPageControl.m in Sources */,
 				8F03A5351DD9D29200833E19 /* GuanYu95VC.m in Sources */,
 				8F02FE871DA89F6B0051EDFC /* ASIDataDecompressor.m in Sources */,
@@ -1427,6 +1482,7 @@
 				8FCD4F861DA8B4D300CB113C /* AFURLResponseSerialization.m in Sources */,
 				8FDC2E541DD5D34A0009E639 /* QiYeKuaiSuMaiVC.m in Sources */,
 				8FCD4F851DA8B4D300CB113C /* AFURLRequestSerialization.m in Sources */,
+				8F16BC411DE82C9800172CB5 /* ChoosePeopleVC.m in Sources */,
 				8FE5B4721DDB30D50069B82F /* MJRefreshHeader.m in Sources */,
 				8FCD4F931DA8B4D300CB113C /* UIImage+MultiFormat.m in Sources */,
 				8FCD4FAA1DA8B4D300CB113C /* SDCycleScrollView.m in Sources */,
@@ -1437,8 +1493,10 @@
 				8FE5B4771DDB30D50069B82F /* MJRefreshBackNormalFooter.m in Sources */,
 				8FE5B47B1DDB30D50069B82F /* MJRefreshStateHeader.m in Sources */,
 				8FCD4FA31DA8B4D300CB113C /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
+				8F16BC371DE7E13A00172CB5 /* GuanLiViewController.m in Sources */,
 				8FF4A7E61DD6C9DB00C5C743 /* QiuGouShangPinVC.m in Sources */,
 				8FCD4FAB1DA8B4D300CB113C /* UIView+SDExtension.m in Sources */,
+				8F16BC451DE82E5700172CB5 /* ChoosePeopleCell.m in Sources */,
 				8F6208361DD41ABE00E9A306 /* ToolClass.m in Sources */,
 				8FE5B47F1DDB30D50069B82F /* UIScrollView+MJRefresh.m in Sources */,
 				8FCD4F9E1DA8B4D300CB113C /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -1605,7 +1663,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 232982DK86;
 				ENABLE_BITCODE = NO;
@@ -1626,7 +1684,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 232982DK86;
 				ENABLE_BITCODE = NO;

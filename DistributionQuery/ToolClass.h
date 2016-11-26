@@ -21,7 +21,13 @@
 #pragma mark -- 拨打电话
 +(void)tellPhone:(NSString*)tell;
 
-
+/*
+ titleStr ：哪条Label要变色
+ fond：要变颜色字体的大小
+ color:要变成什么颜色
+ numberStr：要变色的字符串
+ */
++(NSMutableAttributedString *)attrStrFrom:(NSString *)titleStr intFond:(int)fond Color:(UIColor*)color numberStr:(NSString *)numberStr;
 #pragma mark -  计算内容文本的高度方法
 + (CGFloat)HeightForText:(NSString *)text withSizeOfLabelFont:(CGFloat)font withWidthOfContent:(CGFloat)contentWidth;
 
