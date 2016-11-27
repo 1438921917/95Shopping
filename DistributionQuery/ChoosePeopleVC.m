@@ -20,8 +20,20 @@
     // Do any additional setup after loading the view.
     self.title=@"选择经济人";
     [self rightBtn];
+    [self getJingJiPeople];
     [self CreatTableView];
 }
+
+#pragma mark --获取经纪人
+-(void)getJingJiPeople{
+    [Engine huoQuJingJiRenWithHangYeID:@"0" success:^(NSDictionary *dic) {
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+
+
 #pragma mark --右按钮
 -(void)rightBtn{
     //搜索按钮

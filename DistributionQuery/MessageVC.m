@@ -228,7 +228,7 @@
                      cell.textfield.placeholder=@"请填写公司名字";
                 }
               
-                cell.textfield.sd_layout.widthIs(150);
+                cell.textfield.sd_layout.widthIs(250);
             }else{
                 //经营行业
                 cell.textfield.enabled=NO;

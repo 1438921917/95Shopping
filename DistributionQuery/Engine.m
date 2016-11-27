@@ -10,7 +10,56 @@
 
 #import "AFNetworking.h"
 @implementation Engine
+#pragma mark --获取首页轮播图
++(void)huoQuFirstLunBoTusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@index/GetRotationPic",SER_VICE];
+    NSLog(@"获取首页轮播图%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+                NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"获取首页轮播图%@",str);
+         aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"获取首页轮播图%@",error);
+    }];
+    
+}
 
+#pragma mark --获取设备和物资专区
++(void)huoQuSheBeiWuZiZhuanQuClassIDType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@index/GetIndustry?classid=%@",SER_VICE,type];
+    NSLog(@"获取设备和物资专区%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"获取设备和物资专区%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"获取设备和物资专区%@",error);
+    }];
+    
+    
+}
+#pragma mark --根据行业获取经纪人列表
++(void)huoQuJingJiRenWithHangYeID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@Broker/GetUserList?category=%@",SER_VICE,idd];
+    NSLog(@"根据行业获取经纪人列表%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"根据行业获取经纪人列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"根据行业获取经纪人列表%@",error);
+    }];
+    
+}
 #pragma mark --1.会员注册
 +(void)zhuCeAccountPhoneNumber:(NSString*)str Pwd:(NSString*)pwd CodeStr:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/Register?Mobile=%@&Password=%@&Code=%@",SER_VICE,str,pwd,code];

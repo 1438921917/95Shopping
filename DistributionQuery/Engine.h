@@ -11,6 +11,15 @@ typedef void (^SuccessBlock)(NSDictionary*dic);
 typedef void (^ErrorBlock)(NSError*error);
 @interface Engine : NSObject
 //**********************************首页**********************//
+
+#pragma mark --获取首页轮播图
++(void)huoQuFirstLunBoTusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --获取设备和物资专区
++(void)huoQuSheBeiWuZiZhuanQuClassIDType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --根据行业获取经纪人列表
++(void)huoQuJingJiRenWithHangYeID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
 #pragma mark --1.会员注册
 +(void)zhuCeAccountPhoneNumber:(NSString*)str Pwd:(NSString*)pwd CodeStr:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --2.会员登录

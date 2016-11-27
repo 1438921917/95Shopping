@@ -28,6 +28,10 @@
 @property(nonatomic,strong)NSMutableArray * shengArr;
 @property(nonatomic,strong)NSMutableArray * cityArr;
 @property(nonatomic,assign)NSInteger btntag;//用来区分左右按钮
+@property(nonatomic,copy)NSString * jiLuCityCode;//用来记录选择好的城市ID
+@property(nonatomic,copy)NSString * jiLuHangYeCode;//用来记录选择好的行业ID
+
+//
 @end
 @implementation YouZhiXianHuoVC
 -(void)viewWillAppear:(BOOL)animated{
@@ -66,10 +70,11 @@
 }
 
 #pragma mark --数据解析
--(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te{
+-(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID{
     //GongQiu 1优质现货 2最新采购
-   
-    [Engine tejiaZhuanQuLieBiaoHangYeID:@"0" DiQu:@"0" GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:te success:^(NSDictionary *dic) {
+    [LCProgressHUD showMessage:@"请稍后..."];
+    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:te success:^(NSDictionary *dic) {
+        [LCProgressHUD hide];
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             
@@ -250,6 +255,7 @@
     }
     _tableView.dataSource=self;
     _tableView.delegate=self;
+    _tableView.tableFooterView=[UIView new];
     [self.view addSubview:_tableView];
     //刷新操作
     __weak typeof (self) weakSelf =self;
@@ -257,9 +263,9 @@
          NSLog(@"往下拉了");
         weakSelf.myRefreshView = weakSelf.tableView.header;
         if (_tagg==1) {
-            [self shuJuJieXiDataPage:@"1" TeJia:@"0"];
+            [self shuJuJieXiDataPage:@"1" TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
         }else{
-            [self shuJuJieXiDataPage:@"1" TeJia:@"1"];
+            [self shuJuJieXiDataPage:@"1" TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
         }
         
     }];
@@ -269,12 +275,20 @@
     //..上拉刷新
     _tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
          weakSelf.myRefreshView = weakSelf.tableView.footer;
-        NSLog(@"往上拉了");
+        NSLog(@"往上拉了加载更多");
         _AAA=_AAA+1;
+        /*
+         如果tagg==10代表是特价专区进来的
+         如果tagg==11代表是设备专区进来的
+         如果tagg==12代表是物资专区进来的
+         tagg==1的话就是本身(优质现货)
+         */
         if (_tagg==1) {
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0"];
+            //本页优质现货
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
         }else{
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1"];
+            //其它几个界面
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
         }
        
     }];
@@ -282,6 +296,13 @@
 
     
     
+}
+-(NSString*)stingTextCityID:(NSString*)cityId{
+    if (cityId) {
+        return cityId;
+    }else{
+        return @"0";
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -357,11 +378,30 @@
             _button1.selected=NO;
             [_button1 setTitle:mdd.cityName forState:0];
             _button1.titleLabel.font=[UIFont systemFontOfSize:14];
+            _jiLuCityCode=mdd.cityCode;
+           
+            if (_tagg==1) {
+                //本页优质现货
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode];
+            }else{
+                //其它几个界面
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode];
+            }
+
         }else{
             HangYeModel * mdd =_cityArr[indexPath.row];
+            _jiLuHangYeCode=mdd.HYidd;
             _button2.selected=NO;
             [_button2 setTitle:mdd.HYname forState:0];
             _button2.titleLabel.font=[UIFont systemFontOfSize:14];
+            if (_tagg==1) {
+                //本页优质现货
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode]];
+            }else{
+                //其它几个界面
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode]];
+            }
+
         }
        
         [self dissmiss];

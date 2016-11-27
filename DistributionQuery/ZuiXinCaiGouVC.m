@@ -29,6 +29,8 @@
 @property(nonatomic,strong)NSMutableArray * shengArr;
 @property(nonatomic,strong)NSMutableArray * cityArr;
 @property(nonatomic,assign)NSInteger btntag;//用来区分左右按钮
+@property(nonatomic,copy)NSString * jiLuCityCode;//用来记录选择好的城市ID
+@property(nonatomic,copy)NSString * jiLuHangYeCode;//用来记录选择好的行业ID
 @end
 
 @implementation ZuiXinCaiGouVC
@@ -54,9 +56,9 @@
     [self CreatBtnTitle:titleArr];
 }
 #pragma mark --数据解析
--(void)shuJuJieXiDataPage:(NSString*)page {
+-(void)shuJuJieXiDataPage:(NSString*)page HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID {
     //GongQiu 1优质现货 2最新采购
-    [Engine tejiaZhuanQuLieBiaoHangYeID:@"0" DiQu:@"0" GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:@"0" success:^(NSDictionary *dic) {
+    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:@"0" success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             
@@ -267,7 +269,7 @@
     _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSLog(@"往下拉了");
         weakSelf.myRefreshView = weakSelf.tableView.header;
-        [self shuJuJieXiDataPage:@"1" ];
+        [self shuJuJieXiDataPage:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] ];
     
         
     }];
@@ -279,11 +281,18 @@
         weakSelf.myRefreshView = weakSelf.tableView.footer;
         NSLog(@"往上拉了");
         _AAA=_AAA+1;
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA]];
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
         
         
     }];
     _tableView.footer.hidden = YES;
+}
+-(NSString*)stingTextCityID:(NSString*)cityId{
+    if (cityId) {
+        return cityId;
+    }else{
+        return @"0";
+    }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -358,9 +367,11 @@
     }else if(tableView==_rightTabelView){
         if (_btntag==0) {
             CityModel * mdd=_cityArr[indexPath.row];
+            _jiLuCityCode=mdd.cityCode;
             _button1.selected=NO;
             [_button1 setTitle:mdd.cityName forState:0];
             _button1.titleLabel.font=[UIFont systemFontOfSize:14];
+            [self shuJuJieXiDataPage:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode];
         }else if (_btntag==1){
             _button2.selected=NO;
             [_button2 setTitle:_cityArr[indexPath.row] forState:0];
@@ -368,9 +379,11 @@
         }
         else{
             HangYeModel * mdd =_cityArr[indexPath.row];
+            _jiLuHangYeCode=mdd.HYidd;
             _button3.selected=NO;
             [_button3 setTitle:mdd.HYname forState:0];
             _button3.titleLabel.font=[UIFont systemFontOfSize:14];
+            [self shuJuJieXiDataPage:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] ];
         }
         [self dissmiss];
     }else{

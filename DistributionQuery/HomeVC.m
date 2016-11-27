@@ -117,12 +117,16 @@
     _textfield.clipsToBounds=YES;
     _textfield.layer.borderWidth=1;
     _textfield.layer.borderColor=[[UIColor colorWithRed:210/255.0 green:210/255.0 blue:210/255.0 alpha:1]CGColor];
+    _textfield.backgroundColor=JXColor(232, 232, 232, 232);
     _textfield.center=CGPointMake(self.view.center.x, 27);
     _textfield.bounds=CGRectMake(0, 0, ScreenWidth-150, 30);
-    _textfield.placeholder=@"   请输入类别或者关键字";
+    _textfield.placeholder=@"请输入类别或者关键字";
+    _textfield.leftView =[self imageViewNameStr:@"search"];
+    _textfield.leftViewMode = UITextFieldViewModeAlways;
     _textfield.font=[UIFont systemFontOfSize:14];
-    UIBarButtonItem * leftBtn3 =[[UIBarButtonItem alloc]initWithCustomView:_textfield];
-    self.navigationItem.leftBarButtonItems=@[leftBtn2,leftBtn3];
+    self.navigationItem.titleView=_textfield;
+   // UIBarButtonItem * leftBtn3 =[[UIBarButtonItem alloc]initWithCustomView:_textfield];
+    self.navigationItem.leftBarButtonItems=@[leftBtn2];
     
     //搜索按钮
     _rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -136,6 +140,13 @@
     LrdCellModel *one = [[LrdCellModel alloc] initWithTitle:@"商品" imageName:@"0"];
     LrdCellModel *two = [[LrdCellModel alloc] initWithTitle:@"商户" imageName:@"1"];
     self.menuArr = @[one, two];
+}
+-(UIButton*)imageViewNameStr:(NSString*)imageName{
+    UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:imageName] forState:0];
+    
+    btn.frame=CGRectMake(0, 0, 30, 30);
+    return btn;
 }
 //商品商户按钮点击
 -(void)leftBtnClick:(UIButton*)btn{
@@ -200,14 +211,9 @@
 
 #pragma mark --首页轮播图
 -(void)CreatLunBoTu{
+  
     NSArray * arr =@[@"banner"];
-    [self remoteImageLoaded:arr];
-
-}
-//获取网络图片
-- (void)remoteImageLoaded:(NSArray*)arr{
-
-   cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 20, ScreenWidth, 540*ScreenWidth/1080) delegate:self placeholderImage:[UIImage imageNamed:@"banner"]];
+    cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 20, ScreenWidth, 540*ScreenWidth/1080) delegate:self placeholderImage:[UIImage imageNamed:@"banner"]];
     cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
     cycleScrollView2.currentPageDotColor = [UIColor whiteColor];
     [_bgScrollView addSubview:cycleScrollView2];
@@ -218,6 +224,30 @@
         // NSLog(@">>>>>  %ld", (long)index);
         
     };
+   [self remoteImageLoaded];
+}
+//获取网络图片
+- (void)remoteImageLoaded{
+    NSMutableArray * array =[NSMutableArray new];
+    [Engine  huoQuFirstLunBoTusuccess:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            
+            NSArray * picArr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in picArr) {
+                NSString * picImage =[dicc objectForKey:@"pic"];
+                [array addObject:picImage];
+            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                cycleScrollView2.imageURLStringsGroup = array;
+            });
+
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
     
 }
 
@@ -508,22 +538,43 @@
     .widthIs(198/3)
     .heightIs(40/3);
     //设备专区文字
-    NSArray * arr =@[@"化工",@"矿山",@"机床",@"制冷",@"纺织",@"造纸",@"塑料",@"制冷"];
-    for (int i =0; i<arr.count; i++) {
-        UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
-       // btn.backgroundColor=[UIColor redColor];
-        [btn setTitle:arr[i] forState:0];
-        btn.titleLabel.font=[UIFont systemFontOfSize:16];
-        [btn setTitleColor:[UIColor blackColor] forState:0];
-        [_view4 sd_addSubviews:@[btn]];
-        btn.sd_layout
-        .leftSpaceToView(_view4,0+((ScreenWidth-0)/4+0)*(i%4))
-        .topSpaceToView(linview,0+(ScreenWidth/8+0)*(i/4))
-        .widthIs(ScreenWidth/4)
-        .heightIs(ScreenWidth/8);
+    NSMutableArray * sheBeiArr =[NSMutableArray new];
+    NSMutableArray * sheBeiIDArr =[NSMutableArray new];
+    [Engine huoQuSheBeiWuZiZhuanQuClassIDType:@"1" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * arrStr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in arrStr) {
+                NSString * strName =[dicc objectForKey:@"Name"];
+                NSString * idd =[NSString stringWithFormat:@"%@",[dicc objectForKey:@"Id"]];
+                [sheBeiArr addObject:strName];
+                [sheBeiIDArr addObject:idd];
+            }
+            for (int i =0; i<sheBeiArr.count; i++) {
+                UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
+                // btn.backgroundColor=[UIColor redColor];
+                [btn setTitle:sheBeiArr[i] forState:0];
+                btn.titleLabel.font=[UIFont systemFontOfSize:16];
+                [btn setTitleColor:[UIColor blackColor] forState:0];
+                [_view4 sd_addSubviews:@[btn]];
+                btn.sd_layout
+                .leftSpaceToView(_view4,0+((ScreenWidth-0)/4+0)*(i%4))
+                .topSpaceToView(linview,0+(ScreenWidth/8+0)*(i/4))
+                .widthIs(ScreenWidth/4)
+                .heightIs(ScreenWidth/8);
+                
+                [_view4 setupAutoHeightWithBottomView:btn bottomMargin:10];
+            }
+
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
         
-     [_view4 setupAutoHeightWithBottomView:btn bottomMargin:10];
-    }
+    }];
+    
+    
+    
     
     
     
@@ -575,23 +626,51 @@
     .widthIs(198/3)
     .heightIs(40/3);
     
-    //物资专区文字
-    NSArray * arr =@[@"钢结构",@"废金属",@"配件",@"再生资源"];
-    for (int i =0; i<arr.count; i++) {
-        UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
-        // btn.backgroundColor=[UIColor redColor];
-        [btn setTitle:arr[i] forState:0];
-        btn.titleLabel.font=[UIFont systemFontOfSize:16];
-        [btn setTitleColor:[UIColor blackColor] forState:0];
-        [_view5 sd_addSubviews:@[btn]];
-        btn.sd_layout
-        .leftSpaceToView(_view5,0+((ScreenWidth-0)/4+0)*(i/1))
-        .topSpaceToView(linview,0+(ScreenWidth/8+0)*(i/4))
-        .widthIs(ScreenWidth/4)
-        .heightIs(ScreenWidth/8);
+    NSMutableArray * wuziArr =[NSMutableArray new];
+    NSMutableArray * iddArr =[NSMutableArray new];
+    [Engine huoQuSheBeiWuZiZhuanQuClassIDType:@"2" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * arrStr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in arrStr) {
+                NSString * strName =[dicc objectForKey:@"Name"];
+                NSString * idd =[NSString stringWithFormat:@"%@",[dicc objectForKey:@"Id"]];
+                [wuziArr addObject:strName];
+                [iddArr addObject:idd];
+            }
+            
+            if (wuziArr.count==0) {
+               [_view5 setupAutoHeightWithBottomView:btn bottomMargin:10];
+            }else{
+                //物资专区文字
+                for (int i =0; i<wuziArr.count; i++) {
+                    UIButton * btnn =[UIButton buttonWithType:UIButtonTypeCustom];
+                    // btn.backgroundColor=[UIColor redColor];
+                    [btnn setTitle:wuziArr[i] forState:0];
+                    btnn.titleLabel.font=[UIFont systemFontOfSize:16];
+                    [btnn setTitleColor:[UIColor blackColor] forState:0];
+                    [_view5 sd_addSubviews:@[btnn]];
+                    btnn.sd_layout
+                    .leftSpaceToView(_view5,0+((ScreenWidth-0)/4+0)*(i/1))
+                    .topSpaceToView(linview,0+(ScreenWidth/8+0)*(i/4))
+                    .widthIs(ScreenWidth/4)
+                    .heightIs(ScreenWidth/8);
+                    
+                    [_view5 setupAutoHeightWithBottomView:btnn bottomMargin:10];
+                }
+ 
+            }
+            
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
         
-        [_view5 setupAutoHeightWithBottomView:btn bottomMargin:10];
-    }
+    }];
+    
+    
+    
+   
     
      __weak __typeof(self)weakSelf = self;
     _view5.didFinishAutoLayoutBlock=^(CGRect rect){
