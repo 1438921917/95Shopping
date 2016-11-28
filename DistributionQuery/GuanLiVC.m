@@ -44,8 +44,10 @@
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
     GuanLiCell * cell =[GuanLiCell cellWithTableView:tableView CellID:CellIdentifier];
     cell.indexPath=indexPath;
+    cell.xiugaiBtn.tag=indexPath.row;
+    cell.tejiaBtn.tag=indexPath.row;
     [self btnAddDianJi:cell];
-  //  cell.textLabel.text=[NSString stringWithFormat:@"第%lu行",indexPath.row];
+ 
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,8 +73,24 @@
         }];
         
     }
+    
+    //修改
+    [cell.xiugaiBtn addTarget:self action:@selector(xiuGaiBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //特价
+    [cell.tejiaBtn addTarget:self action:@selector(teJiaBtnn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
-
+//修改
+-(void)xiuGaiBtn:(UIButton*)btn{
+    ScanCodeVC * vc =[ScanCodeVC new];
+    vc.tagg=2;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+//特价
+-(void)teJiaBtnn:(UIButton*)btn{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

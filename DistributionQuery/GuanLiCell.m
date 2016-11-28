@@ -12,8 +12,6 @@
 @property(nonatomic,strong)UILabel * titleLable;//标题
 @property(nonatomic,strong)UILabel * priceLabel;//价格
 @property(nonatomic,strong)UILabel * cjLable;//成交次数
-@property(nonatomic,strong)UIButton * xiugaiBtn;//修改按钮
-@property(nonatomic,strong)UIButton * tejiaBtn;//特价按钮
 @property(nonatomic,strong)UIView * lineView;//灰色的线
 @end
 @implementation GuanLiCell

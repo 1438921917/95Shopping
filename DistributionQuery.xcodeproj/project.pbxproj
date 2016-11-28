@@ -118,6 +118,7 @@
 		8FDC2E5B1DD5D4EB0009E639 /* WeiTuoPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5A1DD5D4EB0009E639 /* WeiTuoPublicVC.m */; };
 		8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */; };
 		8FDC2E611DD603160009E639 /* YuYinPublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E601DD603160009E639 /* YuYinPublicVC.m */; };
+		8FDD67DB1DEBBCB200CE295A /* ChoosePeopleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD67DA1DEBBCB200CE295A /* ChoosePeopleModel.m */; };
 		8FE219A21DE538F1000C1D71 /* CityChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE219A11DE538F1000C1D71 /* CityChooseVC.m */; };
 		8FE247F41DE3EF5D006AD175 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE247F31DE3EF5D006AD175 /* CityModel.m */; };
 		8FE247F71DE41CB3006AD175 /* HangYeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE247F61DE41CB3006AD175 /* HangYeModel.m */; };
@@ -400,6 +401,8 @@
 		8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfPublicCell.m; sourceTree = "<group>"; };
 		8FDC2E5F1DD603160009E639 /* YuYinPublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuYinPublicVC.h; sourceTree = "<group>"; };
 		8FDC2E601DD603160009E639 /* YuYinPublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuYinPublicVC.m; sourceTree = "<group>"; };
+		8FDD67D91DEBBCB200CE295A /* ChoosePeopleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleModel.h; sourceTree = "<group>"; };
+		8FDD67DA1DEBBCB200CE295A /* ChoosePeopleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleModel.m; sourceTree = "<group>"; };
 		8FE219A01DE538F1000C1D71 /* CityChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseVC.h; sourceTree = "<group>"; };
 		8FE219A11DE538F1000C1D71 /* CityChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseVC.m; sourceTree = "<group>"; };
 		8FE247F21DE3EF5D006AD175 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
@@ -530,7 +533,7 @@
 				8FDC2E2B1DD5622A0009E639 /* Engine */,
 				8F02FE591DA887E30051EDFC /* BaseViewController */,
 				8F02FE5A1DA887F20051EDFC /* HomeViewController */,
-				8F02FE5B1DA888050051EDFC /* SaoMaViewController */,
+				8F02FE5B1DA888050051EDFC /* RuZhuPublish */,
 				8F02FE5C1DA8881A0051EDFC /* MyViewController */,
 				8FF4A7D31DD6B2CD00C5C743 /* 登录注册 */,
 				8F02FE491DA886DE0051EDFC /* System */,
@@ -610,7 +613,7 @@
 			name = HomeViewController;
 			sourceTree = "<group>";
 		};
-		8F02FE5B1DA888050051EDFC /* SaoMaViewController */ = {
+		8F02FE5B1DA888050051EDFC /* RuZhuPublish */ = {
 			isa = PBXGroup;
 			children = (
 				8F02FE531DA887B40051EDFC /* ScanCodeVC.h */,
@@ -620,7 +623,7 @@
 				8F16BC461DE84B5F00172CB5 /* PublicTypeVC.h */,
 				8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */,
 			);
-			name = SaoMaViewController;
+			name = RuZhuPublish;
 			sourceTree = "<group>";
 		};
 		8F02FE5C1DA8881A0051EDFC /* MyViewController */ = {
@@ -738,6 +741,8 @@
 				8F16BC401DE82C9800172CB5 /* ChoosePeopleVC.m */,
 				8F16BC431DE82E5700172CB5 /* ChoosePeopleCell.h */,
 				8F16BC441DE82E5700172CB5 /* ChoosePeopleCell.m */,
+				8FDD67D91DEBBCB200CE295A /* ChoosePeopleModel.h */,
+				8FDD67DA1DEBBCB200CE295A /* ChoosePeopleModel.m */,
 			);
 			name = "选择经济人";
 			sourceTree = "<group>";
@@ -1461,6 +1466,7 @@
 				8FCD4F8F1DA8B4D300CB113C /* SDWebImageManager.m in Sources */,
 				8FE5B4731DDB30D50069B82F /* MJRefreshAutoGifFooter.m in Sources */,
 				8F02FE521DA887740051EDFC /* HomeVC.m in Sources */,
+				8FDD67DB1DEBBCB200CE295A /* ChoosePeopleModel.m in Sources */,
 				8FCD4F7F1DA8B4D300CB113C /* AFHTTPRequestOperation.m in Sources */,
 				8FF4A7EA1DD6E8C300C5C743 /* LeftMyAdressCell.m in Sources */,
 				8FDC2E581DD5D4D00009E639 /* MyselfPublicVC.m in Sources */,

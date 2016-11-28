@@ -21,15 +21,7 @@
      [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:16]}];
 }
 
--(void)setTitleName:(NSString *)titleName
-{
-    _titleName=titleName;
-     NSLog(@"走没走");
-    UILabel * label =[[UILabel alloc]init];
-    label.text=titleName;
-    self.navigationController.navigationItem.titleView=label;
-    
-}
+
 //-(void)setTitle:(NSString *)title
 //{
 //    NSLog(@"走没走");

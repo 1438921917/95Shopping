@@ -77,6 +77,7 @@
     }else{
         //托管经济人
         ChoosePeopleVC * vc =[ChoosePeopleVC new];
+        vc.tagg=2;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

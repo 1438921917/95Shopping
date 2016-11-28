@@ -35,7 +35,9 @@
 @implementation HomeVC
 -(void)viewWillAppear:(BOOL)animated
 {
+   // self.navigationController.navigationBar.barTintColor = JXColor(178, 178, 178, 178);
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+   // [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"big_bg"] forBarMetrics:UIBarMetricsDefault];
     [_bgScrollView  setContentOffset:CGPointZero animated:YES];
 }
 - (void)viewDidLoad {
@@ -99,7 +101,9 @@
 
 #pragma mark --创建导航条文本框
 -(void)CreatTextFiled{
-    //创建商品商户按钮
+    
+        
+//    //创建商品商户按钮
     _leftBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [_leftBtn setTitle:@"商品" forState:0];
     [_leftBtn setBackgroundImage:[UIImage imageNamed:@"arrow_down"] forState:0];
@@ -188,6 +192,7 @@
             self.navigationController.navigationBar.tintColor = [UIColor blackColor];
                 _alphaMemory = offsetY/(100) >= 1 ? 1 : offsetY/(100);
                 [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:_alphaMemory];
+            
             if (offsetY<=50) {
                 [_leftBtn setTitleColor:[UIColor whiteColor] forState:0];
                 [_rightBtn setTitleColor:[UIColor whiteColor] forState:0];
@@ -198,6 +203,7 @@
             
         }else if (offsetY>100){
             _alphaMemory = 1;
+            
             [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
             if (offsetY>50) {
                 [_leftBtn setTitleColor:[UIColor redColor] forState:0];

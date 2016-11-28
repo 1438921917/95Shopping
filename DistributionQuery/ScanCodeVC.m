@@ -9,7 +9,7 @@
 #import "ScanCodeVC.h"
 #import "ScanCodeCell.h"
 #import "PublicTypeVC.h"
-@interface ScanCodeVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface ScanCodeVC ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * nameArray;
 @property(nonatomic,strong)UIScrollView * bgScrollview;
@@ -23,19 +23,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets=NO;
-    self.backHomeBtn.hidden=YES;
-    _bgScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-49)];
-  //  _bgScrollview.backgroundColor=[UIColor yellowColor];
+   
+    _bgScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-44)];
     [self.view addSubview:_bgScrollview];
-    //搜索按钮
-    UIButton*rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [rightBtn setTitle:@"发布" forState:0];
-    [rightBtn setTitleColor:[UIColor redColor] forState:0];
-    rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
-    rightBtn.frame=CGRectMake(0, 0, 50, 15);
-    [rightBtn addTarget:self action:@selector(fabu) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * rightBtnn =[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-    self.navigationItem.rightBarButtonItems=@[rightBtnn];
+    if (_tagg==2) {
+            self.title=@"修改";
+    }else{
+         self.backHomeBtn.hidden=YES;
+        //搜索按钮
+        UIButton*rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        [rightBtn setTitle:@"发布" forState:0];
+        [rightBtn setTitleColor:[UIColor redColor] forState:0];
+        rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+        rightBtn.frame=CGRectMake(0, 0, 50, 15);
+        [rightBtn addTarget:self action:@selector(fabu) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem * rightBtnn =[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+        self.navigationItem.rightBarButtonItems=@[rightBtnn];
+    }
+    
+    
+   
 
     NSArray * arr1 =@[@"标题",@"名称",@"数量",@"型号",@"价格"];
     NSArray * arr2 =@[@"产地",@"成色",@"有限期"];
@@ -64,6 +71,7 @@
     NSLog(@"点击了");
     [_tableView endEditing:YES];
     [_view1 endEditing:YES];
+    [_view2 endEditing:YES];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -157,6 +165,7 @@
     
     //uitextview
     UITextView * textView =[UITextView new];
+    textView.delegate=self;
     textView.text=@"请您说出商品名称，编号";
     textView.font=[UIFont systemFontOfSize:14];
     [_view1 sd_addSubviews:@[textView]];
@@ -168,6 +177,51 @@
     [_view1 setupAutoHeightWithBottomView:textView bottomMargin:10];
     [self CreatView2];
 }
+
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    CGFloat rects = _bgScrollview.frame.size.height - (textView.frame.origin.y + textView.frame.size.height + 216 +50);
+    
+    NSLog(@"aa%f>>>%f",rects,(textView.frame.origin.y + textView.frame.size.height + 216 +50));
+    
+   // if (rects <= 0) {
+        [_bgScrollview  setContentOffset:CGPointMake(0, 266) animated:YES];
+    _bgScrollview.scrollEnabled=NO;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            
+//            CGRect frame = _bgScrollview.frame;
+//            
+//            frame.origin.y = -rects;
+//            
+//            _bgScrollview.frame = frame;
+//            
+//        }];
+    
+   // }
+    
+    
+    
+    return YES;
+}
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+//    [UIView animateWithDuration:0.3 animations:^{
+//        
+//        CGRect frame = _bgScrollview.frame;
+//        
+//        frame.origin.y = 0.0;
+//        
+//        _bgScrollview.frame = frame;
+//        
+//    }];
+     [_bgScrollview  setContentOffset:CGPointMake(0, 0) animated:YES];
+    _bgScrollview.scrollEnabled=YES;
+    
+    return YES;
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

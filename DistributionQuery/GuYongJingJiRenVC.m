@@ -123,6 +123,7 @@
     if (btn.tag==0) {
         //我已符合
         ChoosePeopleVC * vc =[ChoosePeopleVC new];
+        vc.tagg=1;
          [self.navigationController pushViewController:vc animated:YES ];
     }else{
         //完善

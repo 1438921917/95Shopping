@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface BaseNavigationController : UINavigationController
-@property(nonatomic,retain)NSString * titleName;
 @end

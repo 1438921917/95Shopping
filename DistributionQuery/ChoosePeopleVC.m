@@ -8,17 +8,24 @@
 
 #import "ChoosePeopleVC.h"
 #import "ChoosePeopleCell.h"
+#import "ChoosePeopleModel.h"
 @interface ChoosePeopleVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)UIButton * lastBtn;
+@property(nonatomic,strong)NSMutableArray * dataArray;
 @end
 
 @implementation ChoosePeopleVC
-
+-(void)viewWillDisappear:(BOOL)animated{
+    if (_tagg==2) {
+        [LCProgressHUD showMessage:@"发布成功"];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"选择经济人";
+    _dataArray=[NSMutableArray new];
     [self rightBtn];
     [self getJingJiPeople];
     [self CreatTableView];
@@ -26,8 +33,19 @@
 
 #pragma mark --获取经纪人
 -(void)getJingJiPeople{
-    [Engine huoQuJingJiRenWithHangYeID:@"0" success:^(NSDictionary *dic) {
-        
+    [Engine huoQuJingJiRenWithHangYeID:@"0" success:^(NSDictionary *dic)
+    {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * item3Arr =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc in item3Arr) {
+                ChoosePeopleModel * md =[[ChoosePeopleModel alloc]initWithChoosePeople:dicc];
+                [_dataArray addObject:md];
+            }
+            [_tableView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
     } error:^(NSError *error) {
         
     }];
@@ -58,11 +76,12 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 10;
+    return _dataArray.count;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString * cellID =[NSString stringWithFormat:@"%lu%lu",indexPath.section,indexPath.row];
     ChoosePeopleCell * cell =[ChoosePeopleCell cellWithTableView:tableView CellID:cellID];
+    cell.model=_dataArray[indexPath.row];
     cell.duiGouBtn.tag=indexPath.row;
     [cell.duiGouBtn addTarget:self action:@selector(duiBtn:) forControlEvents:UIControlEventTouchUpInside];
     if (cell.duiGouBtn.tag==0) {

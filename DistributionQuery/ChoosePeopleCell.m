@@ -146,6 +146,12 @@
 
 
 }
+-(void)setModel:(ChoosePeopleModel *)model{
+    _model=model;
+    [_headImage setImageWithURL:[NSURL URLWithString:model.headUrl] placeholderImage:[UIImage imageNamed:@"my_photo"]];
+    _bianHaoLab.text=model.bianHaoName;
+    _ziYuanLab.text=[NSString stringWithFormat:@"资源数量  %@",model.ziyuanNumber];
+}
 -(void)duiBtn:(UIButton*)btn{
     btn.selected=!btn.selected;
 }
