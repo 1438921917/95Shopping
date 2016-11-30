@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ShouCangVC : BaseViewController
-
+@property(nonatomic,strong)  UIButton * rightBtn;
 @end

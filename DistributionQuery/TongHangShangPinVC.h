@@ -10,4 +10,5 @@
 
 @interface TongHangShangPinVC : BaseViewController
 
+@property (nonatomic,strong)UIButton * rightBtn;
 @end

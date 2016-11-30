@@ -248,7 +248,6 @@
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
-    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:nicheng forKey:@"NickName"];
     [dic setObject:name forKey:@"RealName"];
     if (sheng) {
@@ -279,7 +278,6 @@
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
-    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:gongsi forKey:@"Company"];
     if (hangyeID) {
         [dic setObject:hangyeID forKey:@"Category"];
@@ -311,7 +309,6 @@
     
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
-    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:endStr forKey:@"img"];
     [dic setObject:type forKey:@"type"];
     
@@ -331,7 +328,6 @@
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/SaveImg",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
-    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:type forKey:@"Type"];
     [dic setObject:url forKey:@"Url"];
      NSLog(@"token=%@",[NSUSE_DEFO objectForKey:@"token"]);
@@ -353,7 +349,6 @@
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/GetImg",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
-    [dic setObject:[NSUSE_DEFO objectForKey:@"mid"] forKey:@"UId"];
     [dic setObject:type forKey:@"Type"];
 //    NSLog(@"token=%@",[NSUSE_DEFO objectForKey:@"token"]);
 //    NSLog(@"UId=%@",[NSUSE_DEFO objectForKey:@"mid"]);
@@ -367,6 +362,66 @@
         aSuccess(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"17获取图片%@",error);
+    }];
+}
+#pragma mark --19添加信息记录(浏览，收藏，关注)
++(void)addMessageJiLuMessageID:(NSString*)pid Type:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/AddViewLog",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:pid forKey:@"PId"];
+    [dic setObject:type forKey:@"Type"];
+    NSLog(@"1输出看看%@",[NSUSE_DEFO objectForKey:@"token"]);
+     NSLog(@"2输出看看%@",pid);
+     NSLog(@"3输出看看%@",type);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"添加信息记录%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"添加信息记录错误%@",error);
+    }];
+    
+}
+#pragma mark --20删除信息记录
++(void)deleteMessageID:(NSString*)pid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/DeleteViewLog",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:pid forKey:@"PId"];
+    NSLog(@"1输出看看%@",[NSUSE_DEFO objectForKey:@"token"]);
+    NSLog(@"2输出看看%@",pid);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"删除信息记录%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"删除信息记录错误%@",error);
+    }];
+}
+#pragma mark --21获取信息记录列表（浏览，收藏，关注）
++(void)getMessageJiLuType:(NSString*)type Page:(NSString*)page PageSize:(NSString*)tiaoShu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/GetViewLogList",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:type forKey:@"Type"];
+    [dic setObject:page forKey:@"Page"];
+    [dic setObject:tiaoShu forKey:@"PageSize"];
+    
+    
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"获取信息记录列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"获取信息记录列表错误%@",error);
     }];
 }
 @end

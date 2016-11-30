@@ -60,4 +60,12 @@ typedef void (^ErrorBlock)(NSError*error);
 +(void)saveImageType:(NSString*)type urlStr:(NSString*)url success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --17获取图片
 +(void)huoQuImageWithType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --19添加信息记录(浏览，收藏，关注)
++(void)addMessageJiLuMessageID:(NSString*)pid Type:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --20删除信息记录
++(void)deleteMessageID:(NSString*)pid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --21获取信息记录列表（浏览，收藏，关注）
++(void)getMessageJiLuType:(NSString*)type Page:(NSString*)page PageSize:(NSString*)tiaoShu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 @end

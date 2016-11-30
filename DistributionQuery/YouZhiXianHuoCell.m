@@ -10,7 +10,7 @@
 @interface YouZhiXianHuoCell ()
 @property(nonatomic,strong)UIImageView * leftImage;//左边图片
 @property(nonatomic,strong)UILabel * titleLabel;//标题
-@property(nonatomic,strong)UIImageView * imagedan;//标题图标
+
 @property(nonatomic,strong)UIImageView * imagedw;//定位图标
 @property(nonatomic,strong)UILabel * cityLabel;//定位城市
 @property(nonatomic,strong)UILabel * taishuLabel;//台数

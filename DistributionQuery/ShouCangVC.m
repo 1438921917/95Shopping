@@ -14,6 +14,7 @@
 @property (nonatomic, strong) SGTopTitleView *topTitleView;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
+
 @end
 
 @implementation ShouCangVC
@@ -22,8 +23,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"收藏";
+    self.view.tag=111;
     self.automaticallyAdjustsScrollViewInsets=NO;
    // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor],NSFontAttributeName:[UIFont systemFontOfSize:TITLE_FOUNT]}];
+    
+    //搜索按钮
+      
+    
+    
     [self setupChildViewController];
     self.titles = @[@"同行商品",@"求购商品"];
     self.topTitleView = [SGTopTitleView topTitleViewWithFrame:CGRectMake(0, 69,ScreenWidth, 44)];
@@ -48,7 +55,16 @@
     [self.view addSubview:_mainScrollView];
     
     TongHangShangPinVC *oneVC = [[TongHangShangPinVC alloc] init];
-    [self.mainScrollView addSubview:oneVC.view];
+   
+    oneVC.rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [oneVC.rightBtn setTitle:@"编辑" forState:0];
+    oneVC.rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+    [oneVC.rightBtn setTitleColor:[UIColor redColor] forState:0];
+    oneVC.rightBtn.frame=CGRectMake(0, 0, 50, 15);
+     UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:oneVC.rightBtn];
+     self.navigationItem.rightBarButtonItems=@[rightBtn];
+    
+     [self.mainScrollView addSubview:oneVC.view];
     [self addChildViewController:oneVC];
     [self.view insertSubview:_mainScrollView belowSubview:_topTitleView];
 
@@ -70,6 +86,17 @@
     
     UIViewController *vc = self.childViewControllers[index];
     
+    if (index==0) {
+         TongHangShangPinVC *oneVC=self.childViewControllers[index];
+        UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:oneVC.rightBtn];
+        self.navigationItem.rightBarButtonItems=@[rightBtn];
+    }else{
+     QiuGouShangPinVC *twoVC=self.childViewControllers[index];
+        UIBarButtonItem * rightBtn2 =[[UIBarButtonItem alloc]initWithCustomView:twoVC.rightBtn];
+        self.navigationItem.rightBarButtonItems=@[rightBtn2];
+    }
+    
+    
     // 判断控制器的view有没有加载过,如果已经加载过,就不需要加载
     if (vc.isViewLoaded) return;
     
@@ -81,10 +108,22 @@
 - (void)setupChildViewController {
     // 未领取
     TongHangShangPinVC *oneVC = [[TongHangShangPinVC alloc] init];
+    oneVC.rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [oneVC.rightBtn setTitle:@"编辑" forState:0];
+    oneVC.rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+    [oneVC.rightBtn setTitleColor:[UIColor redColor] forState:0];
+    oneVC.rightBtn.frame=CGRectMake(0, 0, 50, 15);
+    
     [self addChildViewController:oneVC];
     
     // 领取
     QiuGouShangPinVC *twoVC = [[QiuGouShangPinVC alloc] init];
+    twoVC.rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [twoVC.rightBtn setTitle:@"边际" forState:0];
+    twoVC.rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+    [twoVC.rightBtn setTitleColor:[UIColor redColor] forState:0];
+    twoVC.rightBtn.frame=CGRectMake(0, 0, 50, 15);
+    
     [self addChildViewController:twoVC];
     
 }

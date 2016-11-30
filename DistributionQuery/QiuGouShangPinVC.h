@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface QiuGouShangPinVC : BaseViewController
-
+@property (nonatomic,strong)UIButton * rightBtn;
 @end

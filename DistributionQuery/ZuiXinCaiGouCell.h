@@ -11,5 +11,6 @@
 @interface ZuiXinCaiGouCell : UITableViewCell
 
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
+
 @property(nonatomic,retain)HomeModel * model;
 @end

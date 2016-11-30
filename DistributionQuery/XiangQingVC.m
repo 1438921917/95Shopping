@@ -111,7 +111,8 @@
     //五角星
     UIButton *btnXing =[UIButton buttonWithType:UIButtonTypeCustom];
     [btnXing setImage:[UIImage imageNamed:@"xiangqing_shou"] forState:UIControlStateNormal];
-    [btnXing setImage:[UIImage imageNamed:@"xiangqing_shou"] forState:UIControlStateSelected];
+    [btnXing setImage:[UIImage imageNamed:@"xiangqing_shou_click"] forState:UIControlStateSelected];
+    [btnXing addTarget:self action:@selector(shouCang:) forControlEvents:UIControlEventTouchUpInside];
     [_view1 sd_addSubviews:@[btnXing]];
     btnXing.sd_layout
     .rightSpaceToView(_view1,20)
@@ -203,6 +204,31 @@
     }
        [self CreatView2];//具体参数
 }
+
+
+-(void)shouCang:(UIButton*)btn{
+    if (_tagg==2) {
+        //代表最新采购详情页
+        btn.selected=!btn.selected;
+         NSLog(@"点击的是最新采购详情");
+        NSLog(@"messageID=%@",_messageID);
+        //Type 1.浏览 2.收藏 3.关注
+        [Engine addMessageJiLuMessageID:_messageID Type:@"2" success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"]) {
+                btn.selected=YES;
+                 [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }
+        } error:^(NSError *error) {
+            
+        }];
+    }else{
+        NSLog(@"点击的是优质现货详情");
+    }
+}
+
 #pragma mark --进店查看按钮
 -(void)chakanBtn:(UIButton*)btn{
     if (_tagg==2) {

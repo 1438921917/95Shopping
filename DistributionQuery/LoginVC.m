@@ -273,11 +273,36 @@
 #pragma mark --存储登录信息
 -(void)saveSomeMessageDic:(NSDictionary*)dic{
     //1.存储用户名
+//    NSMutableDictionary * saveDic=[NSMutableDictionary new];
+//    [saveDic setObject:[dic objectForKey:@"M_UserName"] forKey:@"M_UserName"];
+//    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]] forKey:@"M_Id"];
+//    [ToolClass savePlist:saveDic name:@"Login"];
+    //1.存储用户名
     NSMutableDictionary * saveDic=[NSMutableDictionary new];
     [saveDic setObject:[dic objectForKey:@"M_UserName"] forKey:@"M_UserName"];
     [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]] forKey:@"M_Id"];
-    [ToolClass savePlist:saveDic name:@"Login"];
+    //存真实名字
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_RealName"]] forKey:@"M_RealName"];
+    //存昵称
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_NickName"]] forKey:@"M_NickName"];
+    //省code
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Province"]] forKey:@"M_Province"];
+    //市code
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_City"]] forKey:@"M_City"];
+    //省name
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_ProvinceName"]] forKey:@"M_ProvinceName"];
+    //市name
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_CityName"]] forKey:@"M_CityName"];
+    //公司的名字
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_CompanyName"]] forKey:@"M_CompanyName"];
+    //经营行业ID
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Category"]] forKey:@"M_Category"];
+    //经营行业name
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_CategoryName"]] forKey:@"M_CategoryName"];
+    //所在场所
+    [saveDic setObject:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Address"]] forKey:@"M_Address"];
     
+    [ToolClass savePlist:saveDic name:@"Login"];
     
 }
 

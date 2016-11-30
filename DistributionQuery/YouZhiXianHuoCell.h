@@ -10,6 +10,7 @@
 #import "HomeModel.h"
 @interface YouZhiXianHuoCell : UITableViewCell
 @property(nonatomic,strong)UIButton * chaKanBtn;//立即查看
+@property(nonatomic,strong)UIImageView * imagedan;//标题图标
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
 @property(nonatomic,retain)HomeModel * model;
 @end

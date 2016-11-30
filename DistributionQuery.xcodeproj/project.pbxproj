@@ -962,10 +962,6 @@
 			children = (
 				8FDC2E5C1DD5E2160009E639 /* MyselfPublicCell.h */,
 				8FDC2E5D1DD5E2160009E639 /* MyselfPublicCell.m */,
-				8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */,
-				8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */,
-				8FDC2E331DD564320009E639 /* YouZhiShangHuCell.h */,
-				8FDC2E341DD564320009E639 /* YouZhiShangHuCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1000,6 +996,8 @@
 			children = (
 				8FEE742C1DD407C400470D75 /* YouZhiXianHuoVC.h */,
 				8FEE742D1DD407C400470D75 /* YouZhiXianHuoVC.m */,
+				8FEE743B1DD40DB700470D75 /* YouZhiXianHuoCell.h */,
+				8FEE743C1DD40DB700470D75 /* YouZhiXianHuoCell.m */,
 				8FF4A7E81DD6E8C300C5C743 /* LeftMyAdressCell.h */,
 				8FF4A7E91DD6E8C300C5C743 /* LeftMyAdressCell.m */,
 				8FF4A7EE1DD6E90A00C5C743 /* RightMyAddressCell.h */,
@@ -1039,6 +1037,8 @@
 			children = (
 				8FDC2E2C1DD562620009E639 /* YouZhiShangHuVC.h */,
 				8FDC2E2D1DD562620009E639 /* YouZhiShangHuVC.m */,
+				8FDC2E331DD564320009E639 /* YouZhiShangHuCell.h */,
+				8FDC2E341DD564320009E639 /* YouZhiShangHuCell.m */,
 			);
 			name = "优质商户";
 			sourceTree = "<group>";
@@ -1678,7 +1678,7 @@
 				GCC_PREFIX_HEADER = /Volumes/DISK0S3/95Shopping/DistributionQuery/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DistributionQuery/PrefixHeader.pch\"";
 				INFOPLIST_FILE = DistributionQuery/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_BUNDLE_IDENTIFIER = XY.DistributionQuery;
@@ -1699,7 +1699,7 @@
 				GCC_PREFIX_HEADER = /Volumes/DISK0S3/95Shopping/DistributionQuery/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/DistributionQuery/PrefixHeader.pch\"";
 				INFOPLIST_FILE = DistributionQuery/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_BUNDLE_IDENTIFIER = XY.DistributionQuery;

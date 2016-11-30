@@ -127,7 +127,7 @@
         UIAlertController * actionView =[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"是否退出" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action1 =[UIAlertAction actionWithTitle:@"确认" style:0 handler:^(UIAlertAction * _Nonnull action) {
             //删除Login.plist文件
-            [ToolClass deleagtePlistName:@"Login.plist"];
+            [ToolClass deleagtePlistName:@"Login"];
             //移除token
             [NSUSE_DEFO removeObjectForKey:@"token"];
              [NSUSE_DEFO removeObjectForKey:@"mid"];

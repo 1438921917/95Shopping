@@ -268,6 +268,7 @@
     __weak typeof (self) weakSelf =self;
     _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSLog(@"往下拉了");
+        _AAA=1;
         weakSelf.myRefreshView = weakSelf.tableView.header;
         [self shuJuJieXiDataPage:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] ];
     

@@ -103,7 +103,7 @@
              [_myRefreshView endRefreshing];
         }
     } error:^(NSError *error) {
-        
+         [_myRefreshView  endRefreshing];
     }];
 }
 #pragma mark --获取全国省份
@@ -261,6 +261,7 @@
     __weak typeof (self) weakSelf =self;
     _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
          NSLog(@"往下拉了");
+        _AAA=1;
         weakSelf.myRefreshView = weakSelf.tableView.header;
         if (_tagg==1) {
             [self shuJuJieXiDataPage:@"1" TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
