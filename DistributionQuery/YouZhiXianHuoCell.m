@@ -29,7 +29,7 @@
         cell=[[YouZhiXianHuoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
     }
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    //cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{

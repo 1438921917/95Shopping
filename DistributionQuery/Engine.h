@@ -68,4 +68,7 @@ typedef void (^ErrorBlock)(NSError*error);
 +(void)deleteMessageID:(NSString*)pid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --21获取信息记录列表（浏览，收藏，关注）
 +(void)getMessageJiLuType:(NSString*)type Page:(NSString*)page PageSize:(NSString*)tiaoShu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --发布产品信息
++(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 @end
