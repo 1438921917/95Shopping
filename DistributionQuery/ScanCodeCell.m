@@ -62,6 +62,7 @@
     .heightIs(47/2);
     
     //textField
+   // _textfield.backgroundColor=[UIColor yellowColor];
     _textfield.sd_layout
     .leftSpaceToView(_nameLabel,25)
     .rightSpaceToView(_yuYinBtn,15)

@@ -64,7 +64,7 @@
       
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
         _sheBeiName=[ToolClass isString:[dic objectForKey:@"C_ProductName"]];
-        _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_Pid"]]];
+        _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_Id"]]];
     }
     
     return self;

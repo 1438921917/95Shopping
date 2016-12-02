@@ -188,9 +188,9 @@
     }
     if (offsetY>=0) {
         //重新赋值 frame
-        if (offsetY<=100) {
+        if (offsetY<=60) {
             self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-                _alphaMemory = offsetY/(100) >= 1 ? 1 : offsetY/(100);
+                _alphaMemory = offsetY/(60) >= 1 ? 1 : offsetY/(60);
                 [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:_alphaMemory];
             
             if (offsetY<=50) {
@@ -201,7 +201,7 @@
             }
             
             
-        }else if (offsetY>100){
+        }else if (offsetY>60){
             _alphaMemory = 1;
             
             [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];

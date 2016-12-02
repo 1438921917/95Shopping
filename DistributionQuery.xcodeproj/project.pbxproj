@@ -50,6 +50,7 @@
 		8F16BC411DE82C9800172CB5 /* ChoosePeopleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC401DE82C9800172CB5 /* ChoosePeopleVC.m */; };
 		8F16BC451DE82E5700172CB5 /* ChoosePeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC441DE82E5700172CB5 /* ChoosePeopleCell.m */; };
 		8F16BC481DE84B5F00172CB5 /* PublicTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */; };
+		8F308EA41DF11E6F00D57714 /* ChengSeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F308EA31DF11E6F00D57714 /* ChengSeViewController.m */; };
 		8F6208361DD41ABE00E9A306 /* ToolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208351DD41ABE00E9A306 /* ToolClass.m */; };
 		8F6208391DD44E0300E9A306 /* LrdOutputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208381DD44E0300E9A306 /* LrdOutputView.m */; };
 		8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */; };
@@ -267,6 +268,8 @@
 		8F16BC441DE82E5700172CB5 /* ChoosePeopleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleCell.m; sourceTree = "<group>"; };
 		8F16BC461DE84B5F00172CB5 /* PublicTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTypeVC.h; sourceTree = "<group>"; };
 		8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTypeVC.m; sourceTree = "<group>"; };
+		8F308EA21DF11E6F00D57714 /* ChengSeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChengSeViewController.h; sourceTree = "<group>"; };
+		8F308EA31DF11E6F00D57714 /* ChengSeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChengSeViewController.m; sourceTree = "<group>"; };
 		8F6208341DD41ABE00E9A306 /* ToolClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolClass.h; sourceTree = "<group>"; };
 		8F6208351DD41ABE00E9A306 /* ToolClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolClass.m; sourceTree = "<group>"; };
 		8F6208371DD44E0300E9A306 /* LrdOutputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LrdOutputView.h; sourceTree = "<group>"; };
@@ -622,6 +625,8 @@
 				8FE5B1681DDA98310069B82F /* ScanCodeCell.m */,
 				8F16BC461DE84B5F00172CB5 /* PublicTypeVC.h */,
 				8F16BC471DE84B5F00172CB5 /* PublicTypeVC.m */,
+				8F308EA21DF11E6F00D57714 /* ChengSeViewController.h */,
+				8F308EA31DF11E6F00D57714 /* ChengSeViewController.m */,
 			);
 			name = RuZhuPublish;
 			sourceTree = "<group>";
@@ -1528,6 +1533,7 @@
 				8F02FE851DA89F6B0051EDFC /* ASIAuthenticationDialog.m in Sources */,
 				8FCD4F981DA8B4D300CB113C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8F03A51E1DD9A3B700833E19 /* PopView.m in Sources */,
+				8F308EA41DF11E6F00D57714 /* ChengSeViewController.m in Sources */,
 				8FDC2E5E1DD5E2160009E639 /* MyselfPublicCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
