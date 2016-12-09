@@ -142,22 +142,22 @@
 
 
 
-#pragma mark --6.1（优质现货1，最新采购2）特价专区列表
+#pragma mark --32特价专区列表
 +(void)tejiaZhuanQuLieBiaoHangYeID:(NSString*)category DiQu:(NSString*)area GuanJianZi:(NSString*)keyword Page:(NSString*)page PageSize:(NSString*)pagesize GongQiu:(NSString*)gq TeJia:(NSString*)tejia  success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@&Discount=%@&Business=%@",SER_VICE,category,area,keyword,page,pagesize,tejia,gq];
-    NSLog(@"3.特价专区列表%@",urlStr);
+    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@&Discount=%@&Agent=%@",SER_VICE,category,area,keyword,page,pagesize,tejia,gq];
+    NSLog(@"32特价专区列表%@",urlStr);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
         NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"3.特价专区列表%@",str);
+        NSLog(@"32特价专区列表%@",str);
         aSuccess(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [LCProgressHUD showFailure:@"请检查网络连接"];
-        NSLog(@"3.特价专区列表%@",error);
+        NSLog(@"32特价专区列表%@",error);
     }];
 }
-#pragma mark --6.2.列表详情界面
+#pragma mark --33列表详情界面
 +(void)tableViewXiangQingJieMianMessageID:(NSString*)messageId success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     // http://api.hs95.com/Commodity/GetDetail?Id=7458
     NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetDetail?Id=%@",SER_VICE,messageId];
@@ -424,12 +424,18 @@
         NSLog(@"获取信息记录列表错误%@",error);
     }];
 }
-#pragma mark --发布产品信息
-+(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+#pragma mark --23发布产品信息
++(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu JingJiPeope:(NSString*)jingjiID Image1:(NSString*)image1 Image2:(NSString*)image2 success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     
     NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/AddCommodity",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
-     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    NSString * token =[NSUSE_DEFO objectForKey:@"token"];
+    if (token==nil) {
+        [LCProgressHUD showMessage:@"请登录"];
+    }else{
+        [dic setObject:token forKey:@"Token"];
+    }
+    
      [dic setObject:title forKey:@"Title"];
      [dic setObject:chanPiName forKey:@"ProductName"];
      [dic setObject:shuliang forKey:@"Count"];
@@ -450,6 +456,87 @@
         NSLog(@"获取信息记录列表错误%@",error);
     }];
 
+    
+}
+#pragma mark --26获取资讯列表
++(void)huoQuZiXunListViewCid:(NSString*)cid YeShuPage:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+  
+    NSString * urlStr =[NSString stringWithFormat:@"%@News/GetNewsList?Page=%@&PageSize=10&Cid=%@",SER_VICE,page,cid];
+    NSLog(@"29优质商户%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"26获取资讯列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"26获取资讯列表%@",error);
+    }];
+    
+    
+}
+#pragma mark --28留言(意见反馈)
++(void)YiJianSuccessFanKuiOrgin:(NSString*)question1 suggest:(NSString*)jianYi PhoneNumber:(NSString*)phone success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@Message/AddMessage",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:question1 forKey:@"Orgin"];
+    [dic setObject:jianYi forKey:@"Other"];
+    [dic setObject:phone forKey:@"Phone"];
+    
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"留言(意见反馈)%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"留言(意见反馈)%@",error);
+    }];
+    
+}
+#pragma mark --29优质商户
++(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Member/GetMemberList?Page=%@&PageSize=10&Category=%@&Area=%@",SER_VICE,page,hangye,citycode];
+    NSLog(@"29优质商户%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"29优质商户%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"29优质商户%@",error);
+    }];
+
+}
+//***********************第二套接口*****************************//
+#pragma mark --5企业快速发布
++(void)qiYeKuaiSuPublicTitleStr:(NSString*)title Count:(NSString*)number PriceStr:(NSString*)price PhoneNumber:(NSString*)phone HangYeID:(NSString*)cid DiQuCode:(NSString*)diquID imageUrlStr:(NSString*)urlStr success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStrr =[NSString stringWithFormat:@"%@Consult/InsertConsult",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:title forKey:@"Title"];
+    [dic setObject:number forKey:@"Count"];
+    [dic setObject:price forKey:@"Price"];
+    [dic setObject:phone forKey:@"PhoneNum"];
+    [dic setObject:cid forKey:@"Cid"];
+    [dic setObject:diquID forKey:@"CityId"];
+    [dic setObject:urlStr forKey:@"Images"];
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStrr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"5企业快速发布%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"5企业快速发布%@",error);
+    }];
+    
     
 }
 @end

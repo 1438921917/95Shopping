@@ -178,6 +178,7 @@
             _button2.selected=NO;
              _button3.selected=NO;
             [self CreatLeftTableVeiw];
+            
         }else{
             [self dissmiss];
         }
@@ -329,16 +330,18 @@
         return cell1;
     }else if (tableView==_rightTabelView){
         RightMyAddressCell * cell1 =[RightMyAddressCell cellWithTableView:tableView];
+        cell1.textLabel.textAlignment=1;
+        cell1.textLabel.font=[UIFont systemFontOfSize:15];
         if (_btntag==0) {
             CityModel * md =_cityArr[indexPath.row];
-            cell1.name=md.cityName;
+            cell1.textLabel.text=md.cityName;
         }else if (_btntag==1){
-            cell1.name=_cityArr[indexPath.row];
+           cell1.textLabel.text=_cityArr[indexPath.row];
            // NSLog(@"输出得到数据%@",_cityArr[indexPath.row]);
         }
         else{
             HangYeModel * md =_cityArr[indexPath.row];
-            cell1.name=md.HYname;
+            cell1.textLabel.text=md.HYname;
         }
         return cell1;
     }else{

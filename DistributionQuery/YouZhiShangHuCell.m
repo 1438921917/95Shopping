@@ -158,7 +158,15 @@
     [self.contentView setupAutoHeightWithBottomView:_imagedw bottomMargin:10];
     
 }
+-(void)setModel:(HomeModel *)model{
+    _model=model;
+    _titleLabel.text=model.titleName;
+    [_leftImage setImageWithURL:[NSURL URLWithString:model.imageview] placeholderImage:[UIImage imageNamed:@"xianhuo_pic1"]];
+    _cityLabel.text=model.cityName;
+    _cishuLable.text=model.taishuName;
+    _woshouLabel.text=model.sheBeiName;
 
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

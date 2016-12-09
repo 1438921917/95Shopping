@@ -48,6 +48,35 @@
     
     return self;
 }
+
+//优质商户
+-(id)initWithYouZhiShangHuDic:(NSDictionary*)dic{
+    self=[super init];
+    if (self) {
+        NSString * image =[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_PlaceImg"]]];
+        _imageview=[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,image];
+        _titleName=[ToolClass isString:[dic objectForKey:@"M_CompanyName"]];
+        NSString *city=[ToolClass isString:[dic objectForKey:@"M_CityName"]];
+        NSString *sheng=[ToolClass isString:[dic objectForKey:@"M_ProvinceName"]];
+       
+        _cityName=[NSString stringWithFormat:@"%@-%@",sheng,city];
+      //代替收藏
+        _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Hits"]]];
+      //代替成交
+        _sheBeiName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Volumes"]]];
+        _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]]];
+    }
+    
+    return self;
+}
+
+
+
+
+
+
+
+
 //最新采购(收藏采购)
 -(id)initWithCaiGouDic:(NSDictionary*)dic{
     self=[super init];

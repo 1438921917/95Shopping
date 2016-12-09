@@ -24,6 +24,7 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=@"管理";
     [self setupChildViewController];
+    [self.backHomeBtn addTarget:self action:@selector(backBtnn) forControlEvents:UIControlEventTouchUpInside];
     self.titles = @[@"自己交易",@"托管经纪人"];
     self.topTitleView = [SGTopTitleView topTitleViewWithFrame:CGRectMake(0, 64,ScreenWidth, 44)];
     _topTitleView.staticTitleArr = [NSArray arrayWithArray:_titles];
@@ -105,7 +106,10 @@
     [self.topTitleView staticTitleLabelSelecteded:selLabel];
     
 }
-
+-(void)backBtnn{
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+     self.tabBarController.selectedIndex=2;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

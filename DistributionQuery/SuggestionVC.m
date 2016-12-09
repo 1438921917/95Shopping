@@ -195,7 +195,16 @@
     NSLog(@"问题意见>>%@",_textView.text);
     NSLog(@"联系方式>>%@",_textfiled.text);
     NSLog(@"反馈类型>>%@",btnName);
-    
+    [Engine YiJianSuccessFanKuiOrgin:btnName suggest:_textView.text PhoneNumber:_textfiled.text success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
     //    [Engine getLiuYanxxid:@"0" contact:btnName handtel:_textfiled.text content:_textView.text type:@"0" uid:@"0" ruid:@"0" success:^(NSDictionary *dic) {
     //        [WINDOW showHUDWithText:[dic objectForKey:@"Item2"] Type:ShowPhotoYes Enabled:YES];
     //    } error:^(NSError *error) {
@@ -205,7 +214,10 @@
     
     
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

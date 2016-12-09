@@ -32,10 +32,10 @@ typedef void (^ErrorBlock)(NSError*error);
 #pragma mark --5.获取首页特价专区
 +(void)FirstTeJiaZhuanQusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
-#pragma mark --6.1（优质现货1，最新采购2）特价专区列表
+#pragma mark --32（gq）特价专区列表
 +(void)tejiaZhuanQuLieBiaoHangYeID:(NSString*)category DiQu:(NSString*)area GuanJianZi:(NSString*)keyword Page:(NSString*)page PageSize:(NSString*)pagesize GongQiu:(NSString*)gq TeJia:(NSString*)tejia success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
-#pragma mark --6.2.列表详情界面
+#pragma mark --33列表详情界面
 +(void)tableViewXiangQingJieMianMessageID:(NSString*)messageId success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
 #pragma mark --6获取顶级产品分类
@@ -69,6 +69,23 @@ typedef void (^ErrorBlock)(NSError*error);
 #pragma mark --21获取信息记录列表（浏览，收藏，关注）
 +(void)getMessageJiLuType:(NSString*)type Page:(NSString*)page PageSize:(NSString*)tiaoShu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
-#pragma mark --发布产品信息
-+(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --23发布产品信息
++(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu JingJiPeope:(NSString*)jingjiID Image1:(NSString*)image1 Image2:(NSString*)image2 success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --26获取资讯列表 Cid 1.行业资讯 2.公告
++(void)huoQuZiXunListViewCid:(NSString*)cid YeShuPage:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+
+
+#pragma mark --28留言(意见反馈)
++(void)YiJianSuccessFanKuiOrgin:(NSString*)question1 suggest:(NSString*)jianYi PhoneNumber:(NSString*)phone success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --29优质商户
++(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+//***********************第二套接口*****************************//
+#pragma mark --5企业快速发布
++(void)qiYeKuaiSuPublicTitleStr:(NSString*)title Count:(NSString*)number PriceStr:(NSString*)price PhoneNumber:(NSString*)phone HangYeID:(NSString*)cid DiQuCode:(NSString*)diquID imageUrlStr:(NSString*)urlStr success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+
+
+
 @end

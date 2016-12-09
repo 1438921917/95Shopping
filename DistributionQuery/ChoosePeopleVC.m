@@ -16,11 +16,7 @@
 @end
 
 @implementation ChoosePeopleVC
--(void)viewWillDisappear:(BOOL)animated{
-    if (_tagg==2) {
-        [LCProgressHUD showMessage:@"发布成功"];
-    }
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -91,11 +87,17 @@
     return cell;
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChoosePeopleModel * md=_dataArray[indexPath.row];
+    self.peopleIDBlock(md.jingJiIdd);
+}
 #pragma mark --对勾
 -(void)duiBtn:(UIButton*)btn{
     _lastBtn.selected=!_lastBtn.selected;
     btn.selected=!btn.selected;
     _lastBtn=btn;
+   
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -107,6 +109,8 @@
 }
 -(void)queDingBtn:(UIButton*)btn{
     NSLog(@"btn.tag=%lu",_lastBtn.tag);
+    ChoosePeopleModel * md=_dataArray[_lastBtn.tag];
+    self.peopleIDBlock(md.jingJiIdd);
     [self.navigationController popViewControllerAnimated:YES];
 }
 /*

@@ -17,8 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self dataShuJuPage:@"1"];
 }
-
+-(void)dataShuJuPage:(NSString*)page{
+    [Engine huoQuZiXunListViewCid:@"2" YeShuPage:page success:^(NSDictionary *dic) {
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

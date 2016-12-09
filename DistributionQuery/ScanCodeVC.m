@@ -27,6 +27,7 @@
 @property(nonatomic,copy)NSString * chengSeText;//成色
 @property(nonatomic,copy)NSString * chengSeCode;
 @property(nonatomic,strong)UIButton * lastBtn;//记录照片按钮
+@property(nonatomic,strong)UIButton * buton1;
 @end
 
 @implementation ScanCodeVC
@@ -55,12 +56,48 @@
     }
     
     
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lianjieClink:) name:@"pianyi" object:nil];
 
     NSArray * arr1 =@[@"标题",@"名称",@"数量",@"型号",@"价格"];
     NSArray * arr2 =@[@"产地",@"成色"];
     _nameArray=[[NSMutableArray alloc]initWithObjects:arr1,arr2, nil];
     [self CreatTableView];
+}
+#pragma mark --通知清空数据
+-(void)lianjieClink:(NSNotification*)notification{
+    NSLog(@"通知清空了");
+    //标题
+    ScanCodeCell *cell0 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    //名称
+    ScanCodeCell *cell1 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    //数量
+    ScanCodeCell *cell2 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    //型号
+    ScanCodeCell *cell3 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    //价格
+    ScanCodeCell *cell4 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    //产地
+    ScanCodeCell *cell5 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    //成色
+    ScanCodeCell *cell6 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]];
+    
+   
+     cell0.textfield.text=@"";
+     cell1.textfield.text=@"";
+     cell2.textfield.text=@"";
+     cell3.textfield.text=@"";
+     cell4.textfield.text=@"";
+     cell5.textfield.text=@"";
+     cell6.textfield.text=@"";
+    textViewText.text=@"请您说出商品名称,编号";
+    textViewText.alpha=.6;
+   _chengSeText=@"";
+    _chanDiText=@"";
+    [_lastBtn setBackgroundImage:[UIImage imageNamed:@"fabu_pic"] forState:0];;
+     [_buton1 setBackgroundImage:[UIImage imageNamed:@"fabu_pic"] forState:0];;
+    [_tableView reloadData];
+
 }
 -(void)CreatTableView{
     _tableView=[[UITableView alloc]init];
@@ -76,30 +113,13 @@
     .heightIs(50*7+10);
     [self CreatXiangXiMessage];
     
-//    UITapGestureRecognizer * tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-//    tap.delegate=self;
-//    [_tableView addGestureRecognizer:tap];
-    
+ 
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [_tableView endEditing:YES];
 }
-//
-//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-//    NSLog(@"执行不");
-//    
-//    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
-//     [_tableView endEditing:YES];
-//    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-//        return NO;
-//    }
-//    
-//    if ([touch.view isKindOfClass:[UITextView class]]) {
-//        return YES;
-//    }
-//    return YES;
-//}
+
 
 
 -(void)tap:(UITapGestureRecognizer*)tap{
@@ -129,7 +149,8 @@
         }else if (indexPath.row==1){
             cell.textfield.placeholder=@"请填写产品名称";
         }else if (indexPath.row==2){
-            cell.textfield.placeholder=@"请填写产品数量";
+             cell.textfield.keyboardType=UIKeyboardTypeNumberPad;
+             cell.textfield.placeholder=@"请填写产品数量";
         }else if (indexPath.row==3){
             cell.textfield.placeholder=@"请填写产品型号";
         }else{
@@ -253,6 +274,7 @@
     textViewText =[UITextView new];
     textViewText.delegate=self;
     textViewText.text=@"请您说出商品名称，编号";
+    textViewText.alpha=.6;
     textViewText.font=[UIFont systemFontOfSize:14];
     [_view1 sd_addSubviews:@[textViewText]];
     textViewText.sd_layout
@@ -305,6 +327,9 @@
         [btn setBackgroundImage:[UIImage imageNamed:@"fabu_pic"] forState:0];
         btn.tag=i;
         _lastBtn=btn;
+        if (i==0) {
+            _buton1=btn;
+        }
         UILabel * label =[UILabel new];
         label.font=[UIFont systemFontOfSize:13];
         label.alpha=.6;
@@ -424,6 +449,7 @@
       [dataDic setObject:cell3.textfield.text forKey:@"型号"];
       [dataDic setObject:cell4.textfield.text forKey:@"价格"];
       [dataDic setObject:[ToolClass isString:_chanDiText] forKey:@"产地"];
+     [dataDic setObject:textViewText.text forKey:@"描述"];
       [dataDic setObject:[ToolClass isString:_chengSeCode] forKey:@"成色"];
       [dataDic setObject:[ToolClass isString:_mingPaiUrl] forKey:@"铭牌照片"];
       [dataDic setObject:[ToolClass isString:_zhengJiUrl] forKey:@"整机照片"];

@@ -9,9 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ChoosePeopleVC : BaseViewController
-/*
- tagg==1,我的>>>雇佣经纪人
- tagg==2,入驻发布>>>发布
- */
-@property(nonatomic,assign)NSInteger tagg;
+@property(nonatomic,copy)void(^peopleIDBlock)(NSString*codeID);
 @end

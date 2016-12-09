@@ -21,6 +21,7 @@
 @property(nonatomic,strong)UIButton * bgview;
 @property(nonatomic,strong)UIButton * button1;
 @property(nonatomic,strong)UIButton * button2;
+@property(nonatomic,strong)UIButton * button3;
 @property(nonatomic,strong)NSMutableArray * dataArray;
 @property(nonatomic,assign)int AAA;
 @property (nonatomic, strong) MJRefreshComponent *myRefreshView;
@@ -30,6 +31,7 @@
 @property(nonatomic,assign)NSInteger btntag;//用来区分左右按钮
 @property(nonatomic,copy)NSString * jiLuCityCode;//用来记录选择好的城市ID
 @property(nonatomic,copy)NSString * jiLuHangYeCode;//用来记录选择好的行业ID
+@property (nonatomic,copy)NSString * jiaoYiCode;//用来记录选择好的来源
 
 //
 @end
@@ -58,7 +60,7 @@
           //[self shuJuJieXiDataPage:@"1" TeJia:@"1"];
     }
     
-    NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"行业", nil];
+    NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"来源",@"行业", nil];
     _bgview=[[UIButton alloc]init];
     _bgview.frame=CGRectMake(0, 0, ScreenWidth, ScreenHeight-64);
     _bgview.backgroundColor=[UIColor blackColor];
@@ -70,10 +72,9 @@
 }
 
 #pragma mark --数据解析
--(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID{
-    //GongQiu 1优质现货 2最新采购
+-(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID jiaoYiStye:(NSString*)jiaoyi{
     [LCProgressHUD showMessage:@"请稍后..."];
-    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:te success:^(NSDictionary *dic) {
+    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:jiaoyi TeJia:te success:^(NSDictionary *dic) {
         [LCProgressHUD hide];
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
@@ -191,6 +192,7 @@
             [_rightTabelView removeFromSuperview];
             [_leftTabelView removeFromSuperview];
             _button2.selected=NO;
+             _button3.selected=NO;
             [self CreatLeftTableVeiw];
         }else{
             [self dissmiss];
@@ -198,7 +200,28 @@
         
         _button1=btn;
         
-    }else{
+    }else  if (btn.tag==1){
+        //点击的是第2个
+        if (btn.selected==YES) {
+            _tableView.scrollEnabled=NO;
+            [_tableView setContentOffset:CGPointZero animated:NO];
+            [_tableView addSubview:_bgview];
+            [_rightTabelView removeFromSuperview];
+            [_leftTabelView removeFromSuperview];
+            _button1.selected=NO;
+            _button3.selected=NO;
+            [_cityArr removeAllObjects];
+            _cityArr=nil;
+            _cityArr=[[NSMutableArray alloc]initWithObjects:@"个人交易",@"委托交易",nil];
+            [self CreatRightTableView:ScreenWidth Xzhou:0 Gzhou:44*_cityArr.count];
+        }
+        else{
+            [self dissmiss];
+        }
+        _button2=btn;
+
+    }
+    else  if (btn.tag==2){
         //点击的是第二个
         if (btn.selected==YES) {
              [self getHangYeAll];
@@ -208,11 +231,12 @@
             [_leftTabelView removeFromSuperview];
             [_rightTabelView removeFromSuperview];
             _button1.selected=NO;
+             _button2.selected=NO;
              [self CreatLeftTableVeiw];
         }else{
             [self dissmiss];
         }
-        _button2=btn;
+        _button3=btn;
     }
 }
 #pragma mark --灰色按钮点击取消
@@ -225,7 +249,7 @@
 #pragma mark --创建左边表格
 -(void)CreatLeftTableVeiw{
     
-    _leftTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+51, ScreenWidth/2, ScreenHeight/1.5) style:UITableViewStylePlain];
+    _leftTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+51, ScreenWidth/2.5, ScreenHeight/1.5) style:UITableViewStylePlain];
     _leftTabelView.dataSource=self;
     _leftTabelView.delegate=self;
     _leftTabelView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -264,9 +288,9 @@
         _AAA=1;
         weakSelf.myRefreshView = weakSelf.tableView.header;
         if (_tagg==1) {
-            [self shuJuJieXiDataPage:@"1" TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
+            [self shuJuJieXiDataPage:@"1" TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
         }else{
-            [self shuJuJieXiDataPage:@"1" TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
+            [self shuJuJieXiDataPage:@"1" TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
         }
         
     }];
@@ -286,10 +310,10 @@
          */
         if (_tagg==1) {
             //本页优质现货
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
         }else{
             //其它几个界面
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode]];
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
         }
        
     }];
@@ -320,15 +344,17 @@
     if (tableView==_leftTabelView) {
        
         LeftMyAdressCell * cell1 =[LeftMyAdressCell cellWithTableView:tableView];
+        cell1.textLabel.textAlignment=1;
+        cell1.textLabel.font=[UIFont systemFontOfSize:15];
         cell1.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (_btntag==0) {
             //点击的是城市给城市赋值
-             CityModel * md =_shengArr[indexPath.row];
-            cell1.name=md.shengName;
-        }else{
+            CityModel * md =_shengArr[indexPath.row];
+            cell1.textLabel.text=md.shengName;
+        }else if (_btntag==2){
             //点击的是行业，给行业赋值
             HangYeModel * md =_shengArr[indexPath.row];
-            cell1.name=md.HYname;
+            cell1.textLabel.text=md.HYname;
         }
       
        
@@ -337,12 +363,17 @@
     }else if (tableView==_rightTabelView)
     {
         RightMyAddressCell * cell1 =[RightMyAddressCell cellWithTableView:tableView];
+        cell1.textLabel.textAlignment=1;
+        cell1.textLabel.font=[UIFont systemFontOfSize:15];
         if (_btntag==0) {
             CityModel * md =_cityArr[indexPath.row];
-            cell1.name=md.cityName;
-        }else{
+            cell1.textLabel.text=md.cityName;
+        }else if (_btntag==1){
+            cell1.textLabel.text=_cityArr[indexPath.row];
+        }
+        else if (_btntag==2){
             HangYeModel * md =_cityArr[indexPath.row];
-            cell1.name=md.HYname;
+            cell1.textLabel.text=md.HYname;
         }
        
         return cell1;
@@ -361,11 +392,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (tableView==_leftTabelView) {
-        [self CreatRightTableView:ScreenWidth-ScreenWidth/2 Xzhou:ScreenWidth/2 Gzhou:ScreenHeight/1.5];
+        [self CreatRightTableView:ScreenWidth-ScreenWidth/2.5 Xzhou:ScreenWidth/2.5 Gzhou:ScreenHeight/1.5];
         if (_btntag==0) {
             CityModel * mdd =_shengArr[indexPath.row];
             [self shengWithCity:mdd];
-        }else{
+        }else  if (_btntag==2){
             HangYeModel * md =_shengArr[indexPath.row];
             [self genJuIddGetHangYe:md];
         }
@@ -380,27 +411,47 @@
             [_button1 setTitle:mdd.cityName forState:0];
             _button1.titleLabel.font=[UIFont systemFontOfSize:14];
             _jiLuCityCode=mdd.cityCode;
-           
+            _AAA=1;
+            [_dataArray removeAllObjects];
             if (_tagg==1) {
                 //本页优质现货
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
             }else{
                 //其它几个界面
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
             }
 
-        }else{
-            HangYeModel * mdd =_cityArr[indexPath.row];
-            _jiLuHangYeCode=mdd.HYidd;
+        }else if (_btntag==1){
             _button2.selected=NO;
-            [_button2 setTitle:mdd.HYname forState:0];
+            [_button2 setTitle:_cityArr[indexPath.row] forState:0];
             _button2.titleLabel.font=[UIFont systemFontOfSize:14];
+            _jiaoYiCode=[NSString stringWithFormat:@"%lu",indexPath.row];
+            _AAA=1;
+            [_dataArray removeAllObjects];
             if (_tagg==1) {
                 //本页优质现货
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode]];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:_jiaoYiCode];
             }else{
                 //其它几个界面
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode]];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:_jiaoYiCode];
+            }
+
+        }
+        
+        else if (_btntag==2){
+            HangYeModel * mdd =_cityArr[indexPath.row];
+            _jiLuHangYeCode=mdd.HYidd;
+            _button3.selected=NO;
+            [_button3 setTitle:mdd.HYname forState:0];
+            _button3.titleLabel.font=[UIFont systemFontOfSize:14];
+            _AAA=1;
+            [_dataArray removeAllObjects];
+            if (_tagg==1) {
+                //本页优质现货
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+            }else{
+                //其它几个界面
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
             }
 
         }

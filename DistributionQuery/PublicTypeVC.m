@@ -8,9 +8,11 @@
 
 #import "PublicTypeVC.h"
 #import "ChoosePeopleVC.h"
+#import "GuanLiViewController.h"
 @interface PublicTypeVC ()
 @property(nonatomic,strong)UIImageView * headImage;
 @property(nonatomic,strong)UIView * view2;
+@property(nonatomic,copy)NSString * peopleID;
 @end
 
 @implementation PublicTypeVC
@@ -73,14 +75,51 @@
 -(void)btnn:(UIButton*)btn{
     if (btn.tag==0) {
         //个人交易
-        [LCProgressHUD showMessage:@"发布完毕"];
+        [self publicMessagePeopleID:@"-1"];
+       
     }else{
         //托管经济人
         ChoosePeopleVC * vc =[ChoosePeopleVC new];
-        vc.tagg=2;
+        vc.peopleIDBlock=^(NSString * peopleID){
+            //_peopleID=peopleID;
+            NSLog(@"输出%@",peopleID);
+            [self publicMessagePeopleID:peopleID];
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+-(void)publicMessagePeopleID:(NSString*)jingJiID{
+     NSDictionary * dicc =[ToolClass duquPlistWenJianPlistName:@"入驻发布"];
+    [LCProgressHUD showLoading:@"发布中..."];
+    [Engine publicChanPinMessageXiangQingTitle:[dicc objectForKey:@"标题"] ProductName:[dicc objectForKey:@"名称"] Count:[dicc objectForKey:@"数量"] Type:[dicc objectForKey:@"型号"] ExpectPrice:[dicc objectForKey:@"价格"] ProductLocation:[dicc objectForKey:@"产地"] Degree:[dicc objectForKey:@"成色"] Description:[dicc objectForKey:@"描述"] JingJiPeope:jingJiID Image1:[dicc objectForKey:@"铭牌照片"] Image2:[dicc objectForKey:@"整机照片"] success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            [LCProgressHUD hide];
+            UIAlertController * actionView =[UIAlertController alertControllerWithTitle:@"温馨提示" message:[dic objectForKey:@"Item2"] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action1 =[UIAlertAction actionWithTitle:@"继续发布" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"pianyi" object:nil userInfo:dic];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
+            UIAlertAction * action2 =[UIAlertAction actionWithTitle:@"查看界面" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                GuanLiViewController * vc =[GuanLiViewController new];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"pianyi" object:nil userInfo:dic];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+            [actionView addAction:action1];
+            [actionView addAction:action2];
+            [self presentViewController:actionView animated:YES completion:nil];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+         [LCProgressHUD showMessage:@"发布失败"];
+    }];
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
