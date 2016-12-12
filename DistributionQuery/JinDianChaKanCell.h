@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JinDianModel.h"
 @interface JinDianChaKanCell : UITableViewCell
 @property(nonatomic,strong)UIButton * chaKanBtn;//立即查看
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
+@property(nonatomic,strong)JinDianModel * model;
 @end

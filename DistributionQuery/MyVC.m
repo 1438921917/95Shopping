@@ -20,6 +20,7 @@
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSMutableArray * dataArray;
 @property(nonatomic,strong)NSMutableArray * imageArray;
+@property(nonatomic,copy)NSString * headUrl;
 @end
 
 @implementation MyVC
@@ -53,7 +54,24 @@
     NSArray * image4 =@[@"my_our"];
     _imageArray=[[NSMutableArray alloc]initWithObjects:image1,image2,image3,image4, nil];
 }
-
+#pragma mark --获取头像
+-(void)getImageHead{
+    [Engine huoQuImageWithType:@"0" success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+            NSArray * imageHead =[dic objectForKey:@"Item3"];
+            for (NSDictionary * dicc  in imageHead) {
+                _headUrl =[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"Img_Url"]];
+            }
+             _tableView.tableHeaderView=[self tableViewHead];
+           // [_tableView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
 
 #pragma mark --表头
 -(UIView*)tableViewHead{
@@ -66,7 +84,8 @@
     .heightIs(ScreenWidth*26/75);
     //头像
     UIImageView * headImageView =[UIImageView new];
-    headImageView.image=[UIImage imageNamed:@"my_photo"];
+    headImageView.sd_cornerRadius=@(40);
+    [headImageView setImageWithURL:[NSURL URLWithString:_headUrl] placeholderImage:[UIImage imageNamed:@"my_photo"]];
     [headView sd_addSubviews:@[headImageView]];
     headImageView.sd_layout
     .leftSpaceToView(headView,15)
@@ -78,11 +97,11 @@
     imagedan.image=[UIImage imageNamed:@"my_danbao"];
     [headImageView sd_addSubviews:@[imagedan]];
     imagedan.sd_layout
-    .rightSpaceToView(headImageView,0)
-    .bottomSpaceToView(headImageView,0)
+    .rightSpaceToView(headImageView,10)
+    .bottomSpaceToView(headImageView,10)
     .widthIs(33/2)
     .heightIs(33/2);
-   
+  
    
     //登录按钮
     UIButton * loginBtn =[UIButton buttonWithType:UIButtonTypeCustom];
@@ -156,6 +175,7 @@
 #pragma mark --创建表
 -(void)CreatTableView
 {
+  
     if (!_tableView) {
         _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     }
@@ -166,7 +186,7 @@
     _tableView.delegate=self;
     
     [self.view addSubview:_tableView];
-    
+    [self getImageHead];
     
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -228,18 +248,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if(indexPath.section==1){
-//        if (indexPath.row==0) {
-//            //雇佣经纪人
-////            GuYongJingJiRenVC * vc =[GuYongJingJiRenVC new];
-////            vc.hidesBottomBarWhenPushed=YES;
-////            [self.navigationController pushViewController:vc animated:YES];
-//        }
-       // else{
-            //服务充值
-            FuWuChongZhiVC * vc =[FuWuChongZhiVC new];
-            vc.hidesBottomBarWhenPushed=YES;
-            [self.navigationController pushViewController:vc animated:YES];
-       // }
+        //服务充值
+        FuWuChongZhiVC * vc =[FuWuChongZhiVC new];
+        vc.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.section==2){
         if (indexPath.row==0) {
             //消息通知

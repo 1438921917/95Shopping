@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets=NO;
+    [self dataShuJuPage:@"1"];
     if (_tagg==11) {
         self.title=@"所有商品";
     }else if (_tagg==12){
@@ -29,6 +30,15 @@
     }
     [self CreatTabelView];
 }
+
+-(void)dataShuJuPage:(NSString*)page{
+    [Engine dianPuChanPinMessageID:_messageID Cid:[NSString stringWithFormat:@"%lu",_cidd] Page:page success:^(NSDictionary *dic) {
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+
 -(void)CreatTabelView{
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     _tableView.backgroundColor=COLOR;

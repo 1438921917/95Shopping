@@ -17,4 +17,10 @@
  
  */
 @property(nonatomic,assign)NSInteger tagg;
+//从店铺穿过来的ID
+@property(nonatomic,copy)NSString * messageID;
+/*
+ 0全部 1最新 2经典 3优质
+ */
+@property(nonatomic,assign)NSInteger  cidd;
 @end

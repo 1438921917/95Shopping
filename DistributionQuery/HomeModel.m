@@ -64,6 +64,10 @@
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Hits"]]];
       //代替成交
         _sheBeiName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Volumes"]]];
+        //头像
+        _priceName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_HeadImg"]]];
+        //电话
+        _phoneNumber=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_MobieNum"]]];
         _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_Id"]]];
     }
     

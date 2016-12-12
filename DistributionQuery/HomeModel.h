@@ -20,6 +20,7 @@
 -(id)initWithTeJiaDic:(NSDictionary*)dic;
 //优质现货
 -(id)initWithYouZhiXianHuoDic:(NSDictionary*)dic;
+@property(nonatomic,copy)NSString * phoneNumber;
 //优质商户
 -(id)initWithYouZhiShangHuDic:(NSDictionary*)dic;
 
@@ -27,6 +28,6 @@
 
 //最新采购(收藏采购)
 -(id)initWithCaiGouDic:(NSDictionary*)dic;
-@property(nonatomic,copy)NSString * phoneNumber;
+
 
 @end

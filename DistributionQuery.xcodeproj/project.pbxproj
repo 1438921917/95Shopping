@@ -55,6 +55,8 @@
 		8F6208391DD44E0300E9A306 /* LrdOutputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6208381DD44E0300E9A306 /* LrdOutputView.m */; };
 		8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */; };
 		8F6C931E1DD2BFF90067CC8F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F6C931D1DD2BFF90067CC8F /* Info.plist */; };
+		8F8D294B1DFE38B300E86E0A /* ShangXinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8D294A1DFE38B300E86E0A /* ShangXinModel.m */; };
+		8F8D294E1DFE8FAF00E86E0A /* JinDianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8D294D1DFE8FAF00E86E0A /* JinDianModel.m */; };
 		8FCD4F111DA8A13100CB113C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCD4F101DA8A13100CB113C /* libsqlite3.tbd */; };
 		8FCD4F131DA8A13A00CB113C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCD4F121DA8A13A00CB113C /* libz.tbd */; };
 		8FCD4F151DA8A14800CB113C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCD4F141DA8A14800CB113C /* libstdc++.tbd */; };
@@ -277,6 +279,10 @@
 		8F62083A1DD45B7B00E9A306 /* XiangQingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiangQingVC.h; sourceTree = "<group>"; };
 		8F62083B1DD45B7B00E9A306 /* XiangQingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiangQingVC.m; sourceTree = "<group>"; };
 		8F6C931D1DD2BFF90067CC8F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F8D29491DFE38B300E86E0A /* ShangXinModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangXinModel.h; sourceTree = "<group>"; };
+		8F8D294A1DFE38B300E86E0A /* ShangXinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangXinModel.m; sourceTree = "<group>"; };
+		8F8D294C1DFE8FAF00E86E0A /* JinDianModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinDianModel.h; sourceTree = "<group>"; };
+		8F8D294D1DFE8FAF00E86E0A /* JinDianModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JinDianModel.m; sourceTree = "<group>"; };
 		8FCD4F101DA8A13100CB113C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8FCD4F121DA8A13A00CB113C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8FCD4F141DA8A14800CB113C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -1083,6 +1089,8 @@
 				8F07E61D1DDD5CF30045EA74 /* XitongTongZhiVC.m */,
 				8F07E61F1DDD5D0B0045EA74 /* ShangXinVC.h */,
 				8F07E6201DDD5D0B0045EA74 /* ShangXinVC.m */,
+				8F8D29491DFE38B300E86E0A /* ShangXinModel.h */,
+				8F8D294A1DFE38B300E86E0A /* ShangXinModel.m */,
 			);
 			name = "消息通知";
 			sourceTree = "<group>";
@@ -1185,6 +1193,8 @@
 			children = (
 				8FEC53531DDBFC31000328FA /* JinDianChaKanVC.h */,
 				8FEC53541DDBFC31000328FA /* JinDianChaKanVC.m */,
+				8F8D294C1DFE8FAF00E86E0A /* JinDianModel.h */,
+				8F8D294D1DFE8FAF00E86E0A /* JinDianModel.m */,
 				8FEC535A1DDC2D85000328FA /* AllShangPinVC.h */,
 				8FEC535B1DDC2D85000328FA /* AllShangPinVC.m */,
 				8FEC53571DDC2969000328FA /* JinDianChaKanCell.h */,
@@ -1440,6 +1450,7 @@
 				8F16BC3A1DE7E19E00172CB5 /* TuoGuanVC.m in Sources */,
 				8FCD4FA81DA8B4D300CB113C /* TAPageControl.m in Sources */,
 				8F03A5351DD9D29200833E19 /* GuanYu95VC.m in Sources */,
+				8F8D294E1DFE8FAF00E86E0A /* JinDianModel.m in Sources */,
 				8F02FE871DA89F6B0051EDFC /* ASIDataDecompressor.m in Sources */,
 				8F07E6211DDD5D0B0045EA74 /* ShangXinVC.m in Sources */,
 				8FE5B47E1DDB30D50069B82F /* UIScrollView+MJExtension.m in Sources */,
@@ -1457,6 +1468,7 @@
 				8FCD4F891DA8B4D300CB113C /* NSData+ImageContentType.m in Sources */,
 				8F02FE551DA887B40051EDFC /* ScanCodeVC.m in Sources */,
 				8FEC53591DDC2969000328FA /* JinDianChaKanCell.m in Sources */,
+				8F8D294B1DFE38B300E86E0A /* ShangXinModel.m in Sources */,
 				8F02FE1D1DA883FE0051EDFC /* ViewController.m in Sources */,
 				8F02FE881DA89F6B0051EDFC /* ASIDownloadCache.m in Sources */,
 				8FCD4FA61DA8B4D300CB113C /* TAAnimatedDotView.m in Sources */,

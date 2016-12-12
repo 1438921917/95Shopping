@@ -513,6 +513,39 @@
     }];
 
 }
+#pragma mark --34获取店铺产品列表
++(void)dianPuChanPinMessageID:(NSString*)idd Cid:(NSString*)cid Page:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetShopList?ShopId=%@&Cid=%@&Page=%@&PageSize=10",SER_VICE,idd,cid,page];
+    NSLog(@"34获取店铺产品列表%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"34获取店铺产品列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"34获取店铺产品列表%@",error);
+    }];
+    
+
+    
+}
+#pragma mark --35 获取店铺首页
++(void)huoQuDianPuFirstMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+   
+    NSString * urlStr =[NSString stringWithFormat:@"%@Shop/GetIndex?ShopId=%@",SER_VICE,idd];
+    NSLog(@"35 获取店铺首页%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"35 获取店铺首页%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"35 获取店铺首页%@",error);
+    }];
+    
+}
 //***********************第二套接口*****************************//
 #pragma mark --5企业快速发布
 +(void)qiYeKuaiSuPublicTitleStr:(NSString*)title Count:(NSString*)number PriceStr:(NSString*)price PhoneNumber:(NSString*)phone HangYeID:(NSString*)cid DiQuCode:(NSString*)diquID imageUrlStr:(NSString*)urlStr success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{

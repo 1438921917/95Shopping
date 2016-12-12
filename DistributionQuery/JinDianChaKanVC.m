@@ -9,8 +9,13 @@
 #import "JinDianChaKanVC.h"
 #import "JinDianChaKanCell.h"
 #import "AllShangPinVC.h"
+#import "JinDianModel.h"
 @interface JinDianChaKanVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
+@property(nonatomic,strong)NSMutableArray * dataArray1;
+@property(nonatomic,strong)NSMutableArray * dataArray2;
+@property(nonatomic,strong)NSMutableArray * dataArray3;
+@property(nonatomic,strong)NSMutableArray * dataArray4;
 @end
 
 @implementation JinDianChaKanVC
@@ -20,7 +25,12 @@
     // Do any additional setup after loading the view.
     self.title=@"进店查看";
     self.automaticallyAdjustsScrollViewInsets=NO;
+     _dataArray1=[NSMutableArray new];
+     _dataArray2=[NSMutableArray new];
+     _dataArray3=[NSMutableArray new];
+     _dataArray4=[NSMutableArray new];
     [self CreatRightBtn];
+    [self jieXiData];
     _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
@@ -28,7 +38,54 @@
     _tableView.tableHeaderView=[self CreatTableViewHead];
     [self.view addSubview:_tableView];
 }
+-(void)jieXiData{
+    NSLog(@"输出来%@",_messageID);
+    [Engine huoQuDianPuFirstMessageID:_messageID success:^(NSDictionary *dic) {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+              NSArray * itme4 =[dic objectForKey:@"Item4"];//最新
+              NSArray * itme6 =[dic objectForKey:@"Item6"];//优质
+            NSArray * itme5 =[dic objectForKey:@"Item5"];//经典
 
+            if (itme4.count!=0) {
+                for (NSDictionary * dic4 in itme4) {
+                    JinDianModel * md =[[JinDianModel alloc]initWithDiQuDic:dic4];
+                    [_dataArray1 addObject:md];
+                    NSLog(@"输出一下数量%lu",_dataArray1.count);
+                }
+                [_tableView reloadData];
+            }
+            if (itme5.count!=0) {
+                for (NSDictionary * dic4 in itme5) {
+                    JinDianModel * md =[[JinDianModel alloc]initWithDiQuDic:dic4];
+                    [_dataArray3 addObject:md];
+                }
+                 [_tableView reloadData];
+            }
+            if (itme6.count!=0) {
+                for (NSDictionary * dic4 in itme6) {
+                    JinDianModel * md =[[JinDianModel alloc]initWithDiQuDic:dic4];
+                    [_dataArray2 addObject:md];
+                }
+                 [_tableView reloadData];
+            }
+//            if (_dataArray1.count!=0) {
+//                [_dataArray4 addObject:_dataArray1];
+//            }
+//            if (_dataArray2.count!=0) {
+//                [_dataArray4 addObject:_dataArray2];
+//            }
+//            if (_dataArray3.count!=0) {
+//                [_dataArray4 addObject:_dataArray3];
+//            }
+            [_tableView reloadData];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+    } error:^(NSError *error) {
+        
+    }];
+}
 #pragma mark --创建右按钮
 -(void)CreatRightBtn{
     UIButton * rightBtn =[UIButton buttonWithType:UIButtonTypeCustom];
@@ -73,7 +130,13 @@
     
     //头像
     UIImageView * headImage =[[UIImageView alloc]init];
-    headImage.image=[UIImage imageNamed:@"my_photo"];
+  //  headImage.image=[UIImage imageNamed:@"my_photo"];
+    if (_tagg==2) {
+        //商户详情(priceName暂时代替头像)
+        [headImage setImageWithURL:[NSURL URLWithString:_mdd.priceName] placeholderImage:[UIImage imageNamed:@"my_photo"]];
+    }else{
+     headImage.image=[UIImage imageNamed:@"my_photo"];
+    }
     [whiteView sd_addSubviews:@[headImage]];
     headImage.sd_layout
     .centerXEqualToView(whiteView)
@@ -82,7 +145,13 @@
     .widthIs(75);
     //titleName(公司的名字)
     UILabel * comLabel =[UILabel new];
-    comLabel.text=@"石家庄龙顺铝材有限公司";
+    if (_tagg==2) {
+        //商户详情
+        comLabel.text=_mdd.titleName;
+    }else{
+       comLabel.text=@"石家庄龙顺铝材有限公司";
+    }
+   
     comLabel.font=[UIFont systemFontOfSize:16];
     comLabel.alpha=.8;
     [whiteView sd_addSubviews:@[comLabel]];
@@ -102,7 +171,13 @@
     .widthIs(20);
     //地区
     UILabel * address =[UILabel new];
-    address.text=@"河北-石家庄";
+    if (_tagg==2){
+        address.text=_mdd.cityName;
+    }
+    else{
+        address.text=@"河北-石家庄";
+    }
+   
     address.font=[UIFont systemFontOfSize:14];
     address.alpha=.6;
     [whiteView sd_addSubviews:@[address]];
@@ -113,7 +188,13 @@
     [address setSingleLineAutoResizeWithMaxWidth:ScreenWidth];
     //收藏次数
     UILabel * shouCang =[UILabel new];
-    shouCang.text=@"收藏次数  10次";
+//    shouCang.text=@"收藏次数  10次";
+    if (_tagg==2){
+        shouCang.text=[NSString stringWithFormat:@"收藏次数  %@次",_mdd.taishuName];
+    }
+    else{
+       shouCang.text=@"收藏次数  10次";
+    }
     shouCang.font=[UIFont systemFontOfSize:14];
     shouCang.alpha=.6;
     [whiteView sd_addSubviews:@[shouCang]];
@@ -126,7 +207,12 @@
     UIButton * phoneBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     
     [phoneBtn setBackgroundImage:[UIImage imageNamed:@"dianpu_phone-1"] forState:0];
-    [phoneBtn setTitle:@"400-156-489" forState:0];
+    if (_tagg==2) {
+          [phoneBtn setTitle:_mdd.phoneNumber forState:0];
+    }else{
+          [phoneBtn setTitle:@"400-156-489" forState:0];
+    }
+  
     [phoneBtn setTitleColor:[UIColor blackColor] forState:0];
     phoneBtn.titleLabel.font=[UIFont systemFontOfSize:13];
     [whiteView sd_addSubviews:@[phoneBtn]];
@@ -181,6 +267,8 @@
     }else{
         AllShangPinVC * vc =[AllShangPinVC new];
         vc.tagg=btn.tag;
+        vc.messageID=_messageID;
+        vc.cidd=btn.tag-11;//0全部 1最新 2经典 3优质
         [self.navigationController pushViewController:vc animated:YES];
     }
    
@@ -189,7 +277,14 @@
     return 3;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    if (section==0) {
+        return _dataArray1.count;
+    }else if (section==1){
+        return _dataArray2.count;
+    }else{
+        return _dataArray3.count;
+    }
+    
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
@@ -197,6 +292,13 @@
     cell.chaKanBtn.tag=indexPath.row;
     //[cell.chaKanBtn addTarget:self action:@selector(chaKan:) forControlEvents:UIControlEventTouchUpInside];
     cell.chaKanBtn.hidden=YES;
+    if (indexPath.section==0) {
+        cell.model=_dataArray1[indexPath.row];
+    }else if (indexPath.section==1){
+         cell.model=_dataArray2[indexPath.row];
+    }else{
+         cell.model=_dataArray3[indexPath.row];
+    }
     return cell;
 }
 
@@ -235,7 +337,18 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 95;
+    
+    if (indexPath.section==0) {
+        return [_tableView cellHeightForIndexPath:indexPath model:_dataArray1[indexPath.row]keyPath:@"model" cellClass:[JinDianChaKanCell class] contentViewWidth:[ToolClass  cellContentViewWith]];;
+  
+    }else if (indexPath.section==1){
+        return [_tableView cellHeightForIndexPath:indexPath model:_dataArray2[indexPath.row]keyPath:@"model" cellClass:[JinDianChaKanCell class] contentViewWidth:[ToolClass  cellContentViewWith]];;
+
+    }else{
+        return [_tableView cellHeightForIndexPath:indexPath model:_dataArray3[indexPath.row]keyPath:@"model" cellClass:[JinDianChaKanCell class] contentViewWidth:[ToolClass  cellContentViewWith]];;
+
+    }
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

@@ -243,6 +243,7 @@
     }
     _tableView.dataSource=self;
     _tableView.delegate=self;
+    _tableView.tableFooterView=[UIView new];
     [self.view addSubview:_tableView];
     //刷新操作
     __weak typeof (self) weakSelf =self;
@@ -365,8 +366,11 @@
         [self dissmiss];
     }else{
         //优质商户详情页(和进店查看一样)
+        HomeModel * mdd =_dataArray[indexPath.row];
         JinDianChaKanVC * vc =[JinDianChaKanVC new];
         vc.tagg=2;
+        vc.messageID=mdd.messageID;
+        vc.mdd=_dataArray[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

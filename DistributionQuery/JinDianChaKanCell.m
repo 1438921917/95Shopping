@@ -139,6 +139,23 @@
     [self setupAutoHeightWithBottomView:_chaKanBtn bottomMargin:10];
     
 }
+
+-(void)setModel:(JinDianModel *)model{
+    _model=model;
+//    _titleLabel.text=@"出售海泰500T注塑机";
+//    _leftImage
+//    _cityLabel.text=@"河北-石家庄";
+//    _taishuLabel.text=@"10台";
+//    _priceLabel.text=@"8000元";
+    
+    _titleLabel.text=model.titleName;
+    [_leftImage setImageWithURL:[NSURL URLWithString:model.imageview] placeholderImage:[UIImage imageNamed:@"xianhuo_pic1"]];
+    _cityLabel.text=model.diquName;
+    _taishuLabel.text=[NSString stringWithFormat:@"%@台",model.taishuName];
+    
+    _priceLabel.text=[NSString stringWithFormat:@"%@台",model.priceName];
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
