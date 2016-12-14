@@ -18,7 +18,7 @@
         _titleName=[ToolClass isString:[dic objectForKey:@"C_Title"]];
         _priceName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_ExpectPrice"]]];
         _bianHaoName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_ProductCode"]]];
-        _phoneName=[ToolClass isString:[dic objectForKey:@""]];
+        _phoneName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"E_Number"]]];
         //具体参数
         _xinagHaoName=[ToolClass isString:[dic objectForKey:@"C_Type"]];
         NSString * chanSheng =[ToolClass isString:[dic objectForKey:@"C_Prov_Name"]];

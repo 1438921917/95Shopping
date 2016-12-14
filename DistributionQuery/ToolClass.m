@@ -35,7 +35,7 @@
 #pragma mark --判断字符串是不是空
 +(NSString*)isString:(id)str{
     NSString * string =nil;
-    if (str==nil || str==[NSNull null] || [str isEqualToString:@"(null)"]) {
+    if (str==nil || str==[NSNull null] || [str isEqualToString:@"(null)"]|| [str isEqualToString:@"<null>"]) {
         string=@"";
     }else{
         string=[NSString stringWithFormat:@"%@",str];

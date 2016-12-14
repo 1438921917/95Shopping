@@ -146,6 +146,7 @@
 
 
 }
+
 -(void)setModel:(ChoosePeopleModel *)model{
     _model=model;
     [_headImage setImageWithURL:[NSURL URLWithString:model.headUrl] placeholderImage:[UIImage imageNamed:@"my_photo"]];

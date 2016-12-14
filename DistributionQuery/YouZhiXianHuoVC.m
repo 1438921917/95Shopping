@@ -461,6 +461,8 @@
          HomeModel * md =_dataArray[indexPath.row];
         XiangQingVC * vc =[XiangQingVC new];
         vc.messageID=md.messageID;
+        vc.dianPuID=md.dianpuID;
+        
         NSLog(@"messageID=%@",md.messageID);
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -537,6 +539,8 @@
     HomeModel * md =_dataArray[btn.tag];
     XiangQingVC * vc =[XiangQingVC new];
     vc.messageID=md.messageID;
+     NSLog(@"输出店铺ID=%@",md.dianpuID);
+    vc.dianPuID=md.dianpuID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

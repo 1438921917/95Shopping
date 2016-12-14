@@ -61,6 +61,7 @@
     _taishuLabel=[UILabel new];
     _priceLabel=[UILabel new];
     _chaKanBtn=[UILabel new];
+    _chaKanBtn.hidden=YES;
     //属性
     _titleLabel.font=[UIFont systemFontOfSize:16];
     _titleLabel.numberOfLines=0;

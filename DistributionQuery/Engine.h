@@ -81,7 +81,7 @@ typedef void (^ErrorBlock)(NSError*error);
 
 #pragma mark --29优质商户
 +(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
-#pragma mark --34获取店铺产品列表
+#pragma mark --36获取店铺产品列表
 +(void)dianPuChanPinMessageID:(NSString*)idd Cid:(NSString*)cid Page:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --35 获取店铺首页
 +(void)huoQuDianPuFirstMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
@@ -89,8 +89,13 @@ typedef void (^ErrorBlock)(NSError*error);
 //***********************第二套接口*****************************//
 #pragma mark --5企业快速发布
 +(void)qiYeKuaiSuPublicTitleStr:(NSString*)title Count:(NSString*)number PriceStr:(NSString*)price PhoneNumber:(NSString*)phone HangYeID:(NSString*)cid DiQuCode:(NSString*)diquID imageUrlStr:(NSString*)urlStr success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --6语音发布
++(void)yuyinPublicSting:(NSString*)str success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
 
-
+#pragma mark --7获取最新采购列表
++(void)huoQuCaiGouListViewPage:(NSString*)page Cid:(NSString*)cid DiQuCode:(NSString*)areid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --8获取最新采购详情
++(void)zuiXinCaiGouXiangQingMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
 @end

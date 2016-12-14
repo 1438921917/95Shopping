@@ -42,25 +42,30 @@
 #pragma mark --解析详情页的数据
 -(void)jieXiXiangQingYeData{
     //@"7458" _messageID
-    [Engine tableViewXiangQingJieMianMessageID:_messageID success:^(NSDictionary *dic) {
-        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
-        if ([item1 isEqualToString:@"1"])
-        {
-            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
-                [LCProgressHUD showMessage:@"Item3无数据"];
-            }else{
-                NSDictionary * dicc =[dic objectForKey:@"Item3"];
+    if (_tagg==1) {
+        //现货详情
+        [Engine tableViewXiangQingJieMianMessageID:_messageID success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"])
+            {
+                if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+                    [LCProgressHUD showMessage:@"Item3无数据"];
+                }else{
+                    NSDictionary * dicc =[dic objectForKey:@"Item3"];
                     XiangQingModel * md =[[XiangQingModel alloc]initWithXiangXiDic:dicc];
                     [_dataArray addObject:md];
-                
+                }
+                [self CreatView1];
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
             }
-             [self CreatView1];
-        }else{
-             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
-        }
-    } error:^(NSError *error) {
-        
-    }];
+        } error:^(NSError *error) {
+            
+        }];
+    }else if (_tagg==2){
+        //最新采购详情
+    }
+    
 }
 
 
@@ -198,7 +203,11 @@
         [chaKanBtn setImage:[UIImage imageNamed:@"xiangqing_bt1(1)"] forState:0];
         [_view1 setupAutoHeightWithBottomView:chaKanBtn bottomMargin:10];
 
-    }else{
+    }else if (_tagg==3){
+        chaKanBtn.hidden=YES;
+        [_view1 setupAutoHeightWithBottomView:viewColor bottomMargin:10];
+    }
+    else{
         [_view1 setupAutoHeightWithBottomView:viewColor bottomMargin:10];
 
     }
@@ -238,6 +247,8 @@
         //进店查看
         JinDianChaKanVC * vc =[JinDianChaKanVC new];
         vc.tagg=1;
+        vc.messageID=_dianPuID;
+        NSLog(@"输出店铺ID=%@",_dianPuID);
         [self.navigationController pushViewController:vc animated:YES];
 
     }
@@ -422,6 +433,7 @@
     
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
     YouZhiXianHuoCell * cell =[YouZhiXianHuoCell cellWithTableView:tableView CellID:CellIdentifier];
+    cell.chaKanBtn.tag=indexPath.row;
     cell.chaKanBtn.hidden=YES;
     return cell;
 }

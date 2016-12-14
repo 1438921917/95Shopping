@@ -18,7 +18,9 @@
 @property(nonatomic,copy)NSString * sheBeiName;
 @property(nonatomic,copy)NSString * messageID;
 -(id)initWithTeJiaDic:(NSDictionary*)dic;
-//优质现货
+
+//优质现货  (dianpuID店铺ID，从现货详情页进入店铺查看需要。messageID从先货进入详情页需要) 现货专用
+@property(nonatomic,copy)NSString * dianpuID;
 -(id)initWithYouZhiXianHuoDic:(NSDictionary*)dic;
 @property(nonatomic,copy)NSString * phoneNumber;
 //优质商户
@@ -26,8 +28,9 @@
 
 
 
-//最新采购(收藏采购)
+//(收藏采购)
 -(id)initWithCaiGouDic:(NSDictionary*)dic;
 
-
+//最新采购
+-(id)initWithZuiXinCaiGouDic:(NSDictionary*)dic;
 @end

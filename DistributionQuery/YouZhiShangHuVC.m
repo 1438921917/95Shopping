@@ -370,7 +370,6 @@
         JinDianChaKanVC * vc =[JinDianChaKanVC new];
         vc.tagg=2;
         vc.messageID=mdd.messageID;
-        vc.mdd=_dataArray[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

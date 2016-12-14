@@ -145,6 +145,8 @@
 		8FE5B47E1DDB30D50069B82F /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B4691DDB30D50069B82F /* UIScrollView+MJExtension.m */; };
 		8FE5B47F1DDB30D50069B82F /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B46B1DDB30D50069B82F /* UIScrollView+MJRefresh.m */; };
 		8FE5B4801DDB30D50069B82F /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE5B46D1DDB30D50069B82F /* UIView+MJExtension.m */; };
+		8FE925121E00DB0E000CF287 /* FuWuChongZhiZhenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE925111E00DB0E000CF287 /* FuWuChongZhiZhenVC.m */; };
+		8FE925151E00DD55000CF287 /* FuWuChongZhiZhenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE925141E00DD55000CF287 /* FuWuChongZhiZhenCell.m */; };
 		8FEC53551DDBFC31000328FA /* JinDianChaKanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC53541DDBFC31000328FA /* JinDianChaKanVC.m */; };
 		8FEC53591DDC2969000328FA /* JinDianChaKanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC53581DDC2969000328FA /* JinDianChaKanCell.m */; };
 		8FEC535C1DDC2D85000328FA /* AllShangPinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC535B1DDC2D85000328FA /* AllShangPinVC.m */; };
@@ -458,6 +460,10 @@
 		8FE5B46B1DDB30D50069B82F /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		8FE5B46C1DDB30D50069B82F /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		8FE5B46D1DDB30D50069B82F /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		8FE925101E00DB0E000CF287 /* FuWuChongZhiZhenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuWuChongZhiZhenVC.h; sourceTree = "<group>"; };
+		8FE925111E00DB0E000CF287 /* FuWuChongZhiZhenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuWuChongZhiZhenVC.m; sourceTree = "<group>"; };
+		8FE925131E00DD55000CF287 /* FuWuChongZhiZhenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuWuChongZhiZhenCell.h; sourceTree = "<group>"; };
+		8FE925141E00DD55000CF287 /* FuWuChongZhiZhenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuWuChongZhiZhenCell.m; sourceTree = "<group>"; };
 		8FEC53531DDBFC31000328FA /* JinDianChaKanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinDianChaKanVC.h; sourceTree = "<group>"; };
 		8FEC53541DDBFC31000328FA /* JinDianChaKanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JinDianChaKanVC.m; sourceTree = "<group>"; };
 		8FEC53571DDC2969000328FA /* JinDianChaKanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinDianChaKanCell.h; sourceTree = "<group>"; };
@@ -644,7 +650,8 @@
 				8F02FE571DA887CC0051EDFC /* MyVC.m */,
 				8FE219991DE52F20000C1D71 /* 消息通知 */,
 				8F03A5361DD9D8A500833E19 /* 关于95 */,
-				8F03A5321DD9BF5D00833E19 /* 雇佣经济人 */,
+				8F03A5321DD9BF5D00833E19 /* 我的服务 */,
+				8F16BC421DE82CA700172CB5 /* 选择经济人 */,
 				8F03A5311DD9BF5300833E19 /* 服务充值 */,
 				8F03A52A1DD9AB1D00833E19 /* 城市选择 */,
 				8F03A5231DD9A66B00833E19 /* 意见反馈 */,
@@ -700,20 +707,23 @@
 		8F03A5311DD9BF5300833E19 /* 服务充值 */ = {
 			isa = PBXGroup;
 			children = (
+				8FE925101E00DB0E000CF287 /* FuWuChongZhiZhenVC.h */,
+				8FE925111E00DB0E000CF287 /* FuWuChongZhiZhenVC.m */,
+				8FE925131E00DD55000CF287 /* FuWuChongZhiZhenCell.h */,
+				8FE925141E00DD55000CF287 /* FuWuChongZhiZhenCell.m */,
 				8F03A52B1DD9AB3E00833E19 /* FuWuChongZhiVC.h */,
 				8F03A52C1DD9AB3E00833E19 /* FuWuChongZhiVC.m */,
 			);
 			name = "服务充值";
 			sourceTree = "<group>";
 		};
-		8F03A5321DD9BF5D00833E19 /* 雇佣经济人 */ = {
+		8F03A5321DD9BF5D00833E19 /* 我的服务 */ = {
 			isa = PBXGroup;
 			children = (
 				8F03A52E1DD9BF4D00833E19 /* GuYongJingJiRenVC.h */,
 				8F03A52F1DD9BF4D00833E19 /* GuYongJingJiRenVC.m */,
-				8F16BC421DE82CA700172CB5 /* 选择经济人 */,
 			);
-			name = "雇佣经济人";
+			name = "我的服务";
 			sourceTree = "<group>";
 		};
 		8F03A5361DD9D8A500833E19 /* 关于95 */ = {
@@ -1423,6 +1433,7 @@
 				8FCD4F9D1DA8B4D300CB113C /* UIProgressView+AFNetworking.m in Sources */,
 				8FCD4FA11DA8B4D300CB113C /* LCProgressHUD.m in Sources */,
 				8FEC535C1DDC2D85000328FA /* AllShangPinVC.m in Sources */,
+				8FE925121E00DB0E000CF287 /* FuWuChongZhiZhenVC.m in Sources */,
 				8FCD4F971DA8B4D300CB113C /* UIView+WebCacheOperation.m in Sources */,
 				8F02FE8B1DA89F6B0051EDFC /* ASIInputStream.m in Sources */,
 				8FCD4F841DA8B4D300CB113C /* AFURLConnectionOperation.m in Sources */,
@@ -1515,6 +1526,7 @@
 				8F03A5161DD9504100833E19 /* HomeModel.m in Sources */,
 				8FE5B4771DDB30D50069B82F /* MJRefreshBackNormalFooter.m in Sources */,
 				8FE5B47B1DDB30D50069B82F /* MJRefreshStateHeader.m in Sources */,
+				8FE925151E00DD55000CF287 /* FuWuChongZhiZhenCell.m in Sources */,
 				8FCD4FA31DA8B4D300CB113C /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				8F16BC371DE7E13A00172CB5 /* GuanLiViewController.m in Sources */,
 				8FF4A7E61DD6C9DB00C5C743 /* QiuGouShangPinVC.m in Sources */,

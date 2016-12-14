@@ -199,6 +199,7 @@
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
              [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
         }

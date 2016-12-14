@@ -12,9 +12,7 @@
 /*
  tagg==1. 从优质现货>>店铺查看
  tagg==2, 优质商户详情页
- HomeModel  是商户的
  */
 @property(nonatomic,assign)NSInteger tagg;
-@property(nonatomic,strong)HomeModel * mdd;
 @property(nonatomic,strong)NSString * messageID;
 @end

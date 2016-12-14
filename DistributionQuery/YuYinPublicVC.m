@@ -44,13 +44,33 @@
     UIButton * _rightBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     //搜索按钮
     _rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [_rightBtn setTitle:@"完成" forState:0];
+    [_rightBtn setTitle:@"发布" forState:0];
     _rightBtn.titleLabel.font=[UIFont systemFontOfSize:TITLE_FOUNT];
     _rightBtn.frame=CGRectMake(0, 0, 50, 15);
     [_rightBtn setTitleColor:[UIColor redColor] forState:0];
     UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:_rightBtn];
+    [_rightBtn addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItems=@[rightBtn];
+    //
 }
+#pragma mark --点击发布
+-(void)rightClick:(UIButton*)btn{
+    NSLog(@"内容>>>>%@",_textView.text);
+    [Engine yuyinPublicSting:_textView.text success:^(NSDictionary *dic)
+    {
+        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+        if ([item1 isEqualToString:@"1"]) {
+             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+        }
+        
+    } error:^(NSError *error) {
+        
+    }];
+}
+
 -(void)CreatTextView{
     _textView=[[UITextView alloc]init];
     _textView.backgroundColor=[UIColor whiteColor];

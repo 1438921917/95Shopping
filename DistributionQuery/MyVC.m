@@ -13,7 +13,7 @@
 #import "ShouCangVC.h"
 #import "SuggestionVC.h"
 #import "GuYongJingJiRenVC.h"
-#import "FuWuChongZhiVC.h"
+#import "FuWuChongZhiZhenVC.h"
 #import "GuanYu95VC.h"
 #import "XiaoXiTongZhiVC.h"
 @interface MyVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -43,13 +43,13 @@
 #pragma mark --创建数据源
 -(void)CreatDataArr{
     NSArray * arr1 =@[@"管理",@"收藏"];
-    NSArray * arr2=@[@"服务充值"];
+    NSArray * arr2=@[@"我的服务",@"服务充值"];
     NSArray * arr3 =@[@"消息通知",@"意见反馈"];
     NSArray * arr4 =@[@"关于95"];
     _dataArray=[[NSMutableArray alloc]initWithObjects:arr1,arr2,arr3,arr4, nil];
     
     NSArray * image1 =@[@"my_guanli",@"my_shoucang"];
-    NSArray * image2 =@[@"my_service"];
+    NSArray * image2 =@[@"my_se",@"my_service"];
      NSArray * image3 =@[@"my_message",@"my_fankui"];
     NSArray * image4 =@[@"my_our"];
     _imageArray=[[NSMutableArray alloc]initWithObjects:image1,image2,image3,image4, nil];
@@ -248,10 +248,19 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if(indexPath.section==1){
-        //服务充值
-        FuWuChongZhiVC * vc =[FuWuChongZhiVC new];
-        vc.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row==0) {
+            //我的服务
+            GuYongJingJiRenVC * vc =[GuYongJingJiRenVC new];
+            vc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            //服务充值
+            FuWuChongZhiZhenVC * vc =[FuWuChongZhiZhenVC new];
+            vc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:vc animated:YES];
+ 
+        }
+        
     }else if(indexPath.section==2){
         if (indexPath.row==0) {
             //消息通知

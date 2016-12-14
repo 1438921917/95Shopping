@@ -43,6 +43,7 @@
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_LookCount"]]];
         _sheBeiName=[ToolClass isString:[dic objectForKey:@"C_ProductName"]];
         _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Id"]]];
+        _dianpuID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_User_Id"]]];
         
     }
     
@@ -98,6 +99,22 @@
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
         _sheBeiName=[ToolClass isString:[dic objectForKey:@"C_ProductName"]];
         _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"V_Id"]]];
+    }
+    
+    return self;
+}
+//最新采购
+-(id)initWithZuiXinCaiGouDic:(NSDictionary*)dic{
+    self=[super init];
+    if (self) {
+         _titleName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Content"]]];
+        NSString *city=[ToolClass isString:[dic objectForKey:@"PName"]];
+        NSString *sheng=[ToolClass isString:[dic objectForKey:@"CName"]];
+         _cityName=[NSString stringWithFormat:@"%@-%@",sheng,city];//[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
+         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
+         _priceName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Price"]]];
+        _imageview=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Pics"]]];
+        _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Id"]]];
     }
     
     return self;

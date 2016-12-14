@@ -521,10 +521,10 @@
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
         NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"34获取店铺产品列表%@",str);
+        NSLog(@"36获取店铺产品列表%@",str);
         aSuccess(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"34获取店铺产品列表%@",error);
+        NSLog(@"36获取店铺产品列表%@",error);
     }];
     
 
@@ -550,16 +550,16 @@
 #pragma mark --5企业快速发布
 +(void)qiYeKuaiSuPublicTitleStr:(NSString*)title Count:(NSString*)number PriceStr:(NSString*)price PhoneNumber:(NSString*)phone HangYeID:(NSString*)cid DiQuCode:(NSString*)diquID imageUrlStr:(NSString*)urlStr success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     
-    NSString * urlStrr =[NSString stringWithFormat:@"%@Consult/InsertConsult",SER_VICE];
+    NSString * urlStrr =[NSString stringWithFormat:@"%@Consult/InsertConsult",SER_VICE];//Consult/InsertConsult
     NSMutableDictionary * dic =[NSMutableDictionary new];
     [dic setObject:title forKey:@"Title"];
     [dic setObject:number forKey:@"Count"];
     [dic setObject:price forKey:@"Price"];
     [dic setObject:phone forKey:@"PhoneNum"];
     [dic setObject:cid forKey:@"Cid"];
-    [dic setObject:diquID forKey:@"CityId"];
+    [dic setObject:diquID forKey:@"Cityid"];
     [dic setObject:urlStr forKey:@"Images"];
-    
+   
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager POST:urlStrr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
@@ -568,8 +568,58 @@
         aSuccess(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"5企业快速发布%@",error);
+        [LCProgressHUD hide];
     }];
     
     
+}
+#pragma mark --6语音发布
++(void)yuyinPublicSting:(NSString*)str success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStrr =[NSString stringWithFormat:@"%@Consult/InsertVoice",SER_VICE];//Consult/InsertConsult
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:str forKeyedSubscript:@"Content"];
+    [dic setObject:@"1" forKeyedSubscript:@"TypeId"];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStrr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"6语音发布%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"6语音发布%@",error);
+        [LCProgressHUD hide];
+    }];
+}
+#pragma mark --7获取最新采购列表
++(void)huoQuCaiGouListViewPage:(NSString*)page Cid:(NSString*)cid DiQuCode:(NSString*)areid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * token =[NSUSE_DEFO objectForKey:@"token"];
+    NSString * urlStr =[NSString stringWithFormat:@"%@Consult/GetConsultList?token=%@&cid=%@&Page=%@&pageSize=10&Areaid=%@",SER_VICE,token,cid,page,areid];
+    NSLog(@"7获取最新采购列表%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"7获取最新采购列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"7获取最新采购列表%@",error);
+    }];
+    
+}
+#pragma mark --8获取最新采购详情
++(void)zuiXinCaiGouXiangQingMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * token =[NSUSE_DEFO objectForKey:@"token"];
+    NSString * urlStr =[NSString stringWithFormat:@"%@Consult/GetConsultList?token=%@&consultId=%@",SER_VICE,token,idd];
+    NSLog(@"7获取最新采购列表%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"7获取最新采购列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"7获取最新采购列表%@",error);
+    }];
+
 }
 @end

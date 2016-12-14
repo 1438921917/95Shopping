@@ -22,7 +22,6 @@
 @property(nonatomic,strong)UIButton * bgview;
 @property(nonatomic,strong)UIButton * button1;
 @property(nonatomic,strong)UIButton * button2;
-@property(nonatomic,strong)UIButton * button3;
 @property(nonatomic,strong)NSMutableArray * dataArray;
 @property(nonatomic,assign)int AAA;
 //顶级数组
@@ -46,7 +45,7 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     _shengArr=[NSMutableArray new];
     _cityArr=[NSMutableArray new];
-    NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"个人",@"行业", nil];
+    NSMutableArray* titleArr =[[NSMutableArray alloc]initWithObjects:@"地区",@"行业", nil];
     _bgview=[[UIButton alloc]init];
     _bgview.frame=CGRectMake(0, 0, ScreenWidth, ScreenHeight-64);
     _bgview.backgroundColor=[UIColor blackColor];
@@ -57,38 +56,71 @@
 }
 #pragma mark --数据解析
 -(void)shuJuJieXiDataPage:(NSString*)page HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID {
-    //GongQiu 1优质现货 2最新采购
-    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:@"0" success:^(NSDictionary *dic) {
+    
+    [Engine huoQuCaiGouListViewPage:page Cid:hangYeID DiQuCode:cityID success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
-            
-            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+            if ([dic objectForKey:@"Item2"]==[NSNull null]) {
                 [LCProgressHUD showMessage:@"Item3没有数据"];
             }else{
-                NSArray * array =[dic objectForKey:@"Item3"];
-                NSMutableArray * array2=[NSMutableArray new];
-                for (NSDictionary * dicc in array) {
-                    HomeModel * md =[[HomeModel alloc]initWithYouZhiXianHuoDic:dicc];
-                    [array2 addObject:md];
-                }
-                if (self.myRefreshView == _tableView.header) {
-                    _dataArray = array2;
-                    _tableView.footer.hidden = _dataArray.count==0?YES:NO;
-                }else if(self.myRefreshView == _tableView.footer){
-                    [_dataArray addObjectsFromArray:array2];
-                }
-                
-                
-            }
-            [_tableView reloadData];
-            [_myRefreshView  endRefreshing];
+                    NSArray * array =[dic objectForKey:@"Item2"];
+                    NSMutableArray * array2=[NSMutableArray new];
+                    for (NSDictionary * dicc in array) {
+                      HomeModel * md =[[HomeModel alloc]initWithZuiXinCaiGouDic:dicc];
+                        [array2 addObject:md];
+                    }
+                    if (self.myRefreshView == _tableView.header) {
+                            _dataArray = array2;
+                            _tableView.footer.hidden = _dataArray.count==0?YES:NO;
+                        }else if(self.myRefreshView == _tableView.footer)
+                        {
+                            [_dataArray addObjectsFromArray:array2];
+                        }
+                    }
+                    [_tableView reloadData];
+                    [_myRefreshView  endRefreshing];
         }else{
             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
-            [_myRefreshView endRefreshing];
+             [_myRefreshView endRefreshing];
         }
     } error:^(NSError *error) {
-        
+      
+        [_myRefreshView endRefreshing];
     }];
+    
+    
+//    //GongQiu 1优质现货 2最新采购
+//    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:@"0" success:^(NSDictionary *dic) {
+//        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+//        if ([item1 isEqualToString:@"1"]) {
+//            
+//            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
+//                [LCProgressHUD showMessage:@"Item3没有数据"];
+//            }else{
+//                NSArray * array =[dic objectForKey:@"Item3"];
+//                NSMutableArray * array2=[NSMutableArray new];
+//                for (NSDictionary * dicc in array) {
+//                    HomeModel * md =[[HomeModel alloc]initWithYouZhiXianHuoDic:dicc];
+//                    [array2 addObject:md];
+//                }
+//                if (self.myRefreshView == _tableView.header) {
+//                    _dataArray = array2;
+//                    _tableView.footer.hidden = _dataArray.count==0?YES:NO;
+//                }else if(self.myRefreshView == _tableView.footer){
+//                    [_dataArray addObjectsFromArray:array2];
+//                }
+//                
+//                
+//            }
+//            [_tableView reloadData];
+//            [_myRefreshView  endRefreshing];
+//        }else{
+//            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+//            [_myRefreshView endRefreshing];
+//        }
+//    } error:^(NSError *error) {
+//        
+//    }];
 }
 #pragma mark --获取全国省份
 -(void)shengFenData{
@@ -176,7 +208,6 @@
             [_rightTabelView removeFromSuperview];
             [_leftTabelView removeFromSuperview];
             _button2.selected=NO;
-             _button3.selected=NO;
             [self CreatLeftTableVeiw];
             
         }else{
@@ -185,40 +216,20 @@
         
         _button1=btn;
         
-    }else  if (btn.tag==1){
-        //点击的是第二个
-        if (btn.selected==YES) {
-           
-            _tableView.scrollEnabled=NO;
-            [_tableView setContentOffset:CGPointZero animated:NO];
-            [_tableView addSubview:_bgview];
-            [_leftTabelView removeFromSuperview];
-            [_rightTabelView removeFromSuperview];
-            _button1.selected=NO;
-            _button3.selected=NO;
-            [_cityArr removeAllObjects];
-            _cityArr=nil;
-            _cityArr=[[NSMutableArray alloc]initWithObjects:@"个人",@"企业",nil];
-             [self CreatRightTableView:ScreenWidth Xzhou:0 Gzhou:44*_cityArr.count];
-        }else{
-            [self dissmiss];
-        }
-        _button2=btn;
     }else{
         if (btn.selected==YES) {
-             [self getHangYeAll];
+            [self getHangYeAll];
             _tableView.scrollEnabled=NO;
             [_tableView setContentOffset:CGPointZero animated:NO];
-            _button2.selected=NO;
-            _button1.selected=NO;
-            [_rightTabelView removeFromSuperview];
-            [_leftTabelView removeFromSuperview];
             [_tableView addSubview:_bgview];
-             [self CreatLeftTableVeiw];;
+            [_leftTabelView removeFromSuperview];
+            [_rightTabelView removeFromSuperview];
+            _button1.selected=NO;
+            [self CreatLeftTableVeiw];
         }else{
              [self dissmiss];
         }
-         _button3=btn;
+         _button2=btn;
     }
 }
 
@@ -232,7 +243,7 @@
 #pragma mark --创建左边表格
 -(void)CreatLeftTableVeiw{
     
-    _leftTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+51, ScreenWidth/2.5, ScreenHeight/1.5) style:UITableViewStylePlain];
+    _leftTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64+51, ScreenWidth/2, ScreenHeight/1.5) style:UITableViewStylePlain];
     _leftTabelView.dataSource=self;
     _leftTabelView.delegate=self;
     _leftTabelView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -318,8 +329,6 @@
             CityModel * md =_shengArr[indexPath.row];
             cell1.textLabel.text=md.shengName;
             cell1.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }else if (_btntag==1){
-            
         }
         else{
             //点击的是行业，给行业赋值
@@ -335,9 +344,6 @@
         if (_btntag==0) {
             CityModel * md =_cityArr[indexPath.row];
             cell1.textLabel.text=md.cityName;
-        }else if (_btntag==1){
-           cell1.textLabel.text=_cityArr[indexPath.row];
-           // NSLog(@"输出得到数据%@",_cityArr[indexPath.row]);
         }
         else{
             HangYeModel * md =_cityArr[indexPath.row];
@@ -347,8 +353,8 @@
     }else{
         NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
         ZuiXinCaiGouCell * cell =[ZuiXinCaiGouCell cellWithTableView:tableView CellID:CellIdentifier];
-        HomeModel * md =_dataArray[indexPath.row];
-        cell.model=md;
+//        HomeModel * md =_dataArray[indexPath.row];
+//        cell.model=md;
         return cell;
     }
     
@@ -361,8 +367,6 @@
             CityModel * mdd =_shengArr[indexPath.row];
             NSLog(@"输出%@",mdd.shengCode);
             [self shengWithCity:mdd];
-        }else if (_btntag==1){
-            
         }
         else{
             HangYeModel * md =_shengArr[indexPath.row];
@@ -376,17 +380,13 @@
             [_button1 setTitle:mdd.cityName forState:0];
             _button1.titleLabel.font=[UIFont systemFontOfSize:14];
             [self shuJuJieXiDataPage:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode];
-        }else if (_btntag==1){
-            _button2.selected=NO;
-            [_button2 setTitle:_cityArr[indexPath.row] forState:0];
-            _button2.titleLabel.font=[UIFont systemFontOfSize:14];
         }
         else{
             HangYeModel * mdd =_cityArr[indexPath.row];
             _jiLuHangYeCode=mdd.HYidd;
-            _button3.selected=NO;
-            [_button3 setTitle:mdd.HYname forState:0];
-            _button3.titleLabel.font=[UIFont systemFontOfSize:14];
+            _button2.selected=NO;
+            [_button2 setTitle:mdd.HYname forState:0];
+            _button2.titleLabel.font=[UIFont systemFontOfSize:14];
             [self shuJuJieXiDataPage:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] ];
         }
         [self dissmiss];

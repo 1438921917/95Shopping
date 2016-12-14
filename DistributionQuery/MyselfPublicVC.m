@@ -264,13 +264,13 @@
    //所在地 _diquText _cityCode
     //图片url _urlStr
     
-    NSLog(@"标题%@",cell0.textField.text);
-    NSLog(@"数量%@",cell1.textField.text);
-    NSLog(@"价格%@",cell2.textField.text);
-    NSLog(@"手机号%@",cell3.textField.text);
-    NSLog(@"行业%@>>>行业ID=%@",_hangYeName,_hangYeCode);
-    NSLog(@"所在地%@>>>所在地code=%@",_diquText,_cityCode);
-    NSLog(@"图片url=%@",_urlStr);
+    NSLog(@"标题>>%@",cell0.textField.text);
+    NSLog(@"数量>>%@",cell1.textField.text);
+    NSLog(@"价格>>%@",cell2.textField.text);
+    NSLog(@"手机号>>%@",cell3.textField.text);
+    NSLog(@"行业名字%@>>>行业ID=%@",_hangYeName,_hangYeCode);
+    NSLog(@"所在地名字>>%@>>>所在地code=%@",_diquText,_cityCode);
+    NSLog(@"图片url>>%@",_urlStr);
     [LCProgressHUD showLoading:@"发布中..."];
     [Engine qiYeKuaiSuPublicTitleStr:cell0.textField.text Count:cell1.textField.text PriceStr:cell2.textField.text PhoneNumber:cell3.textField.text HangYeID:[ToolClass isString:_hangYeCode] DiQuCode:[ToolClass isString:_cityCode] imageUrlStr:[ToolClass isString:_urlStr] success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];

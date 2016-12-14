@@ -259,6 +259,7 @@
 
 #pragma mark --创建view1
 -(void)CreatBtnFore{
+    //创建4个按钮
     _view1=[UIView new];
     _view1.backgroundColor=[UIColor whiteColor];
     [_bgScrollView sd_addSubviews:@[_view1]];
@@ -285,7 +286,7 @@
     
     
 }
-#pragma mark --4个按钮
+#pragma mark --4个按钮点击事件
 -(void)view1Btn:(UIButton*)btn{
    // NSLog(@"输出%lu",btn.tag);
     if (btn.tag==0) {
@@ -327,7 +328,7 @@
     UIImageView * imageview =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"home_weituo"]];
     [_view2 sd_addSubviews:@[imageview]];
     imageview.sd_layout
-    .leftSpaceToView(_view2,30)
+    .leftSpaceToView(_view2,20)
     .topSpaceToView(_view2,10)
     .widthIs(221/2.5)
     .heightIs(65/2.5);
@@ -357,7 +358,6 @@
 
 #pragma mark --创建view3（特价专区）
 -(void)CreatView3{
-    NSLog(@"有个数吗%lu",_tejiaArray.count);
     _view3=[UIView new];
     _view3.backgroundColor=[UIColor whiteColor];
     [_bgScrollView sd_addSubviews:@[_view3]];
@@ -370,7 +370,6 @@
     UILabel * label =[UILabel new];
     label.text=@"特价专区";
     label.textColor=[UIColor redColor];
-   // label.alpha=.6;
     label.font=[UIFont systemFontOfSize:16];
      [_view3 sd_addSubviews:@[label]];
     label.sd_layout
@@ -422,8 +421,10 @@
                     NSDictionary * dicc =item3Arr[i];
                     HomeModel * md =[[HomeModel alloc]initWithTeJiaDic:dicc];
                     NSLog(@"输出看%@",md.imageview);
-                    UIImageView * imageTejia =[[UIImageView alloc]init];
-                    [imageTejia setImageWithURL:[NSURL URLWithString:md.imageview] placeholderImage:[UIImage imageNamed:@"login_banner"]];
+                    UIButton * imageTejia =[[UIButton alloc]init];
+                    imageTejia.tag=i;
+                    [imageTejia setImageForState:0 withURL:[NSURL URLWithString:md.imageview] placeholderImage:[UIImage imageNamed:@"login_banner"]];
+                    [imageTejia addTarget:self action:@selector(tejiaBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [priceScrollview sd_addSubviews:@[imageTejia]];
                     imageTejia.sd_layout
                     .leftSpaceToView(priceScrollview,10+(100+10)*i)
@@ -494,6 +495,12 @@
     [self CreatView4];//设备专区
    // [self CreatView5];//物资专区
 }
+-(void)tejiaBtnClick:(UIButton*)btn{
+    YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
+    vc.tagg=10;
+    vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark --特价专区点击进入
 -(void)tejiaBtn:(UIButton*)btn{
     YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
@@ -558,9 +565,10 @@
             }
             for (int i =0; i<sheBeiArr.count; i++) {
                 UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
-                // btn.backgroundColor=[UIColor redColor];
+                btn.tag=i;
                 [btn setTitle:sheBeiArr[i] forState:0];
                 btn.titleLabel.font=[UIFont systemFontOfSize:16];
+                [btn addTarget:self action:@selector(btnSheBeiClick:) forControlEvents:UIControlEventTouchUpInside];
                 [btn setTitleColor:[UIColor blackColor] forState:0];
                 [_view4 sd_addSubviews:@[btn]];
                 btn.sd_layout
@@ -588,6 +596,13 @@
    
     [self CreatView5];//物资专区
     
+}
+#pragma mark --设备内容点击事件
+-(void)btnSheBeiClick:(UIButton*)btn{
+    YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
+    vc.tagg=11;
+    vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark --创建view5物资专区
 -(void)CreatView5{
