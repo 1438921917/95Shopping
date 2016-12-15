@@ -89,8 +89,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChoosePeopleModel * md=_dataArray[indexPath.row];
-    self.peopleIDBlock(md.jingJiIdd);
+//    ChoosePeopleModel * md=_dataArray[indexPath.row];
+//    self.peopleIDBlock(md.jingJiIdd);
 }
 #pragma mark --对勾
 -(void)duiBtn:(UIButton*)btn{

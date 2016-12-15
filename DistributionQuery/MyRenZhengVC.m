@@ -11,10 +11,12 @@
 @interface MyRenZhengVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UIView * view1;
 @property(nonatomic,strong)UIView * view2;
+@property(nonatomic,strong)UIView * view3;//身份证反面
 @property(nonatomic,strong)UIImageView * imageview;
 @property(nonatomic,strong)UIButton* lastBtn;
 @property(nonatomic,strong)UIImage * image1;
 @property(nonatomic,strong)UIImage * image2;
+@property(nonatomic,strong)UIImage * image3;//身份证反面
 @end
 
 @implementation MyRenZhengVC
@@ -61,7 +63,24 @@
     .topEqualToView(nameLabel)
     .widthIs(413/2)
     .heightIs(242/2);
-     [_view1 setupAutoHeightWithBottomView:upbtn bottomMargin:10];
+    
+    upBtn3=[UIButton buttonWithType:UIButtonTypeCustom];
+    [upBtn3 addTarget:self action:@selector(upbtnphoto:)
+    forControlEvents:UIControlEventTouchUpInside];
+    upBtn3.tag=2;
+    [upBtn3 setBackgroundImage:[UIImage imageNamed:@"renzheng_add2"] forState:0];
+    [_view1 sd_addSubviews:@[upBtn3]];
+    //    413 212
+    upBtn3.sd_layout
+    .leftSpaceToView(nameLabel,25)
+    .topSpaceToView(upbtn,10)
+    .widthIs(413/2)
+    .heightIs(242/2);
+    
+    
+    
+    
+    [_view1 setupAutoHeightWithBottomView:upBtn3 bottomMargin:10];
     if (_image1) {
         NSLog(@"");
     }else{
@@ -82,6 +101,27 @@
         }];
     }
     
+    if (_image3) {
+        
+    }else{
+        [Engine huoQuImageWithType:@"3" success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"]) {
+                NSArray * imageHead =[dic objectForKey:@"Item3"];
+                for (NSDictionary * dicc  in imageHead) {
+                    NSString* Url =[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"Img_Url"]];
+                    [upBtn3 setBackgroundImageForState:0 withURL:[NSURL URLWithString:Url] placeholderImage:[UIImage imageNamed:@"renzheng_add"]];
+                }
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
+            }
+        } error:^(NSError *error) {
+            
+        }];
+    }
+    
+    
+    
 }
 
 #pragma mark --上传身份证照片
@@ -99,13 +139,13 @@
 
 #pragma mark --照片实例
 -(void)CreatPhotoImage{
-    _imageview=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"renzheng_shifan"]];
+    _imageview=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"renzheng_title"]];
     [self.view sd_addSubviews:@[_imageview]];
     _imageview.sd_layout
     .leftSpaceToView(self.view,15)
     .topSpaceToView(_view1,10)
-    .rightSpaceToView(self.view,15)
-    .heightIs((ScreenWidth-30)*371/596);
+    .widthIs(276/2)
+    .heightIs(81/2);
 }
 
 #pragma mark --创建view2
@@ -130,7 +170,7 @@
     
     upbtn2=[UIButton buttonWithType:UIButtonTypeCustom];
     [upbtn2 addTarget:self action:@selector(upbtnphoto:) forControlEvents:UIControlEventTouchUpInside];
-    upbtn2.tag=2;
+    upbtn2.tag=3;
     //[upbtn2 setBackgroundImage:[UIImage imageNamed:@"renzheng_add1"] forState:0];
     [_view2 sd_addSubviews:@[upbtn2]];
     //    413 212
@@ -178,12 +218,18 @@
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-    if (_lastBtn.tag==1) {
+    if (_lastBtn.tag==1 ) {
+        
         [upbtn setBackgroundImage:image forState:0];
         //tagg=1 省份正 tagg=4实地图片
         [self shangChuanImage:image tagg:@"1"];
         _image1=image;
-    }else{
+    }else if (_lastBtn.tag==2){
+         [upBtn3 setBackgroundImage:image forState:0];
+         [self shangChuanImage:image tagg:@"3"];
+        _image3=image;
+    }
+    else{
        [upbtn2 setBackgroundImage:image forState:0];
         [self shangChuanImage:image tagg:@"4"];
         _image2=image;

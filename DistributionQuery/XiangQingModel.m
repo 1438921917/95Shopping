@@ -34,5 +34,27 @@
     
     return self;
 }
-
+//最新采购详情
+-(id)initWithZuiXinCiGouXiangXiDic:(NSDictionary*)dic{
+    self=[super init];
+    if (self) {
+        _imagename =[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[ToolClass isString:[dic objectForKey:@"C_Pics"]]];
+        _titleName=[ToolClass isString:[dic objectForKey:@"C_Name"]];
+        _priceName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Price"]]];
+        _bianHaoName=@"123459";
+       //具体型号
+        NSString * chanSheng =[ToolClass isString:[dic objectForKey:@"PName"]];
+        NSString * chashi =[ToolClass isString:[dic objectForKey:@"CName"]];
+        _chanDiName=[NSString stringWithFormat:@"%@-%@",chanSheng,chashi];
+        _shuLiangName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
+        _suozaiDiName=[NSString stringWithFormat:@"%@-%@",chanSheng,chashi];
+        _xinagHaoName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Cid"]]];
+        //详细信息
+        _xiangXiName=[ToolClass isString:[dic objectForKey:@"C_Content"]];
+        
+        
+    }
+    
+    return self;
+}
 @end

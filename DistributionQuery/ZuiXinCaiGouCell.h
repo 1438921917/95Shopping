@@ -12,5 +12,6 @@
 
 +(instancetype)cellWithTableView:(UITableView*)tableView CellID:(NSString*)cellID;
 
-@property(nonatomic,retain)HomeModel * model;
+@property(nonatomic,strong)HomeModel * model;
+
 @end

@@ -42,7 +42,7 @@
 #pragma mark --解析详情页的数据
 -(void)jieXiXiangQingYeData{
     //@"7458" _messageID
-    if (_tagg==1) {
+    if (_tagg==1 || _tagg==3) {
         //现货详情
         [Engine tableViewXiangQingJieMianMessageID:_messageID success:^(NSDictionary *dic) {
             NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
@@ -64,6 +64,19 @@
         }];
     }else if (_tagg==2){
         //最新采购详情
+        [Engine zuiXinCaiGouXiangQingMessageID:_messageID success:^(NSDictionary *dic) {
+            NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
+            if ([item1 isEqualToString:@"1"]) {
+                NSDictionary * itemDicr=[dic objectForKey:@"Item2"];
+                XiangQingModel * md =[[XiangQingModel alloc]initWithZuiXinCiGouXiangXiDic:itemDicr];
+                [_dataArray addObject:md];
+                [self CreatView1];
+            }else{
+                [LCProgressHUD showMessage:[dic objectForKey:@"Item3"]];
+            }
+        } error:^(NSError *error) {
+            
+        }];
     }
     
 }
@@ -88,8 +101,8 @@
     .topSpaceToView(_bgScrollView,0)
     .rightSpaceToView(_bgScrollView,0);
    
-    
-    NSArray * arr =@[@"banner"];
+   XiangQingModel * md =_dataArray[0];
+    NSArray * arr =@[md.imagename];
     //轮播图可以通过URL来获取图片的大小，到时候在改尺寸
     cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, ScreenWidth, 540*ScreenWidth/1080) delegate:self placeholderImage:[UIImage imageNamed:@"banner"]];
     cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
@@ -102,7 +115,7 @@
         // NSLog(@">>>>>  %ld", (long)index);
         
     };
-    XiangQingModel * md =_dataArray[0];
+
    //标题
     UILabel * titleLable =[UILabel new];
     titleLable.text=md.titleName;//@"出售183*7米的青岛产球磨机";
@@ -147,6 +160,7 @@
     .centerYEqualToView(priceLabel)
     .heightIs(20);
     [bianHao setSingleLineAutoResizeWithMaxWidth:200];
+    
     //进店查看
     UIButton * chaKanBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     [chaKanBtn setImage:[UIImage imageNamed:@"xiangqing_bt"] forState:0];
@@ -199,11 +213,13 @@
     .widthIs(70)
     .heightIs(20);
     if (_tagg==2) {
+        //最新采购
         viewColor.hidden=YES;
         [chaKanBtn setImage:[UIImage imageNamed:@"xiangqing_bt1(1)"] forState:0];
         [_view1 setupAutoHeightWithBottomView:chaKanBtn bottomMargin:10];
 
     }else if (_tagg==3){
+        //店铺在进详情
         chaKanBtn.hidden=YES;
         [_view1 setupAutoHeightWithBottomView:viewColor bottomMargin:10];
     }
@@ -242,7 +258,22 @@
 -(void)chakanBtn:(UIButton*)btn{
     if (_tagg==2) {
         //短信联系
-         [LCProgressHUD showMessage:@"点击了短信联系"];
+       //  [LCProgressHUD showMessage:@"点击了短信联系"];
+        UIAlertController * actionView =[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"你好，我对你的求购一台二手设备感兴趣，请电话联系我15023573953" preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+       
+        
+        UIAlertAction * action1 =[UIAlertAction actionWithTitle:@"自己编辑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction * action2 =[UIAlertAction actionWithTitle:@"发送" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [actionView addAction:action1];
+        [actionView addAction:action2];
+        [self presentViewController:actionView animated:YES completion:nil];
+        
     }else{
         //进店查看
         JinDianChaKanVC * vc =[JinDianChaKanVC new];

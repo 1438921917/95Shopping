@@ -14,5 +14,5 @@
  tagg==2, 优质商户详情页
  */
 @property(nonatomic,assign)NSInteger tagg;
-@property(nonatomic,strong)NSString * messageID;
+@property(nonatomic,strong)NSString * messageID;//产品ID
 @end

@@ -112,8 +112,8 @@
 {
     JinDianModel * md =_dataArray[indexPath.row];
     XiangQingVC * vc =[XiangQingVC new];
-    vc.tagg=3;
-    vc.messageID=md.messageID;
+    vc.tagg=3;//C_User_Id 店铺ID
+    vc.messageID=md.messageID;//md.messageID; 店铺里面的某一款商品ID
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

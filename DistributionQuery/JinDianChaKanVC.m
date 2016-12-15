@@ -204,6 +204,7 @@
             shouCang.text=[ToolClass isString:[NSString stringWithFormat:@"收藏次数  %@",[dicc objectForKey:@"M_Category"]]];
             //400电话
             [phoneBtn setTitle:[ToolClass isString:[NSString stringWithFormat:@"%@",[dicc objectForKey:@"E_Number"]]] forState:0];
+            //M_Id 是店铺ID
         }else{
             [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
         }

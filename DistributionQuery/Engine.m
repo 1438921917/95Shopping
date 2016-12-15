@@ -610,16 +610,36 @@
 +(void)zuiXinCaiGouXiangQingMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * token =[NSUSE_DEFO objectForKey:@"token"];
     NSString * urlStr =[NSString stringWithFormat:@"%@Consult/GetConsultList?token=%@&consultId=%@",SER_VICE,token,idd];
-    NSLog(@"7获取最新采购列表%@",urlStr);
+    NSLog(@"8获取最新采购详情%@",urlStr);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
         NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"7获取最新采购列表%@",str);
+        NSLog(@"8获取最新采购详情%@",str);
         aSuccess(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"7获取最新采购列表%@",error);
+        NSLog(@"8获取最新采购详情%@",error);
+        [LCProgressHUD hide];
+        
     }];
 
+}
+#pragma mark --9获取充值界面的价格和短信条数
++(void)priceGetType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+
+    NSString * urlStr =[NSString stringWithFormat:@"%@Alipay/GetPDRecharge?type=%@",SER_VICE,type];
+    NSLog(@"9获取充值界面的价格和短信条数%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"9获取充值界面的价格和短信条数%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"9获取充值界面的价格和短信条数%@",error);
+        [LCProgressHUD hide];
+        
+    }];
+    
 }
 @end

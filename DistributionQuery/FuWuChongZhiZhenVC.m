@@ -72,6 +72,7 @@
 -(void)chongZhiButton:(UIButton*)btn{
     if (btn.tag==0 || btn.tag==1) {
         FuWuChongZhiVC * vc =[FuWuChongZhiVC new];
+        vc.tagg=btn.tag;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         [LCProgressHUD showMessage:@"此功能尚未开通,敬请期待~"];

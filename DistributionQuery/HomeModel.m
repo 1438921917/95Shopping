@@ -36,10 +36,10 @@
         _priceName=[ToolClass isString:[dic objectForKey:@"C_ExpectPrice"]];
         NSString *city=[ToolClass isString:[dic objectForKey:@"C_City_Name"]];
         NSString *sheng=[ToolClass isString:[dic objectForKey:@"C_Prov_Name"]];
-        NSLog(@"aa输出%@",sheng);
-        NSLog(@"bb输出%@",city);
+//        NSLog(@"aa输出%@",sheng);
+//        NSLog(@"bb输出%@",city);
         _cityName=[NSString stringWithFormat:@"%@-%@",sheng,city];
-          NSLog(@"cc输出%@",_cityName);
+         // NSLog(@"cc输出%@",_cityName);
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_LookCount"]]];
         _sheBeiName=[ToolClass isString:[dic objectForKey:@"C_ProductName"]];
         _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Id"]]];
@@ -103,17 +103,19 @@
     
     return self;
 }
-//最新采购
+////最新采购
 -(id)initWithZuiXinCaiGouDic:(NSDictionary*)dic{
     self=[super init];
     if (self) {
          _titleName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Content"]]];
-        NSString *city=[ToolClass isString:[dic objectForKey:@"PName"]];
-        NSString *sheng=[ToolClass isString:[dic objectForKey:@"CName"]];
-         _cityName=[NSString stringWithFormat:@"%@-%@",sheng,city];//[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
+        NSString *city=[ToolClass isString:[dic objectForKey:@"CName"]];
+        NSString *sheng=[ToolClass isString:[dic objectForKey:@"PName"]];
+         _cityName=[NSString stringWithFormat:@"%@-%@",sheng,city];
          _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
          _priceName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Price"]]];
-        _imageview=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Pics"]]];
+        NSString * image =[ToolClass isString:[dic objectForKey:@"C_Pics"]];
+        _imageview=[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,image];
+       
         _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Id"]]];
     }
     

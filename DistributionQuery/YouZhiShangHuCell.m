@@ -165,6 +165,7 @@
     _cityLabel.text=model.cityName;
     _cishuLable.text=model.taishuName;
     _woshouLabel.text=model.sheBeiName;
+    NSLog(@"我看看a aaa");
 
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -97,5 +97,7 @@ typedef void (^ErrorBlock)(NSError*error);
 +(void)huoQuCaiGouListViewPage:(NSString*)page Cid:(NSString*)cid DiQuCode:(NSString*)areid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --8获取最新采购详情
 +(void)zuiXinCaiGouXiangQingMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --9获取充值界面的价格和短信条数
++(void)priceGetType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
 @end

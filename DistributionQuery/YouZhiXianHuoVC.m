@@ -74,6 +74,9 @@
 #pragma mark --数据解析
 -(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID jiaoYiStye:(NSString*)jiaoyi{
     [LCProgressHUD showMessage:@"请稍后..."];
+    NSLog(@"到了%@",te);
+    NSLog(@"到了%@",jiaoyi);
+    
     [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:jiaoyi TeJia:te success:^(NSDictionary *dic) {
         [LCProgressHUD hide];
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
@@ -460,6 +463,7 @@
     }else{
          HomeModel * md =_dataArray[indexPath.row];
         XiangQingVC * vc =[XiangQingVC new];
+        vc.tagg=1;
         vc.messageID=md.messageID;
         vc.dianPuID=md.dianpuID;
         

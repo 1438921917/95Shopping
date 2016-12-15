@@ -60,10 +60,10 @@
     [Engine huoQuCaiGouListViewPage:page Cid:hangYeID DiQuCode:cityID success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
-            if ([dic objectForKey:@"Item2"]==[NSNull null]) {
+            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
                 [LCProgressHUD showMessage:@"Item3没有数据"];
             }else{
-                    NSArray * array =[dic objectForKey:@"Item2"];
+                    NSArray * array =[dic objectForKey:@"Item3"];
                     NSMutableArray * array2=[NSMutableArray new];
                     for (NSDictionary * dicc in array) {
                       HomeModel * md =[[HomeModel alloc]initWithZuiXinCaiGouDic:dicc];
@@ -89,38 +89,6 @@
     }];
     
     
-//    //GongQiu 1优质现货 2最新采购
-//    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:@"1" TeJia:@"0" success:^(NSDictionary *dic) {
-//        NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
-//        if ([item1 isEqualToString:@"1"]) {
-//            
-//            if ([dic objectForKey:@"Item3"]==[NSNull null]) {
-//                [LCProgressHUD showMessage:@"Item3没有数据"];
-//            }else{
-//                NSArray * array =[dic objectForKey:@"Item3"];
-//                NSMutableArray * array2=[NSMutableArray new];
-//                for (NSDictionary * dicc in array) {
-//                    HomeModel * md =[[HomeModel alloc]initWithYouZhiXianHuoDic:dicc];
-//                    [array2 addObject:md];
-//                }
-//                if (self.myRefreshView == _tableView.header) {
-//                    _dataArray = array2;
-//                    _tableView.footer.hidden = _dataArray.count==0?YES:NO;
-//                }else if(self.myRefreshView == _tableView.footer){
-//                    [_dataArray addObjectsFromArray:array2];
-//                }
-//                
-//                
-//            }
-//            [_tableView reloadData];
-//            [_myRefreshView  endRefreshing];
-//        }else{
-//            [LCProgressHUD showMessage:[dic objectForKey:@"Item2"]];
-//            [_myRefreshView endRefreshing];
-//        }
-//    } error:^(NSError *error) {
-//        
-//    }];
 }
 #pragma mark --获取全国省份
 -(void)shengFenData{
@@ -353,8 +321,8 @@
     }else{
         NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
         ZuiXinCaiGouCell * cell =[ZuiXinCaiGouCell cellWithTableView:tableView CellID:CellIdentifier];
-//        HomeModel * md =_dataArray[indexPath.row];
-//        cell.model=md;
+        HomeModel * md =_dataArray[indexPath.row];
+        cell.model=md;
         return cell;
     }
     

@@ -95,10 +95,10 @@
     //小角标但
     UIImageView * imagedan =[UIImageView new];
     imagedan.image=[UIImage imageNamed:@"my_danbao"];
-    [headImageView sd_addSubviews:@[imagedan]];
+    [headView sd_addSubviews:@[imagedan]];
     imagedan.sd_layout
-    .rightSpaceToView(headImageView,10)
-    .bottomSpaceToView(headImageView,10)
+    .leftSpaceToView(headImageView,-12)
+    .bottomEqualToView(headImageView)
     .widthIs(33/2)
     .heightIs(33/2);
   

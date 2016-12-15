@@ -31,6 +31,6 @@
 //(收藏采购)
 -(id)initWithCaiGouDic:(NSDictionary*)dic;
 
-//最新采购
+////最新采购
 -(id)initWithZuiXinCaiGouDic:(NSDictionary*)dic;
 @end

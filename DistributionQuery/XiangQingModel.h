@@ -24,6 +24,9 @@
 //详细信息
 @property(nonatomic,copy)NSString * xiangXiName;
 //猜你喜欢
--(id)initWithXiangXiDic:(NSDictionary*)dic;
 
+//优质现货详情
+-(id)initWithXiangXiDic:(NSDictionary*)dic;
+//最新采购详情
+-(id)initWithZuiXinCiGouXiangXiDic:(NSDictionary*)dic;
 @end

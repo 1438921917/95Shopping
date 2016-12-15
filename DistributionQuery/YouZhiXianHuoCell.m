@@ -148,7 +148,7 @@
     _taishuLabel.text=[NSString stringWithFormat:@"%@台",model.taishuName];//@"10台";
     _priceLabel.text=[NSString stringWithFormat:@"%@元",model.priceName];//@"8000元";
     
-    
+    NSLog(@"现货啊现货啊");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

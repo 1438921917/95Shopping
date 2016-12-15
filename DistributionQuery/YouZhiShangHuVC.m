@@ -369,7 +369,7 @@
         HomeModel * mdd =_dataArray[indexPath.row];
         JinDianChaKanVC * vc =[JinDianChaKanVC new];
         vc.tagg=2;
-        vc.messageID=mdd.messageID;
+        vc.messageID=mdd.messageID;//产品ID
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

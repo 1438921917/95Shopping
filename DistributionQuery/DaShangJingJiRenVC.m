@@ -9,9 +9,13 @@
 #import "DaShangJingJiRenVC.h"
 
 @interface DaShangJingJiRenVC ()
+{
+    UILabel * hejiLab;//合计多少钱
+}
 @property(nonatomic,strong)UIView * view1;
 @property(nonatomic,strong)UIView * view2;
 @property(nonatomic,strong)UIButton * lastBtn;
+@property(nonatomic,strong)NSArray *  titleArr;
 @end
 
 @implementation DaShangJingJiRenVC
@@ -111,14 +115,17 @@
     .heightIs(20);
     [dashangLab setSingleLineAutoResizeWithMaxWidth:260];
     //6个按钮
-    NSArray * imageArr =@[@"bt11",@"bt2",@"bt3",@"bt4",@"bt5",@"bt6"];
-    NSArray * seleArr =@[@"bt1",@"bt22",@"bt33",@"bt44",@"bt55",@"bt66"];
+    NSArray * imageArr =@[@"messege_line",@"messege_line",@"messege_line",@"messege_line",@"messege_line",@"messege_line"];
+    NSArray * seleArr =@[@"messege_line_red",@"messege_line_red",@"messege_line_red",@"messege_line_red",@"messege_line_red",@"messege_line_red"];
+    _titleArr =@[@"100",@"200",@"300",@"400",@"500",@"600"];
     UIButton * bbttnn;
         for (int i =0; i<6; i++) {
             UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
             [btn setBackgroundImage:[UIImage imageNamed:imageArr[i]] forState:0];
             btn.tag=i;
             bbttnn=btn;
+            [btn setTitle:_titleArr[i] forState:0];
+            [btn setTitleColor:[UIColor blackColor] forState:0];
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
             [btn setBackgroundImage:[UIImage imageNamed:seleArr[i]] forState:UIControlStateSelected];
             [_view2 sd_addSubviews:@[btn]];
@@ -134,8 +141,8 @@
             
         }
     //合计
-    UILabel * hejiLab =[UILabel new];
-    hejiLab.text=@"合计  1066.6元";
+    hejiLab =[UILabel new];
+    hejiLab.text=@"合计  1100元";
     hejiLab.textColor=[UIColor redColor];
     hejiLab.font=[UIFont systemFontOfSize:20];
     hejiLab.attributedText=[ToolClass attrStrFrom:hejiLab.text intFond:16 Color:[UIColor blackColor] numberStr:@"合计"];
@@ -162,6 +169,10 @@
     _lastBtn.selected=!_lastBtn.selected;
     btn.selected=!btn.selected;
     _lastBtn=btn;
+    NSLog(@"输出%@",_titleArr[btn.tag]);
+    int d = [_titleArr[btn.tag] intValue];
+    hejiLab.text=[NSString stringWithFormat:@"合计   %d元",1000+d];
+    hejiLab.attributedText=[ToolClass attrStrFrom:hejiLab.text intFond:16 Color:[UIColor blackColor] numberStr:@"合计"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
