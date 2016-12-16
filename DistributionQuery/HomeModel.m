@@ -22,6 +22,8 @@
         _cityName=[NSString stringWithFormat:@"%@-%@",sheng,city];
         _taishuName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_LookCount"]]];
         _sheBeiName=[ToolClass isString:[dic objectForKey:@"C_ProductName"]];
+        _messageID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Id"]]];//"C_User_Id
+        _dianpuID=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_User_Id"]]];
     }
     
     return self;

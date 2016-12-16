@@ -148,9 +148,18 @@
     _taishuLabel.text=[NSString stringWithFormat:@"%@台",model.taishuName];//@"10台";
     _priceLabel.text=[NSString stringWithFormat:@"%@元",model.priceName];//@"8000元";
     
-    NSLog(@"现货啊现货啊");
+   
 }
-
+-(void)setMd:(XiangQingModel *)md
+{
+    _md=md;
+    _titleLabel.text=md.caititle;//@"出售海泰500T注塑机";
+    [_leftImage setImageWithURL:[NSURL URLWithString:md.caiimage] placeholderImage:[UIImage imageNamed:@"xianhuo_pic1"]];
+    _cityLabel.text=md.caiaddress;//@"河北-石家庄";
+    _taishuLabel.text=[NSString stringWithFormat:@"%@台",md.caitaishu];//@"10台";
+    _priceLabel.text=[NSString stringWithFormat:@"%@元",md.caiprice];//@"8000元";
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

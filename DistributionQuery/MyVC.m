@@ -97,7 +97,7 @@
     imagedan.image=[UIImage imageNamed:@"my_danbao"];
     [headView sd_addSubviews:@[imagedan]];
     imagedan.sd_layout
-    .leftSpaceToView(headImageView,-12)
+    .leftSpaceToView(headImageView,-20)
     .bottomEqualToView(headImageView)
     .widthIs(33/2)
     .heightIs(33/2);

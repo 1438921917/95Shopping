@@ -102,6 +102,7 @@
 }
 
 #pragma mark --3.获取验证码
+//1.注册 2.登陆 3.找回密码
 +(void)getCodePhone:(NSString*)phone typeStr:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Login/GetCode?Mobile=%@&Type=%@",SER_VICE,phone,type];
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
@@ -119,7 +120,29 @@
     
 }
 
-
+#pragma mark --4修改密码
++(void)xiuGaiMiMaPhone:(NSString*)phone Code:(NSString*)code Password:(NSString*)pwd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@Login/ChangePwd?Mobile=%@&Code=%@&Password=%@",SER_VICE,phone,code,pwd];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    NSLog(@"4修改密码%@",urlStr);
+//    NSMutableDictionary * dic =[NSMutableDictionary new ];
+//     [dic setObject:phone forKey:@"Mobile"];
+//     [dic setObject:code forKey:@"Code"];
+//     [dic setObject:pwd forKey:@"Password"];
+    
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"4修改密码%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LCProgressHUD showFailure:@"获取验证码"];
+        NSLog(@"4修改密码%@",error);
+    }];
+    
+    
+}
 
 #pragma mark --5.获取首页特价专区
 +(void)FirstTeJiaZhuanQusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
@@ -247,6 +270,12 @@
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/ModifyPersonal",SER_VICE];
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"12您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:nicheng forKey:@"NickName"];
     [dic setObject:name forKey:@"RealName"];
@@ -277,6 +306,12 @@
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/ModifyCompany",SER_VICE];
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"13您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:gongsi forKey:@"Company"];
     if (hangyeID) {
@@ -308,6 +343,12 @@
     NSString * endStr =[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"14您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:endStr forKey:@"img"];
     [dic setObject:type forKey:@"type"];
@@ -327,6 +368,12 @@
 +(void)saveImageType:(NSString*)type urlStr:(NSString*)url success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/SaveImg",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"15您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:type forKey:@"Type"];
     [dic setObject:url forKey:@"Url"];
@@ -348,6 +395,11 @@
 +(void)huoQuImageWithType:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@Member/GetImg",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"17您还没有登录，请先登录！"];
+        return;
+    }
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:type forKey:@"Type"];
 //    NSLog(@"token=%@",[NSUSE_DEFO objectForKey:@"token"]);
@@ -368,6 +420,11 @@
 +(void)addMessageJiLuMessageID:(NSString*)pid Type:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/AddViewLog",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"19您还没有登录，请先登录！"];
+        return;
+    }
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:pid forKey:@"PId"];
     [dic setObject:type forKey:@"Type"];
@@ -389,6 +446,12 @@
 +(void)deleteMessageID:(NSString*)pid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/DeleteViewLog",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"20您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:pid forKey:@"PId"];
     NSLog(@"1输出看看%@",[NSUSE_DEFO objectForKey:@"token"]);
@@ -407,6 +470,12 @@
 +(void)getMessageJiLuType:(NSString*)type Page:(NSString*)page PageSize:(NSString*)tiaoShu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/GetViewLogList",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"21您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:type forKey:@"Type"];
     [dic setObject:page forKey:@"Page"];
@@ -424,6 +493,33 @@
         NSLog(@"获取信息记录列表错误%@",error);
     }];
 }
+
+#pragma mark --22查询是否收藏过
++(void)isShouCangGuoMaMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * urlStr =[NSString stringWithFormat:@"%@ViewLog/GetViewLogDetail",SER_VICE];
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"22您还没有登录，请先登录！"];
+        return;
+    }
+
+    [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
+    [dic setObject:idd forKey:@"MId"];
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"22查询是否收藏过%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"22查询是否收藏过%@",error);
+    }];
+
+}
+
+
 #pragma mark --23发布产品信息
 +(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu JingJiPeope:(NSString*)jingjiID Image1:(NSString*)image1 Image2:(NSString*)image2 success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     
@@ -431,7 +527,7 @@
     NSMutableDictionary * dic =[NSMutableDictionary new];
     NSString * token =[NSUSE_DEFO objectForKey:@"token"];
     if (token==nil) {
-        [LCProgressHUD showMessage:@"请登录"];
+        [LCProgressHUD showMessage:@"23请登录"];
     }else{
         [dic setObject:token forKey:@"Token"];
     }
@@ -481,6 +577,12 @@
     
     NSString * urlStr =[NSString stringWithFormat:@"%@Message/AddMessage",SER_VICE];
     NSMutableDictionary * dic =[NSMutableDictionary new];
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"28您还没有登录，请先登录！"];
+        return;
+    }
+
     [dic setObject:[NSUSE_DEFO objectForKey:@"token"] forKey:@"Token"];
     [dic setObject:question1 forKey:@"Orgin"];
     [dic setObject:jianYi forKey:@"Other"];
@@ -546,6 +648,29 @@
     }];
     
 }
+
+#pragma mark --37 店铺产品详情
++(void)ChanPinDianPuXiangQingDianPuID:(NSString*)dianID ChanPinID:(NSString*)chanID success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    
+    
+    NSString * urlStr =[NSString stringWithFormat:@"%@Shop/GetDetail?ShopId=%@&Id=%@",SER_VICE,dianID,chanID];
+    NSLog(@"37 店铺产品详情%@",urlStr);
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"37 店铺产品详情%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"37 店铺产品详情%@",error);
+        [LCProgressHUD hide];
+    }];
+    
+    
+}
+
+
+
 //***********************第二套接口*****************************//
 #pragma mark --5企业快速发布
 +(void)qiYeKuaiSuPublicTitleStr:(NSString*)title Count:(NSString*)number PriceStr:(NSString*)price PhoneNumber:(NSString*)phone HangYeID:(NSString*)cid DiQuCode:(NSString*)diquID imageUrlStr:(NSString*)urlStr success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
@@ -592,6 +717,12 @@
 }
 #pragma mark --7获取最新采购列表
 +(void)huoQuCaiGouListViewPage:(NSString*)page Cid:(NSString*)cid DiQuCode:(NSString*)areid success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"7您还没有登录，请先登录！"];
+        return;
+    }
+
     NSString * token =[NSUSE_DEFO objectForKey:@"token"];
     NSString * urlStr =[NSString stringWithFormat:@"%@Consult/GetConsultList?token=%@&cid=%@&Page=%@&pageSize=10&Areaid=%@",SER_VICE,token,cid,page,areid];
     NSLog(@"7获取最新采购列表%@",urlStr);
@@ -608,6 +739,12 @@
 }
 #pragma mark --8获取最新采购详情
 +(void)zuiXinCaiGouXiangQingMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"8您还没有登录，请先登录！"];
+        return;
+    }
+
     NSString * token =[NSUSE_DEFO objectForKey:@"token"];
     NSString * urlStr =[NSString stringWithFormat:@"%@Consult/GetConsultList?token=%@&consultId=%@",SER_VICE,token,idd];
     NSLog(@"8获取最新采购详情%@",urlStr);

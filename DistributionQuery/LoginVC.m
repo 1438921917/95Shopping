@@ -8,6 +8,7 @@
 
 #import "LoginVC.h"
 #import "RegistVC.h"
+#import "ForGetPwdVC.h"
 @interface LoginVC ()
 @property(nonatomic,strong)UIImageView * topImageview;//天空图片
 @property(nonatomic,strong)UITextField *phoneText;//手机号
@@ -167,7 +168,7 @@
     [_forgetBtn setTitleColor:[UIColor redColor] forState:0];
     _forgetBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     _forgetBtn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
-   // [_forgetBtn addTarget:self action:@selector(wangji:) forControlEvents:UIControlEventTouchUpInside];
+    [_forgetBtn addTarget:self action:@selector(wangjiPwd) forControlEvents:UIControlEventTouchUpInside];
     [_bgview sd_addSubviews:@[_forgetBtn]];
     _forgetBtn.sd_layout
     .widthIs(100)
@@ -180,7 +181,11 @@
     
     
 }
-
+#pragma mark --忘记密码
+-(void)wangjiPwd{
+    ForGetPwdVC * vc =[ForGetPwdVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark --获取验证码
 -(void)yanzhengCode:(UIButton*)sender{
     NSLog(@"手机号%@",_phoneText.text);

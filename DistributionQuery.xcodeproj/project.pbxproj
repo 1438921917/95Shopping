@@ -106,6 +106,7 @@
 		8FCD4FA91DA8B4D300CB113C /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD4F7A1DA8B4D300CB113C /* SDCollectionViewCell.m */; };
 		8FCD4FAA1DA8B4D300CB113C /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD4F7C1DA8B4D300CB113C /* SDCycleScrollView.m */; };
 		8FCD4FAB1DA8B4D300CB113C /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD4F7E1DA8B4D300CB113C /* UIView+SDExtension.m */; };
+		8FD4D8171E040296004CD569 /* ForGetPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD4D8161E040296004CD569 /* ForGetPwdVC.m */; };
 		8FDC2E2E1DD562620009E639 /* YouZhiShangHuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E2D1DD562620009E639 /* YouZhiShangHuVC.m */; };
 		8FDC2E351DD564320009E639 /* YouZhiShangHuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E341DD564320009E639 /* YouZhiShangHuCell.m */; };
 		8FDC2E381DD56B0A0009E639 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC2E371DD56B0A0009E639 /* SetViewController.m */; };
@@ -382,6 +383,8 @@
 		8FCD4F7C1DA8B4D300CB113C /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		8FCD4F7D1DA8B4D300CB113C /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		8FCD4F7E1DA8B4D300CB113C /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		8FD4D8151E040296004CD569 /* ForGetPwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForGetPwdVC.h; sourceTree = "<group>"; };
+		8FD4D8161E040296004CD569 /* ForGetPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForGetPwdVC.m; sourceTree = "<group>"; };
 		8FDC2E2C1DD562620009E639 /* YouZhiShangHuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiShangHuVC.h; sourceTree = "<group>"; };
 		8FDC2E2D1DD562620009E639 /* YouZhiShangHuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouZhiShangHuVC.m; sourceTree = "<group>"; };
 		8FDC2E331DD564320009E639 /* YouZhiShangHuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouZhiShangHuCell.h; sourceTree = "<group>"; };
@@ -1220,6 +1223,8 @@
 				8FDC2E461DD5AE3E0009E639 /* LoginVC.m */,
 				8FDC2E481DD5CB600009E639 /* RegistVC.h */,
 				8FDC2E491DD5CB600009E639 /* RegistVC.m */,
+				8FD4D8151E040296004CD569 /* ForGetPwdVC.h */,
+				8FD4D8161E040296004CD569 /* ForGetPwdVC.m */,
 			);
 			name = "登录注册";
 			sourceTree = "<group>";
@@ -1496,6 +1501,7 @@
 				8F02FE521DA887740051EDFC /* HomeVC.m in Sources */,
 				8FDD67DB1DEBBCB200CE295A /* ChoosePeopleModel.m in Sources */,
 				8FCD4F7F1DA8B4D300CB113C /* AFHTTPRequestOperation.m in Sources */,
+				8FD4D8171E040296004CD569 /* ForGetPwdVC.m in Sources */,
 				8FF4A7EA1DD6E8C300C5C743 /* LeftMyAdressCell.m in Sources */,
 				8FDC2E581DD5D4D00009E639 /* MyselfPublicVC.m in Sources */,
 				8F62083C1DD45B7B00E9A306 /* XiangQingVC.m in Sources */,

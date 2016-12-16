@@ -93,6 +93,8 @@
     rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     //[rightBtn setTitle:@"搜索" forState:0];
     [rightBtn setImage:[UIImage imageNamed:@"dianpu_shoucang"] forState:0];
+    [rightBtn setImage:[UIImage imageNamed:@"xiangqing_shou_click"] forState:UIControlStateSelected];
+    [rightBtn addTarget:self action:@selector(shouCangBtn:) forControlEvents:UIControlEventTouchUpInside];
     rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     rightBtn.frame=CGRectMake(0, 0, 50, 50);
     UIBarButtonItem * rightBtnn =[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
@@ -100,7 +102,10 @@
 }
 
 
-
+#pragma mark --收藏
+-(void)shouCangBtn:(UIButton*)btn{
+    btn.selected=!btn.selected;
+}
 
 -(UIView*)CreatTableViewHead{
     UIView * headView =[UIView new];
@@ -130,6 +135,7 @@
     
     //头像
     UIImageView * headImage =[[UIImageView alloc]init];
+    headImage.sd_cornerRadius=@(75/2);
     [whiteView sd_addSubviews:@[headImage]];
     headImage.sd_layout
     .centerXEqualToView(whiteView)
@@ -155,6 +161,18 @@
     .centerYEqualToView(comLabel)
     .heightIs(20)
     .widthIs(20);
+    //认证图标
+    UIImageView * renzheng =[[UIImageView alloc]init];
+    renzheng.image=[UIImage imageNamed:@"xianhuo_v"];
+    [whiteView sd_addSubviews:@[renzheng]];
+    renzheng.sd_layout
+    .leftSpaceToView(imageDan,5)
+    .centerYEqualToView(comLabel)
+    .heightIs(34/2)
+    .widthIs(34/2);
+    
+    
+    
     //地区
     UILabel * address =[UILabel new];
     address.font=[UIFont systemFontOfSize:14];
@@ -188,14 +206,15 @@
     .heightIs(36/2)
     .widthIs(268/2);
     [ whiteView setupAutoHeightWithBottomView:phoneBtn bottomMargin:10];
-
+//店铺id传递的是
     [Engine huoQuDianPuFirstMessageID:_messageID success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             //NSArray * item3 =[dic objectForKey:@"Item3"];
             NSDictionary * dicc =[dic objectForKey:@"Item3"];
+            [bgImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"M_PlaceImg"]]] placeholderImage:[UIImage imageNamed:@"xiangqing_banner"]];
             //头像
-            [headImage setImageWithURL:[NSURL URLWithString:[ToolClass isString:[NSString stringWithFormat:@"%@",[dicc objectForKey:@"M_MIId"]]]] placeholderImage:[UIImage imageNamed:@"my_photo"]];
+            [headImage setImageWithURL:[NSURL URLWithString:[ToolClass isString:[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[dicc objectForKey:@"M_HeadImg"]]]] placeholderImage:[UIImage imageNamed:@"my_photo"]];
             //公司名字
              comLabel.text=[ToolClass isString:[dicc objectForKey:@"M_CompanyName"]];
             //地区
@@ -259,7 +278,7 @@
     }else{
         AllShangPinVC * vc =[AllShangPinVC new];
         vc.tagg=btn.tag;
-        vc.messageID=_messageID;
+        vc.messageID=_messageID;//走的是店铺ID
         vc.cidd=btn.tag-11;//0全部 1最新 2经典 3优质
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -337,6 +356,14 @@
     vc.cidd=btn.tag+1;// 1最新 2经典 3优质
     [self.navigationController pushViewController:vc animated:YES];
 
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     AllShangPinVC * vc =[AllShangPinVC new];
+    vc.tagg=indexPath.section+12;
+    vc.messageID=_messageID;
+    vc.cidd=indexPath.section+1;// 1最新 2经典 3优质
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

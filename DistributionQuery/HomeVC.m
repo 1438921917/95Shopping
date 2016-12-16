@@ -13,6 +13,7 @@
 #import "QiYeKuaiSuMaiVC.h"
 #import "HomeModel.h"
 #import "ZuiXinCaiGouVC.h"
+#import "XiangQingVC.h"
 @interface HomeVC ()<UIScrollViewDelegate,SDCycleScrollViewDelegate,LrdOutputViewDelegate>
 {
     SDCycleScrollView *cycleScrollView2;
@@ -420,7 +421,7 @@
                 {
                     NSDictionary * dicc =item3Arr[i];
                     HomeModel * md =[[HomeModel alloc]initWithTeJiaDic:dicc];
-                    NSLog(@"输出看%@",md.imageview);
+                    //NSLog(@"输出看%@",md.imageview);
                     UIButton * imageTejia =[[UIButton alloc]init];
                     imageTejia.tag=i;
                     [imageTejia setImageForState:0 withURL:[NSURL URLWithString:md.imageview] placeholderImage:[UIImage imageNamed:@"login_banner"]];
@@ -495,11 +496,14 @@
     [self CreatView4];//设备专区
    // [self CreatView5];//物资专区
 }
+#pragma mark --特价专区点击进入详情页
 -(void)tejiaBtnClick:(UIButton*)btn{
-    YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
-    vc.tagg=10;
-    vc.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:vc animated:YES];
+//    YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
+//    vc.tagg=10;
+//    vc.hidesBottomBarWhenPushed=YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    XiangQingVC * vc =[XiangQingVC new];
 }
 #pragma mark --特价专区点击进入
 -(void)tejiaBtn:(UIButton*)btn{

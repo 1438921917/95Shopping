@@ -23,10 +23,22 @@
 @property(nonatomic,copy)NSString * suozaiDiName;
 //详细信息
 @property(nonatomic,copy)NSString * xiangXiName;
-//猜你喜欢
+
 
 //优质现货详情
 -(id)initWithXiangXiDic:(NSDictionary*)dic;
+
+
 //最新采购详情
 -(id)initWithZuiXinCiGouXiangXiDic:(NSDictionary*)dic;
+
+
+
+//猜你喜欢自己的数据
+@property(nonatomic,copy)NSString * caiimage;
+@property(nonatomic,copy)NSString * caititle;
+@property(nonatomic,copy)NSString * caiaddress;
+@property(nonatomic,copy)NSString * caitaishu;
+@property(nonatomic,copy)NSString * caiprice;
+-(id)initWithCaiNiLikeDic:(NSDictionary*)dic;
 @end

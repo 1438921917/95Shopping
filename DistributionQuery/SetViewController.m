@@ -130,7 +130,7 @@
             [ToolClass deleagtePlistName:@"Login"];
             //移除token
             [NSUSE_DEFO removeObjectForKey:@"token"];
-             [NSUSE_DEFO removeObjectForKey:@"mid"];
+            [NSUSE_DEFO removeObjectForKey:@"mid"];
             [NSUSE_DEFO synchronize];
             [self.navigationController popViewControllerAnimated:YES];
         }];

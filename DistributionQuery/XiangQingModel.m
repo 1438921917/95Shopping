@@ -18,12 +18,12 @@
         _titleName=[ToolClass isString:[dic objectForKey:@"C_Title"]];
         _priceName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_ExpectPrice"]]];
         _bianHaoName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_ProductCode"]]];
-        _phoneName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"E_Number"]]];
+        _phoneName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"M_MobieNum"]]];
         //具体参数
         _xinagHaoName=[ToolClass isString:[dic objectForKey:@"C_Type"]];
         NSString * chanSheng =[ToolClass isString:[dic objectForKey:@"C_Prov_Name"]];
-        NSString * chashi =[ToolClass isString:[dic objectForKey:@"C_City_Name"]];
-        _chanDiName=[NSString stringWithFormat:@"%@-%@",chanSheng,chashi];
+        NSString * chashi =[ToolClass isString:[dic objectForKey:@"C_Class"]];
+        _chanDiName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_ProductLocation"]]];
         _shuLiangName=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
         _suozaiDiName=[NSString stringWithFormat:@"%@-%@",chanSheng,chashi];
         //详细信息
@@ -57,4 +57,25 @@
     
     return self;
 }
+
+
+
+
+//猜你喜欢数据
+-(id)initWithCaiNiLikeDic:(NSDictionary*)dic{
+    self=[super init];
+    if (self) {
+        _caiimage=[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[ToolClass isString:[dic objectForKey:@"C_CommodityPic"]]];
+         _caititle=[ToolClass isString:[dic objectForKey:@"C_Title"]];
+        NSString * sheng =[ToolClass isString:[dic objectForKey:@"C_Prov_Name"]];
+        NSString * shi =[ToolClass isString:[dic objectForKey:@"C_City_Name"]];
+         _caiaddress=[NSString stringWithFormat:@"%@-%@",sheng,shi];
+         _caitaishu=[ToolClass isString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"C_Count"]]];
+         _caiprice=[ToolClass isString:[dic objectForKey:@"C_ExpectPrice"]];
+    }
+    
+    return self;
+}
+
+
 @end

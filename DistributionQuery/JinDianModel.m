@@ -12,7 +12,7 @@
 -(id)initWithDiQuDic:(NSDictionary*)dic{
     self=[super init];
     if (self) {
-         _imageview=[ToolClass isString:[dic objectForKey:@"C_CommodityPic"]];
+         _imageview=[NSString stringWithFormat:@"%@%@",IMAGE_TITLE,[ToolClass isString:[dic objectForKey:@"C_CommodityPic"]]];
          _titleName=[ToolClass isString:[dic objectForKey:@"C_Title"]];
         _diquName=[NSString stringWithFormat:@"%@-%@",[ToolClass isString:[dic objectForKey:@"C_Prov_Name"]],[ToolClass isString:[dic objectForKey:@"C_City_Name"]]];
         

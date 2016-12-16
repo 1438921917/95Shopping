@@ -74,8 +74,8 @@
 #pragma mark --数据解析
 -(void)shuJuJieXiDataPage:(NSString*)page TeJia:(NSString*)te HangYeID:(NSString*)hangYeID  CityId:(NSString*)cityID jiaoYiStye:(NSString*)jiaoyi{
     [LCProgressHUD showMessage:@"请稍后..."];
-    NSLog(@"到了%@",te);
-    NSLog(@"到了%@",jiaoyi);
+//    NSLog(@"到了%@",te);
+//    NSLog(@"到了%@",jiaoyi);
     
     [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:jiaoyi TeJia:te success:^(NSDictionary *dic) {
         [LCProgressHUD hide];
@@ -291,9 +291,9 @@
         _AAA=1;
         weakSelf.myRefreshView = weakSelf.tableView.header;
         if (_tagg==1) {
-            [self shuJuJieXiDataPage:@"1" TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+            [self shuJuJieXiDataPage:@"1" TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
         }else{
-            [self shuJuJieXiDataPage:@"1" TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+            [self shuJuJieXiDataPage:@"1" TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
         }
         
     }];
@@ -313,10 +313,10 @@
          */
         if (_tagg==1) {
             //本页优质现货
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
         }else{
             //其它几个界面
-        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+        [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
         }
        
     }];
@@ -330,6 +330,13 @@
         return cityId;
     }else{
         return @"0";
+    }
+}
+-(NSString*)stingTextCityID2:(NSString*)cityId{
+    if (cityId) {
+        return cityId;
+    }else{
+        return @"99";
     }
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -418,10 +425,10 @@
             [_dataArray removeAllObjects];
             if (_tagg==1) {
                 //本页优质现货
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
             }else{
                 //其它几个界面
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:[self stingTextCityID:_jiLuHangYeCode] CityId:mdd.cityCode jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
             }
 
         }else if (_btntag==1){
@@ -451,10 +458,10 @@
             [_dataArray removeAllObjects];
             if (_tagg==1) {
                 //本页优质现货
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"0" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
             }else{
                 //其它几个界面
-                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID:_jiaoYiCode]];
+                [self shuJuJieXiDataPage:[NSString stringWithFormat:@"%d",_AAA] TeJia:@"1" HangYeID:mdd.HYidd CityId:[self stingTextCityID:_jiLuCityCode] jiaoYiStye:[self stingTextCityID2:_jiaoYiCode]];
             }
 
         }
@@ -545,6 +552,7 @@
     vc.messageID=md.messageID;
      NSLog(@"输出店铺ID=%@",md.dianpuID);
     vc.dianPuID=md.dianpuID;
+    vc.tagg=1;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

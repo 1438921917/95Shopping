@@ -44,6 +44,7 @@
             NSMutableArray * array2 =[NSMutableArray new];
             for (NSDictionary * dicc in item3Arr) {
                 JinDianModel * model =[[JinDianModel alloc]initWithDiQuDic:dicc];
+                //此时md.meesageID才是产品ID，，，_messageID是店铺ID
                 [array2 addObject:model];
             }
             if (self.myRefreshView ==_tableView.header) {
@@ -112,8 +113,10 @@
 {
     JinDianModel * md =_dataArray[indexPath.row];
     XiangQingVC * vc =[XiangQingVC new];
-    vc.tagg=3;//C_User_Id 店铺ID
-    vc.messageID=md.messageID;//md.messageID; 店铺里面的某一款商品ID
+    vc.tagg=3;
+    vc.messageID=md.messageID;
+    vc.dianPuID=_messageID;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

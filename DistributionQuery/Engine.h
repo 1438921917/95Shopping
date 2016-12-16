@@ -24,11 +24,11 @@ typedef void (^ErrorBlock)(NSError*error);
 +(void)zhuCeAccountPhoneNumber:(NSString*)str Pwd:(NSString*)pwd CodeStr:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --2.会员登录
 +(void)loginAccountPhoneNumber:(NSString*)str Pwd:(NSString*)pwd CodeStr:(NSString*)code success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
-
-
-
 #pragma mark --3.获取验证码
 +(void)getCodePhone:(NSString*)phone typeStr:(NSString*)type success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --4修改密码
++(void)xiuGaiMiMaPhone:(NSString*)phone Code:(NSString*)code Password:(NSString*)pwd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
 #pragma mark --5.获取首页特价专区
 +(void)FirstTeJiaZhuanQusuccess:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
@@ -69,6 +69,9 @@ typedef void (^ErrorBlock)(NSError*error);
 #pragma mark --21获取信息记录列表（浏览，收藏，关注）
 +(void)getMessageJiLuType:(NSString*)type Page:(NSString*)page PageSize:(NSString*)tiaoShu success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
+#pragma mark --22查询是否收藏过
++(void)isShouCangGuoMaMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
 #pragma mark --23发布产品信息
 +(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu JingJiPeope:(NSString*)jingjiID Image1:(NSString*)image1 Image2:(NSString*)image2 success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --26获取资讯列表 Cid 1.行业资讯 2.公告
@@ -85,6 +88,9 @@ typedef void (^ErrorBlock)(NSError*error);
 +(void)dianPuChanPinMessageID:(NSString*)idd Cid:(NSString*)cid Page:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --35 获取店铺首页
 +(void)huoQuDianPuFirstMessageID:(NSString*)idd success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --37 店铺产品详情
++(void)ChanPinDianPuXiangQingDianPuID:(NSString*)dianID ChanPinID:(NSString*)chanID success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
 //***********************第二套接口*****************************//
 #pragma mark --5企业快速发布
