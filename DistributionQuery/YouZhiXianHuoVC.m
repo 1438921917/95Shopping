@@ -76,8 +76,8 @@
     [LCProgressHUD showMessage:@"请稍后..."];
 //    NSLog(@"到了%@",te);
 //    NSLog(@"到了%@",jiaoyi);
-    
-    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:@"0" Page:page PageSize:@"10" GongQiu:jiaoyi TeJia:te success:^(NSDictionary *dic) {
+    //[self stingTextCityID:_ziText];
+    [Engine tejiaZhuanQuLieBiaoHangYeID:hangYeID DiQu:cityID GuanJianZi:[self stingTextCityID:_ziText] Page:page PageSize:@"10" GongQiu:jiaoyi TeJia:te success:^(NSDictionary *dic) {
         [LCProgressHUD hide];
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {

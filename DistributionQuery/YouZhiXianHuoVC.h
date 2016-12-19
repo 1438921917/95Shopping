@@ -16,4 +16,5 @@
  tagg==1的话就是本身(优质现货)
  */
 @property(nonatomic,assign)NSInteger tagg;
+@property(nonatomic,copy)NSString * ziText;
 @end

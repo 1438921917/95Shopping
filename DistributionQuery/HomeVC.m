@@ -31,15 +31,22 @@
 @property(nonatomic,strong)NSArray *menuArr;
 @property (nonatomic, strong) LrdOutputView *outputView;//搜索商品下拉菜单
 @property(nonatomic,strong)NSMutableArray * tejiaArray;
+@property(nonatomic,strong)NSMutableArray * tejiazhuanquArr;//特价专区记录数组
+@property(nonatomic,assign)NSInteger lastNum;//记录商品商户(搜索)
 @end
 
 @implementation HomeVC
 -(void)viewWillAppear:(BOOL)animated
 {
-   // self.navigationController.navigationBar.barTintColor = JXColor(178, 178, 178, 178);
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-   // [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"big_bg"] forBarMetrics:UIBarMetricsDefault];
     [_bgScrollView  setContentOffset:CGPointZero animated:YES];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    self.navigationController.navigationBarHidden=NO;
+    _textfield.text=@"";
+     _textfield.placeholder=@"请输入类别或者关键字";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,6 +56,7 @@
     self.title=@"";
     
     _tejiaArray=[NSMutableArray new];
+     _tejiazhuanquArr=[NSMutableArray new];
     // [self TeJiaZhuanQuData];//首页特价专区数据解析
      [self CreatBgScrollView];//背景screr
      [self CreatTextFiled];//导航条
@@ -138,6 +146,7 @@
     [_rightBtn setTitle:@"搜索" forState:0];
     _rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
     _rightBtn.frame=CGRectMake(0, 0, 50, 15);
+    [_rightBtn addTarget:self action:@selector(souSuoBtn) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:_rightBtn];
      self.navigationItem.rightBarButtonItems=@[rightBtn];
     
@@ -170,12 +179,35 @@
 }
 - (void)didSelectedAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"输出看看%lu",indexPath.row);
+    _lastNum=indexPath.row;
     if (indexPath.row==0) {
          [_leftBtn setTitle:@"商品" forState:0];
     }else{
          [_leftBtn setTitle:@"商户" forState:0];
     }
    
+}
+#pragma mark --搜索点击事件
+-(void)souSuoBtn{
+    if ([_textfield.text isEqualToString:@""]) {
+        [LCProgressHUD showMessage:@"请输入关键字"];
+        return;
+    }
+    
+    if (_lastNum==0) {
+        YouZhiXianHuoVC * vc =[YouZhiXianHuoVC new];
+        vc.hidesBottomBarWhenPushed=YES;
+        vc.tagg=1;
+        vc.ziText=_textfield.text;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        YouZhiShangHuVC * vc =[YouZhiShangHuVC new];
+        vc.ziText=_textfield.text;
+        vc.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+   
+    
 }
 #pragma mark --滚动试图代理
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -425,6 +457,7 @@
                     UIButton * imageTejia =[[UIButton alloc]init];
                     imageTejia.tag=i;
                     [imageTejia setImageForState:0 withURL:[NSURL URLWithString:md.imageview] placeholderImage:[UIImage imageNamed:@"login_banner"]];
+                    [_tejiazhuanquArr addObject:md];
                     [imageTejia addTarget:self action:@selector(tejiaBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                     [priceScrollview sd_addSubviews:@[imageTejia]];
                     imageTejia.sd_layout
@@ -502,8 +535,13 @@
 //    vc.tagg=10;
 //    vc.hidesBottomBarWhenPushed=YES;
 //    [self.navigationController pushViewController:vc animated:YES];
-    
+    HomeModel * md=  _tejiazhuanquArr[btn.tag];
     XiangQingVC * vc =[XiangQingVC new];
+    vc.tagg=1;
+    vc.dianPuID=md.dianpuID;
+    vc.messageID=md.messageID;
+    vc.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark --特价专区点击进入
 -(void)tejiaBtn:(UIButton*)btn{

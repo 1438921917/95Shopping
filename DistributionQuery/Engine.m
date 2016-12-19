@@ -167,7 +167,9 @@
 
 #pragma mark --32特价专区列表
 +(void)tejiaZhuanQuLieBiaoHangYeID:(NSString*)category DiQu:(NSString*)area GuanJianZi:(NSString*)keyword Page:(NSString*)page PageSize:(NSString*)pagesize GongQiu:(NSString*)gq TeJia:(NSString*)tejia  success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@&Discount=%@&Agent=%@",SER_VICE,category,area,keyword,page,pagesize,tejia,gq];
+    NSString * str =[NSString stringWithFormat:@"%@Commodity/GetList?Category=%@&Area=%@&Keyword=%@&Page=%@&PageSize=%@&Discount=%@&Agent=%@",SER_VICE,category,area,keyword,page,pagesize,tejia,gq];
+    //搜索如果出现汉字了，需要转换编码
+     NSString *urlStr = [str stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSLog(@"32特价专区列表%@",urlStr);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -429,8 +431,8 @@
     [dic setObject:pid forKey:@"PId"];
     [dic setObject:type forKey:@"Type"];
     NSLog(@"1输出看看%@",[NSUSE_DEFO objectForKey:@"token"]);
-     NSLog(@"2输出看看%@",pid);
-     NSLog(@"3输出看看%@",type);
+    NSLog(@"2输出看看%@",pid);
+    NSLog(@"3输出看看%@",type);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager POST:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
@@ -601,8 +603,10 @@
     
 }
 #pragma mark --29优质商户
-+(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
-    NSString * urlStr =[NSString stringWithFormat:@"%@Member/GetMemberList?Page=%@&PageSize=10&Category=%@&Area=%@",SER_VICE,page,hangye,citycode];
++(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode GuanJianZi:(NSString*)guanjian success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * Str =[NSString stringWithFormat:@"%@Member/GetMemberList?Page=%@&PageSize=10&Category=%@&Area=%@Keyword=%@",SER_VICE,page,hangye,citycode,guanjian];
+    
+    NSString *urlStr = [Str stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSLog(@"29优质商户%@",urlStr);
     AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
     [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -668,7 +672,33 @@
     
     
 }
+#pragma mark --41更新产品状态//1.刷新 2.下架 3.置顶 4.成交
++(void)gengXinChanPinStypeMessageID:(NSString*)idd State:(NSString*)state success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"41更新产品状态"];
+        return;
+    }
 
+    NSString * urlStrr =[NSString stringWithFormat:@"%@Commodity/ChangeCommodity",SER_VICE];//Consult/InsertConsult
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:str forKey:@"Token"];
+    [dic setObject:idd forKey:@"Id"];
+    [dic setObject:idd forKey:@"State"];
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStrr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"41更新产品状态%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"41更新产品状态%@",error);
+        [LCProgressHUD hide];
+    }];
+    
+    
+}
 
 
 //***********************第二套接口*****************************//

@@ -83,7 +83,7 @@ typedef void (^ErrorBlock)(NSError*error);
 +(void)YiJianSuccessFanKuiOrgin:(NSString*)question1 suggest:(NSString*)jianYi PhoneNumber:(NSString*)phone success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
 #pragma mark --29优质商户
-+(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
++(void)GetYouZhiShangHuPage:(NSString*)page HangYeID:(NSString*)hangye CityCode:(NSString*)citycode  GuanJianZi:(NSString*)guanjian success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --36获取店铺产品列表
 +(void)dianPuChanPinMessageID:(NSString*)idd Cid:(NSString*)cid Page:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 #pragma mark --35 获取店铺首页
@@ -91,6 +91,9 @@ typedef void (^ErrorBlock)(NSError*error);
 
 #pragma mark --37 店铺产品详情
 +(void)ChanPinDianPuXiangQingDianPuID:(NSString*)dianID ChanPinID:(NSString*)chanID success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+#pragma mark --41更新产品状态
++(void)gengXinChanPinStypeMessageID:(NSString*)idd State:(NSString*)state success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
 
 //***********************第二套接口*****************************//
 #pragma mark --5企业快速发布

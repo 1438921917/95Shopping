@@ -87,7 +87,7 @@
 
 #pragma mark --获取网络数据
 -(void)shangHuDataPage:(NSString*)page HangYe:(NSString*)hangYe CityCode:(NSString*)citycode{
-    [Engine GetYouZhiShangHuPage:page HangYeID:hangYe CityCode:citycode success:^(NSDictionary *dic) {
+    [Engine GetYouZhiShangHuPage:page HangYeID:hangYe CityCode:citycode  GuanJianZi:[self stingTextCityID:_ziText] success:^(NSDictionary *dic) {
         NSString * item1 =[NSString stringWithFormat:@"%@",[dic objectForKey:@"Item1"]];
         if ([item1 isEqualToString:@"1"]) {
             if ([dic objectForKey:@"Item3"]==[NSNull null]) {

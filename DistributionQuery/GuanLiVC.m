@@ -60,6 +60,15 @@
     if (!cell.moreButtonClickedBlock) {
         [cell setMoreButtonClickedBlock:^(UIButton *btn,NSIndexPath *indexPath) {
             NSLog(@"输出%lu",btn.tag);
+            
+           //1.刷新 2.下架 3.置顶 4.成交
+            [Engine gengXinChanPinStypeMessageID:@"" State:[NSString stringWithFormat:@"%lu",btn.tag+1] success:^(NSDictionary *dic) {
+                
+            } error:^(NSError *error) {
+                
+            }];
+            
+            
             if (btn.tag==0) {
                 //刷新
             }else if (btn.tag==1){

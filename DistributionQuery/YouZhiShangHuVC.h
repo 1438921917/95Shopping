@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface YouZhiShangHuVC : BaseViewController
-
+@property(nonatomic,copy)NSString * ziText;//关键字
 @end
