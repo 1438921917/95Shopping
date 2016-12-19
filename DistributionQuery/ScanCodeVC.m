@@ -36,8 +36,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets=NO;
+    
+    //搜索按钮
+    UIButton* _rightBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_rightBtn setTitle:@"提交" forState:0];
+    _rightBtn.titleLabel.font=[UIFont systemFontOfSize:15];
+    _rightBtn.frame=CGRectMake(0, 0, 50, 15);
+    [_rightBtn setTitleColor:[UIColor redColor] forState:0];
+    [_rightBtn addTarget:self action:@selector(tijaioBtn) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * rightBtn =[[UIBarButtonItem alloc]initWithCustomView:_rightBtn];
+    
+    if (_tagg==2) {
+       self.navigationItem.rightBarButtonItems=@[rightBtn];
+    }
+
    
-    _bgScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-44)];
+    
+    
+    if (_tagg==2) {
+        _bgScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64)]; 
+    }else{
+        _bgScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64-44)];
+    }
+   
     _bgScrollview.delegate=self;
     [self.view addSubview:_bgScrollview];
     if (_tagg==2) {
@@ -62,7 +83,41 @@
     NSArray * arr2 =@[@"产地",@"成色"];
     _nameArray=[[NSMutableArray alloc]initWithObjects:arr1,arr2, nil];
     [self CreatTableView];
+   
 }
+#pragma mark --点击了提交
+-(void)tijaioBtn{
+    NSLog(@"点击了提交");
+    //标题
+    ScanCodeCell *cell0 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    //名称
+    ScanCodeCell *cell1 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    //数量
+    ScanCodeCell *cell2 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    //型号
+    ScanCodeCell *cell3 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    //价格
+    ScanCodeCell *cell4 = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    
+    NSLog(@"标题%@",cell0.textfield.text);
+    NSLog(@"名称%@",cell1.textfield.text);
+    NSLog(@"数量%@",cell2.textfield.text);
+    NSLog(@"型号%@",cell3.textfield.text);
+    NSLog(@"价格%@",cell4.textfield.text);
+    //详细信息
+    NSLog(@"详细信息%@",textViewText.text);
+    //成色
+    NSLog(@"成色%@",[ToolClass isString:_chengSeText]);
+    //产地
+    NSLog(@"产地%@",[ToolClass isString:_chanDiText]);
+    //铭牌照片
+    NSLog(@"铭牌照片地址%@",[ToolClass isString:_mingPaiUrl]);
+    //整机照片
+    NSLog(@"整机照片地址%@",[ToolClass isString:_zhengJiUrl]);
+
+}
+
 #pragma mark --通知清空数据
 -(void)lianjieClink:(NSNotification*)notification{
     NSLog(@"通知清空了");
@@ -146,15 +201,30 @@
         if (indexPath.row==0) {
             cell.textfield.placeholder=@"请选择填写或者语音";
             cell.yuYinBtn.hidden=NO;
+            if (_model) {
+                cell.textfield.text=_model.titleName;
+            }
         }else if (indexPath.row==1){
             cell.textfield.placeholder=@"请填写产品名称";
+            if (_model) {
+                cell.textfield.text=_model.nikeName;
+            }
         }else if (indexPath.row==2){
              cell.textfield.keyboardType=UIKeyboardTypeNumberPad;
              cell.textfield.placeholder=@"请填写产品数量";
+            if (_model) {
+                cell.textfield.text=_model.numName;
+            }
         }else if (indexPath.row==3){
             cell.textfield.placeholder=@"请填写产品型号";
+            if (_model) {
+                cell.textfield.text=_model.xingHaoName;
+            }
         }else{
             cell.textfield.placeholder=@"请填写产品价格";
+            if (_model) {
+                cell.textfield.text=_model.priceName;
+            }
         }
     }else{
         cell.textfield.enabled=NO;
@@ -166,10 +236,16 @@
         if (indexPath.row==0) {
             //产地
             cell.textfield.text=_chanDiText;
+            if (_model) {
+                cell.textfield.text=_model.addressName;
+            }
            
         }else if (indexPath.row==1){
             //成色
              cell.textfield.text=_chengSeText;
+            if (_model) {
+                cell.textfield.text=_model.chengseName;
+            }
         }
     }
     
@@ -274,6 +350,9 @@
     textViewText =[UITextView new];
     textViewText.delegate=self;
     textViewText.text=@"请您说出商品名称，编号";
+    if (_model) {
+         textViewText.text=_model.xiangXiName;
+    }
     textViewText.alpha=.6;
     textViewText.font=[UIFont systemFontOfSize:14];
     [_view1 sd_addSubviews:@[textViewText]];
@@ -321,10 +400,14 @@
     .heightIs(20);
     [xiangXi setSingleLineAutoResizeWithMaxWidth:200];
     NSArray * arr =@[@"铭牌照片",@"整机照片"];
+    NSArray * imageArr =@[[NSString stringWithFormat:@"%@",_model.imageurl2],[NSString stringWithFormat:@"%@",_model.imageurl]];
     //上传图片2个btn
     for (int i =0; i<2; i++) {
         UIButton * btn =[UIButton buttonWithType:UIButtonTypeCustom];
         [btn setBackgroundImage:[UIImage imageNamed:@"fabu_pic"] forState:0];
+        if (_tagg==2) {
+            [btn setBackgroundImageForState:0 withURL:[NSURL URLWithString:imageArr[i]] placeholderImage:[UIImage imageNamed:@"fabu_pic"]];
+        }
         btn.tag=i;
         _lastBtn=btn;
         if (i==0) {

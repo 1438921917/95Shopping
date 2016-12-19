@@ -72,7 +72,7 @@
     _leftImage.image=[UIImage imageNamed:@"xianhuo_pic1"];
     _titleLable.text=@"山东馈线回收省威海市荣成有限公司";
     _priceLabel.text=@"8000元";
-    _cjLable.text=@"成交100次";
+    _cjLable.text=@"查看100次";
     [_xiugaiBtn setImage:[UIImage imageNamed:@"guanli_xiugai"] forState:0];
     [_tejiaBtn setImage:[UIImage imageNamed:@"guanli_tejia"] forState:0];
     
@@ -153,7 +153,18 @@
     
     
 }
-
+-(void)setModel:(GuanLiModel *)model
+{
+    _model=model;
+    
+    //_leftImage.image=[UIImage imageNamed:@"xianhuo_pic1"];
+    [_leftImage setImageWithURL:[NSURL URLWithString:model.imageurl] placeholderImage:[UIImage imageNamed:@"xianhuo_pic1"]];
+    _titleLable.text=model.titleName;//@"山东馈线回收省威海市荣成有限公司";
+    _priceLabel.text=[NSString stringWithFormat:@"%@元",model.priceName];//@"8000元";
+    _cjLable.text=[NSString stringWithFormat:@"查看%@次",model.chaKan];//@"查看100次";
+    
+    
+}
 -(void)btnClick:(UIButton*)btn{
     if (self.moreButtonClickedBlock) {
         self.moreButtonClickedBlock(btn,self.indexPath);

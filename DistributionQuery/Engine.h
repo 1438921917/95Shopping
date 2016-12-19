@@ -74,6 +74,11 @@ typedef void (^ErrorBlock)(NSError*error);
 
 #pragma mark --23发布产品信息
 +(void)publicChanPinMessageXiangQingTitle:(NSString*)title ProductName:(NSString*)chanPiName Count:(NSString*)shuliang Type:(NSString*)type ExpectPrice:(NSString*)jiage ProductLocation:(NSString*)chandi Degree:(NSString*)chengXin Description:(NSString*)miaoshu JingJiPeope:(NSString*)jingjiID Image1:(NSString*)image1 Image2:(NSString*)image2 success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --25管理界面列表
++(void)guanLiLieBiaoYeShu:(NSString*)page Stype:(NSString*)stype success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+
 #pragma mark --26获取资讯列表 Cid 1.行业资讯 2.公告
 +(void)huoQuZiXunListViewCid:(NSString*)cid YeShuPage:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 
@@ -91,6 +96,10 @@ typedef void (^ErrorBlock)(NSError*error);
 
 #pragma mark --37 店铺产品详情
 +(void)ChanPinDianPuXiangQingDianPuID:(NSString*)dianID ChanPinID:(NSString*)chanID success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
+#pragma mark --39获取支付订单号
++(void)GetZhiFuDingDanHaoMoney:(NSString*)price Stype:(NSString*)stype success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
+
 #pragma mark --41更新产品状态
 +(void)gengXinChanPinStypeMessageID:(NSString*)idd State:(NSString*)state success:(SuccessBlock)aSuccess error:(ErrorBlock)aError;
 

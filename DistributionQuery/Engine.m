@@ -554,8 +554,37 @@
         NSLog(@"获取信息记录列表错误%@",error);
     }];
 
+}
+
+
+#pragma mark --25管理界面列表
++(void)guanLiLieBiaoYeShu:(NSString*)page Stype:(NSString*)stype success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * token =[NSUSE_DEFO objectForKey:@"token"];
+    if (token==nil) {
+        [LCProgressHUD showMessage:@"25管理界面列表"];
+        return;
+    }
+    NSString * urlStr =[NSString stringWithFormat:@"%@Commodity/MyCommodity?PageSize=10&Token=%@&Agent=%@&Page=%@",SER_VICE,token,stype,page];
+
+    
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"获取信息记录列表%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"获取信息记录列表错误%@",error);
+    }];
+    
     
 }
+
+
+
+
+
+
 #pragma mark --26获取资讯列表
 +(void)huoQuZiXunListViewCid:(NSString*)cid YeShuPage:(NSString*)page success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
   
@@ -672,6 +701,36 @@
     
     
 }
+
+
+#pragma mark --39获取支付订单号
++(void)GetZhiFuDingDanHaoMoney:(NSString*)price Stype:(NSString*)stype success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
+    NSString * str =[NSUSE_DEFO objectForKey:@"token"];
+    if (str==nil) {
+        [LCProgressHUD showMessage:@"39获取支付订单号"];
+        return;
+    }
+    
+    NSString * urlStrr =[NSString stringWithFormat:@"%@Alipay/GetOrder",SER_VICE];//Consult/InsertConsult
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    [dic setObject:str forKey:@"Token"];
+    [dic setObject:price forKey:@"Money"];
+    [dic setObject:stype forKey:@"ChargeType"];
+    AFHTTPRequestOperationManager * manager =[AFHTTPRequestOperationManager manager];
+    [manager POST:urlStrr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"39获取支付订单号%@",str);
+        aSuccess(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"39获取支付订单号%@",error);
+        [LCProgressHUD hide];
+    }];
+
+    
+}
+
+
 #pragma mark --41更新产品状态//1.刷新 2.下架 3.置顶 4.成交
 +(void)gengXinChanPinStypeMessageID:(NSString*)idd State:(NSString*)state success:(SuccessBlock)aSuccess error:(ErrorBlock)aError{
     NSString * str =[NSUSE_DEFO objectForKey:@"token"];
